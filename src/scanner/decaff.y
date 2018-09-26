@@ -21,14 +21,15 @@
 %token <fval> T_FLOT
 %token <bval> T_BOOL
 %token T_NEWLINE
+%token IDENTIFIER
 %token O_ADD O_SUB O_MUL O_DIV O_MOD O_LEF O_RIT
 %token O_NOT O_LEQ O_GEQ O_LES O_GRE O_EQL O_NEQ
 %left O_OR
 %left O_AND
 %left O_XOR
 %left O_ADD O_SUB
-%right O_MUL O_DIV
-%right O_MOD
+%left O_MUL O_DIV
+%left O_MOD
 %type <ival> int_expr
 %type <fval> float_expr
 %type <bval> bool_expr
@@ -47,7 +48,8 @@ expr:
     ;
 
 int_expr:
-    T_INTG                          { $$ = $1; }
+    IDENTIFIER                       { $$ = 0; }
+    | T_INTG                          { $$ = $1; }
     | int_expr O_ADD int_expr       { $$ = $1 + $3; }
     | int_expr O_SUB int_expr       { $$ = $1 - $3; }
     | int_expr O_MUL int_expr       { $$ = $1 * $3; }
@@ -58,10 +60,35 @@ int_expr:
     ;
 
 bool_expr:
-    T_BOOL                          { $$ = $1; }
+    IDENTIFIER                       { $$ = 0; }
+    | T_BOOL                          { $$ = $1; }
     | bool_expr O_OR bool_expr       { $$ = $1 | $3; }
     | bool_expr O_AND bool_expr       { $$ = $1 & $3; }
     | bool_expr O_XOR bool_expr       { $$ = $1 ^ $3; }
+    | int_expr  O_LEQ int_expr        { $$ = $1 <= $3; }
+    | int_expr  O_GEQ int_expr        { $$ = $1 >= $3; }
+    | int_expr  O_LES int_expr        { $$ = $1 < $3; }
+    | int_expr  O_GRE int_expr        { $$ = $1 > $3; }
+    | int_expr  O_EQL int_expr        { $$ = $1 == $3; }
+    | int_expr  O_NEQ int_expr        { $$ = $1 != $3; }
+    | float_expr O_LEQ float_expr        { $$ = $1 <= $3; }
+    | float_expr O_GEQ float_expr        { $$ = $1 >= $3; }
+    | float_expr O_LES float_expr        { $$ = $1 < $3; }
+    | float_expr O_GRE float_expr        { $$ = $1 > $3; }
+    | float_expr O_EQL float_expr        { $$ = $1 == $3; }
+    | float_expr O_NEQ float_expr        { $$ = $1 != $3; }
+    | float_expr  O_LEQ int_expr        { $$ = $1 <= $3; }
+    | float_expr  O_GEQ int_expr        { $$ = $1 >= $3; }
+    | float_expr  O_LES int_expr        { $$ = $1 < $3; }
+    | float_expr  O_GRE int_expr        { $$ = $1 > $3; }
+    | float_expr  O_EQL int_expr        { $$ = $1 == $3; }
+    | float_expr  O_NEQ int_expr        { $$ = $1 != $3; }
+    | int_expr O_LEQ float_expr        { $$ = $1 <= $3; }
+    | int_expr O_GEQ float_expr        { $$ = $1 >= $3; }
+    | int_expr O_LES float_expr        { $$ = $1 < $3; }
+    | int_expr O_GRE float_expr        { $$ = $1 > $3; }
+    | int_expr O_EQL float_expr        { $$ = $1 == $3; }
+    | int_expr O_NEQ float_expr        { $$ = $1 != $3; }
     | O_LEF bool_expr O_RIT          { $$ = $2; }
     ;
 

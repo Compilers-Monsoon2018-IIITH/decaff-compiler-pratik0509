@@ -6,6 +6,8 @@
 %}
 
 DIGIT   [0-9]
+ALPHA   [a-zA-Z]
+ALNUM   [0-9a-zA-Z]
 TRUE    "true"
 FALSE   "false"
 ADD     "+"
@@ -31,7 +33,7 @@ GRE     ">"
 [ \t]                    ;
 \n                       { return T_NEWLINE; }
 {DIGIT}+                 { yylval.ival = atoi(yytext); return T_INTG; }
-{DIGIT}*\.{DIGIT}*       { yylval.fval = atof(yytext); return T_FLOT; }
+{DIGIT}+\.{DIGIT}*       { yylval.fval = atof(yytext); return T_FLOT; }
 {TRUE}|{FALSE}           { yylval.bval = ((strcmp(yytext, "true") == 0) ? 1 : 0); return T_BOOL; }
 {ADD}                    { return O_ADD; }
 {SUB}                    { return O_SUB; }
@@ -40,7 +42,7 @@ GRE     ">"
 {MOD}                    { return O_MOD; }
 {LEF}                    { return O_LEF; }
 {RIT}                    { return O_RIT; }
-{OR}                     { return O_OR  ; }
+{OR}                     { return O_OR; }
 {AND}                    { return O_AND; }
 {XOR}                    { return O_XOR; }
 {NOT}                    { return O_NOT; }
@@ -50,5 +52,6 @@ GRE     ">"
 {NEQ}                    { return O_NEQ; }
 {LES}                    { return O_LES; }
 {GRE}                    { return O_GRE; }
+{ALPHA}{ALNUM}*           { return IDENTIFIER; }
 
 %%

@@ -1,5 +1,5 @@
 decaff.tab.c decaff.tab.h: decaff.y
-	bison -d decaff.y
+	bison -vd -Wall decaff.y
 
 lex.yy.c: decaff.l decaff.tab.h
 	flex decaff.l

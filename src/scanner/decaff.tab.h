@@ -49,23 +49,24 @@ extern int yydebug;
     T_FLOT = 259,
     T_BOOL = 260,
     T_NEWLINE = 261,
-    O_ADD = 262,
-    O_SUB = 263,
-    O_MUL = 264,
-    O_DIV = 265,
-    O_MOD = 266,
-    O_LEF = 267,
-    O_RIT = 268,
-    O_NOT = 269,
-    O_LEQ = 270,
-    O_GEQ = 271,
-    O_LES = 272,
-    O_GRE = 273,
-    O_EQL = 274,
-    O_NEQ = 275,
-    O_OR = 276,
-    O_AND = 277,
-    O_XOR = 278
+    IDENTIFIER = 262,
+    O_ADD = 263,
+    O_SUB = 264,
+    O_MUL = 265,
+    O_DIV = 266,
+    O_MOD = 267,
+    O_LEF = 268,
+    O_RIT = 269,
+    O_NOT = 270,
+    O_LEQ = 271,
+    O_GEQ = 272,
+    O_LES = 273,
+    O_GRE = 274,
+    O_EQL = 275,
+    O_NEQ = 276,
+    O_OR = 277,
+    O_AND = 278,
+    O_XOR = 279
   };
 #endif
 
@@ -81,7 +82,7 @@ union YYSTYPE
     bool bval;
     char cval;
 
-#line 85 "decaff.tab.h" /* yacc.c:1910  */
+#line 86 "decaff.tab.h" /* yacc.c:1910  */
 };
 
 typedef union YYSTYPE YYSTYPE;
