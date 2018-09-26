@@ -64,9 +64,11 @@ extern int yydebug;
     O_GRE = 274,
     O_EQL = 275,
     O_NEQ = 276,
-    O_OR = 277,
-    O_AND = 278,
-    O_XOR = 279
+    O_BND = 277,
+    O_BOR = 278,
+    O_OR = 279,
+    O_AND = 280,
+    O_XOR = 281
   };
 #endif
 
@@ -82,7 +84,7 @@ union YYSTYPE
     bool bval;
     char cval;
 
-#line 86 "decaff.tab.h" /* yacc.c:1910  */
+#line 88 "decaff.tab.h" /* yacc.c:1910  */
 };
 
 typedef union YYSTYPE YYSTYPE;

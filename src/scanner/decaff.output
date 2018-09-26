@@ -3,7 +3,24 @@ Terminals unused in grammar
    O_NOT
 
 
-State 7 conflicts: 2 reduce/reduce
+Rules useless in parser due to conflicts
+
+   21 bool_expr: IDENTIFIER
+
+
+State 7 conflicts: 7 reduce/reduce
+State 72 conflicts: 5 shift/reduce
+State 74 conflicts: 5 shift/reduce
+State 76 conflicts: 5 shift/reduce
+State 78 conflicts: 5 shift/reduce
+State 80 conflicts: 5 shift/reduce
+State 82 conflicts: 5 shift/reduce
+State 104 conflicts: 5 shift/reduce
+State 106 conflicts: 5 shift/reduce
+State 108 conflicts: 5 shift/reduce
+State 110 conflicts: 5 shift/reduce
+State 112 conflicts: 5 shift/reduce
+State 114 conflicts: 5 shift/reduce
 
 
 Grammar
@@ -20,59 +37,66 @@ Grammar
 
     7 int_expr: IDENTIFIER
     8         | T_INTG
-    9         | int_expr O_ADD int_expr
-   10         | int_expr O_SUB int_expr
-   11         | int_expr O_MUL int_expr
-   12         | int_expr O_DIV int_expr
-   13         | int_expr O_MOD int_expr
-   14         | O_LEF int_expr O_RIT
-   15         | O_SUB int_expr
+    9         | int_expr O_BOR int_expr
+   10         | int_expr O_BND int_expr
+   11         | int_expr O_OR int_expr
+   12         | int_expr O_AND int_expr
+   13         | int_expr O_XOR int_expr
+   14         | int_expr O_ADD int_expr
+   15         | int_expr O_SUB int_expr
+   16         | int_expr O_MUL int_expr
+   17         | int_expr O_DIV int_expr
+   18         | int_expr O_MOD int_expr
+   19         | O_LEF int_expr O_RIT
+   20         | O_SUB int_expr
 
-   16 bool_expr: IDENTIFIER
-   17          | T_BOOL
-   18          | bool_expr O_OR bool_expr
-   19          | bool_expr O_AND bool_expr
-   20          | bool_expr O_XOR bool_expr
-   21          | int_expr O_LEQ int_expr
-   22          | int_expr O_GEQ int_expr
-   23          | int_expr O_LES int_expr
-   24          | int_expr O_GRE int_expr
-   25          | int_expr O_EQL int_expr
-   26          | int_expr O_NEQ int_expr
-   27          | float_expr O_LEQ float_expr
-   28          | float_expr O_GEQ float_expr
-   29          | float_expr O_LES float_expr
-   30          | float_expr O_GRE float_expr
-   31          | float_expr O_EQL float_expr
-   32          | float_expr O_NEQ float_expr
-   33          | float_expr O_LEQ int_expr
-   34          | float_expr O_GEQ int_expr
-   35          | float_expr O_LES int_expr
-   36          | float_expr O_GRE int_expr
-   37          | float_expr O_EQL int_expr
-   38          | float_expr O_NEQ int_expr
-   39          | int_expr O_LEQ float_expr
-   40          | int_expr O_GEQ float_expr
-   41          | int_expr O_LES float_expr
-   42          | int_expr O_GRE float_expr
-   43          | int_expr O_EQL float_expr
-   44          | int_expr O_NEQ float_expr
-   45          | O_LEF bool_expr O_RIT
+   21 bool_expr: IDENTIFIER
+   22          | T_BOOL
+   23          | bool_expr O_BOR bool_expr
+   24          | bool_expr O_BND bool_expr
+   25          | bool_expr O_OR bool_expr
+   26          | bool_expr O_AND bool_expr
+   27          | bool_expr O_XOR bool_expr
+   28          | int_expr O_LEQ int_expr
+   29          | int_expr O_GEQ int_expr
+   30          | int_expr O_LES int_expr
+   31          | int_expr O_GRE int_expr
+   32          | int_expr O_EQL int_expr
+   33          | int_expr O_NEQ int_expr
+   34          | float_expr O_LEQ float_expr
+   35          | float_expr O_GEQ float_expr
+   36          | float_expr O_LES float_expr
+   37          | float_expr O_GRE float_expr
+   38          | float_expr O_EQL float_expr
+   39          | float_expr O_NEQ float_expr
+   40          | float_expr O_LEQ int_expr
+   41          | float_expr O_GEQ int_expr
+   42          | float_expr O_LES int_expr
+   43          | float_expr O_GRE int_expr
+   44          | float_expr O_EQL int_expr
+   45          | float_expr O_NEQ int_expr
+   46          | int_expr O_LEQ float_expr
+   47          | int_expr O_GEQ float_expr
+   48          | int_expr O_LES float_expr
+   49          | int_expr O_GRE float_expr
+   50          | int_expr O_EQL float_expr
+   51          | int_expr O_NEQ float_expr
+   52          | O_LEF bool_expr O_RIT
 
-   46 float_expr: T_FLOT
-   47           | float_expr O_ADD float_expr
-   48           | float_expr O_SUB float_expr
-   49           | float_expr O_MUL float_expr
-   50           | float_expr O_DIV float_expr
-   51           | int_expr O_ADD float_expr
-   52           | int_expr O_SUB float_expr
-   53           | int_expr O_MUL float_expr
-   54           | int_expr O_DIV float_expr
-   55           | float_expr O_ADD int_expr
-   56           | float_expr O_SUB int_expr
-   57           | float_expr O_MUL int_expr
-   58           | float_expr O_DIV int_expr
-   59           | O_LEF float_expr O_RIT
+   53 float_expr: T_FLOT
+   54           | float_expr O_ADD float_expr
+   55           | float_expr O_SUB float_expr
+   56           | float_expr O_MUL float_expr
+   57           | float_expr O_DIV float_expr
+   58           | int_expr O_ADD float_expr
+   59           | int_expr O_SUB float_expr
+   60           | int_expr O_MUL float_expr
+   61           | int_expr O_DIV float_expr
+   62           | float_expr O_ADD int_expr
+   63           | float_expr O_SUB int_expr
+   64           | float_expr O_MUL int_expr
+   65           | float_expr O_DIV int_expr
+   66           | O_LEF float_expr O_RIT
 
 
 Terminals, with rules where they appear
@@ -80,48 +104,51 @@ Terminals, with rules where they appear
 $end (0) 0
 error (256)
 T_INTG (258) 8
-T_FLOT (259) 46
-T_BOOL (260) 17
+T_FLOT (259) 53
+T_BOOL (260) 22
 T_NEWLINE (261) 3 4 5 6
-IDENTIFIER (262) 7 16
-O_ADD (263) 9 47 51 55
-O_SUB (264) 10 15 48 52 56
-O_MUL (265) 11 49 53 57
-O_DIV (266) 12 50 54 58
-O_MOD (267) 13
-O_LEF (268) 14 45 59
-O_RIT (269) 14 45 59
+IDENTIFIER (262) 7 21
+O_ADD (263) 14 54 58 62
+O_SUB (264) 15 20 55 59 63
+O_MUL (265) 16 56 60 64
+O_DIV (266) 17 57 61 65
+O_MOD (267) 18
+O_LEF (268) 19 52 66
+O_RIT (269) 19 52 66
 O_NOT (270)
-O_LEQ (271) 21 27 33 39
-O_GEQ (272) 22 28 34 40
-O_LES (273) 23 29 35 41
-O_GRE (274) 24 30 36 42
-O_EQL (275) 25 31 37 43
-O_NEQ (276) 26 32 38 44
-O_OR (277) 18
-O_AND (278) 19
-O_XOR (279) 20
+O_LEQ (271) 28 34 40 46
+O_GEQ (272) 29 35 41 47
+O_LES (273) 30 36 42 48
+O_GRE (274) 31 37 43 49
+O_EQL (275) 32 38 44 50
+O_NEQ (276) 33 39 45 51
+O_BND (277) 10 24
+O_BOR (278) 9 23
+O_OR (279) 11 25
+O_AND (280) 12 26
+O_XOR (281) 13 27
 
 
 Nonterminals, with rules where they appear
 
-$accept (25)
+$accept (27)
     on left: 0
-expr_list (26)
+expr_list (28)
     on left: 1 2, on right: 0 2
-expr (27)
+expr (29)
     on left: 3 4 5 6, on right: 2
-int_expr (28)
-    on left: 7 8 9 10 11 12 13 14 15, on right: 4 9 10 11 12 13 14
-    15 21 22 23 24 25 26 33 34 35 36 37 38 39 40 41 42 43 44 51 52
-    53 54 55 56 57 58
-bool_expr (29)
-    on left: 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33
-    34 35 36 37 38 39 40 41 42 43 44 45, on right: 6 18 19 20 45
-float_expr (30)
-    on left: 46 47 48 49 50 51 52 53 54 55 56 57 58 59, on right: 5
-    27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 47 48 49
-    50 51 52 53 54 55 56 57 58 59
+int_expr (30)
+    on left: 7 8 9 10 11 12 13 14 15 16 17 18 19 20, on right: 4 9
+    10 11 12 13 14 15 16 17 18 19 20 28 29 30 31 32 33 40 41 42 43
+    44 45 46 47 48 49 50 51 58 59 60 61 62 63 64 65
+bool_expr (31)
+    on left: 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38
+    39 40 41 42 43 44 45 46 47 48 49 50 51 52, on right: 6 23 24 25
+    26 27 52
+float_expr (32)
+    on left: 53 54 55 56 57 58 59 60 61 62 63 64 65 66, on right: 5
+    34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 54 55 56
+    57 58 59 60 61 62 63 64 65 66
 
 
 State 0
@@ -169,16 +196,16 @@ State 3
 
 State 4
 
-   46 float_expr: T_FLOT .
+   53 float_expr: T_FLOT .
 
-    $default  reduce using rule 46 (float_expr)
+    $default  reduce using rule 53 (float_expr)
 
 
 State 5
 
-   17 bool_expr: T_BOOL .
+   22 bool_expr: T_BOOL .
 
-    $default  reduce using rule 17 (bool_expr)
+    $default  reduce using rule 22 (bool_expr)
 
 
 State 6
@@ -191,21 +218,28 @@ State 6
 State 7
 
     7 int_expr: IDENTIFIER .
-   16 bool_expr: IDENTIFIER .
+   21 bool_expr: IDENTIFIER .
 
     T_NEWLINE  reduce using rule 7 (int_expr)
-    T_NEWLINE  [reduce using rule 16 (bool_expr)]
+    T_NEWLINE  [reduce using rule 21 (bool_expr)]
     O_RIT      reduce using rule 7 (int_expr)
-    O_RIT      [reduce using rule 16 (bool_expr)]
-    O_OR       reduce using rule 16 (bool_expr)
-    O_AND      reduce using rule 16 (bool_expr)
-    O_XOR      reduce using rule 16 (bool_expr)
+    O_RIT      [reduce using rule 21 (bool_expr)]
+    O_BND      reduce using rule 7 (int_expr)
+    O_BND      [reduce using rule 21 (bool_expr)]
+    O_BOR      reduce using rule 7 (int_expr)
+    O_BOR      [reduce using rule 21 (bool_expr)]
+    O_OR       reduce using rule 7 (int_expr)
+    O_OR       [reduce using rule 21 (bool_expr)]
+    O_AND      reduce using rule 7 (int_expr)
+    O_AND      [reduce using rule 21 (bool_expr)]
+    O_XOR      reduce using rule 7 (int_expr)
+    O_XOR      [reduce using rule 21 (bool_expr)]
     $default   reduce using rule 7 (int_expr)
 
 
 State 8
 
-   15 int_expr: O_SUB . int_expr
+   20 int_expr: O_SUB . int_expr
 
     T_INTG      shift, and go to state 3
     IDENTIFIER  shift, and go to state 14
@@ -217,9 +251,9 @@ State 8
 
 State 9
 
-   14 int_expr: O_LEF . int_expr O_RIT
-   45 bool_expr: O_LEF . bool_expr O_RIT
-   59 float_expr: O_LEF . float_expr O_RIT
+   19 int_expr: O_LEF . int_expr O_RIT
+   52 bool_expr: O_LEF . bool_expr O_RIT
+   66 float_expr: O_LEF . float_expr O_RIT
 
     T_INTG      shift, and go to state 3
     T_FLOT      shift, and go to state 4
@@ -243,27 +277,32 @@ State 10
 State 11
 
     4 expr: int_expr . T_NEWLINE
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   21 bool_expr: int_expr . O_LEQ int_expr
-   22          | int_expr . O_GEQ int_expr
-   23          | int_expr . O_LES int_expr
-   24          | int_expr . O_GRE int_expr
-   25          | int_expr . O_EQL int_expr
-   26          | int_expr . O_NEQ int_expr
-   39          | int_expr . O_LEQ float_expr
-   40          | int_expr . O_GEQ float_expr
-   41          | int_expr . O_LES float_expr
-   42          | int_expr . O_GRE float_expr
-   43          | int_expr . O_EQL float_expr
-   44          | int_expr . O_NEQ float_expr
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   28 bool_expr: int_expr . O_LEQ int_expr
+   29          | int_expr . O_GEQ int_expr
+   30          | int_expr . O_LES int_expr
+   31          | int_expr . O_GRE int_expr
+   32          | int_expr . O_EQL int_expr
+   33          | int_expr . O_NEQ int_expr
+   46          | int_expr . O_LEQ float_expr
+   47          | int_expr . O_GEQ float_expr
+   48          | int_expr . O_LES float_expr
+   49          | int_expr . O_GRE float_expr
+   50          | int_expr . O_EQL float_expr
+   51          | int_expr . O_NEQ float_expr
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
 
     T_NEWLINE  shift, and go to state 20
     O_ADD      shift, and go to state 21
@@ -277,56 +316,65 @@ State 11
     O_GRE      shift, and go to state 29
     O_EQL      shift, and go to state 30
     O_NEQ      shift, and go to state 31
+    O_BND      shift, and go to state 32
+    O_BOR      shift, and go to state 33
+    O_OR       shift, and go to state 34
+    O_AND      shift, and go to state 35
+    O_XOR      shift, and go to state 36
 
 
 State 12
 
     6 expr: bool_expr . T_NEWLINE
-   18 bool_expr: bool_expr . O_OR bool_expr
-   19          | bool_expr . O_AND bool_expr
-   20          | bool_expr . O_XOR bool_expr
+   23 bool_expr: bool_expr . O_BOR bool_expr
+   24          | bool_expr . O_BND bool_expr
+   25          | bool_expr . O_OR bool_expr
+   26          | bool_expr . O_AND bool_expr
+   27          | bool_expr . O_XOR bool_expr
 
-    T_NEWLINE  shift, and go to state 32
-    O_OR       shift, and go to state 33
-    O_AND      shift, and go to state 34
-    O_XOR      shift, and go to state 35
+    T_NEWLINE  shift, and go to state 37
+    O_BND      shift, and go to state 38
+    O_BOR      shift, and go to state 39
+    O_OR       shift, and go to state 40
+    O_AND      shift, and go to state 41
+    O_XOR      shift, and go to state 42
 
 
 State 13
 
     5 expr: float_expr . T_NEWLINE
-   27 bool_expr: float_expr . O_LEQ float_expr
-   28          | float_expr . O_GEQ float_expr
-   29          | float_expr . O_LES float_expr
-   30          | float_expr . O_GRE float_expr
-   31          | float_expr . O_EQL float_expr
-   32          | float_expr . O_NEQ float_expr
-   33          | float_expr . O_LEQ int_expr
-   34          | float_expr . O_GEQ int_expr
-   35          | float_expr . O_LES int_expr
-   36          | float_expr . O_GRE int_expr
-   37          | float_expr . O_EQL int_expr
-   38          | float_expr . O_NEQ int_expr
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
+   34 bool_expr: float_expr . O_LEQ float_expr
+   35          | float_expr . O_GEQ float_expr
+   36          | float_expr . O_LES float_expr
+   37          | float_expr . O_GRE float_expr
+   38          | float_expr . O_EQL float_expr
+   39          | float_expr . O_NEQ float_expr
+   40          | float_expr . O_LEQ int_expr
+   41          | float_expr . O_GEQ int_expr
+   42          | float_expr . O_LES int_expr
+   43          | float_expr . O_GRE int_expr
+   44          | float_expr . O_EQL int_expr
+   45          | float_expr . O_NEQ int_expr
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
 
-    T_NEWLINE  shift, and go to state 36
-    O_ADD      shift, and go to state 37
-    O_SUB      shift, and go to state 38
-    O_MUL      shift, and go to state 39
-    O_DIV      shift, and go to state 40
-    O_LEQ      shift, and go to state 41
-    O_GEQ      shift, and go to state 42
-    O_LES      shift, and go to state 43
-    O_GRE      shift, and go to state 44
-    O_EQL      shift, and go to state 45
-    O_NEQ      shift, and go to state 46
+    T_NEWLINE  shift, and go to state 43
+    O_ADD      shift, and go to state 44
+    O_SUB      shift, and go to state 45
+    O_MUL      shift, and go to state 46
+    O_DIV      shift, and go to state 47
+    O_LEQ      shift, and go to state 48
+    O_GEQ      shift, and go to state 49
+    O_LES      shift, and go to state 50
+    O_GRE      shift, and go to state 51
+    O_EQL      shift, and go to state 52
+    O_NEQ      shift, and go to state 53
 
 
 State 14
@@ -338,119 +386,138 @@ State 14
 
 State 15
 
-   14 int_expr: O_LEF . int_expr O_RIT
+   19 int_expr: O_LEF . int_expr O_RIT
 
     T_INTG      shift, and go to state 3
     IDENTIFIER  shift, and go to state 14
     O_SUB       shift, and go to state 8
     O_LEF       shift, and go to state 15
 
-    int_expr  go to state 47
+    int_expr  go to state 54
 
 
 State 16
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   15         | O_SUB int_expr .
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   20         | O_SUB int_expr .
 
-    O_MUL  shift, and go to state 50
-    O_DIV  shift, and go to state 51
+    O_MUL  shift, and go to state 57
+    O_DIV  shift, and go to state 58
     O_MOD  shift, and go to state 25
 
-    $default  reduce using rule 15 (int_expr)
+    $default  reduce using rule 20 (int_expr)
 
 
 State 17
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   14         | O_LEF int_expr . O_RIT
-   21 bool_expr: int_expr . O_LEQ int_expr
-   22          | int_expr . O_GEQ int_expr
-   23          | int_expr . O_LES int_expr
-   24          | int_expr . O_GRE int_expr
-   25          | int_expr . O_EQL int_expr
-   26          | int_expr . O_NEQ int_expr
-   39          | int_expr . O_LEQ float_expr
-   40          | int_expr . O_GEQ float_expr
-   41          | int_expr . O_LES float_expr
-   42          | int_expr . O_GRE float_expr
-   43          | int_expr . O_EQL float_expr
-   44          | int_expr . O_NEQ float_expr
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   19         | O_LEF int_expr . O_RIT
+   28 bool_expr: int_expr . O_LEQ int_expr
+   29          | int_expr . O_GEQ int_expr
+   30          | int_expr . O_LES int_expr
+   31          | int_expr . O_GRE int_expr
+   32          | int_expr . O_EQL int_expr
+   33          | int_expr . O_NEQ int_expr
+   46          | int_expr . O_LEQ float_expr
+   47          | int_expr . O_GEQ float_expr
+   48          | int_expr . O_LES float_expr
+   49          | int_expr . O_GRE float_expr
+   50          | int_expr . O_EQL float_expr
+   51          | int_expr . O_NEQ float_expr
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
 
     O_ADD  shift, and go to state 21
     O_SUB  shift, and go to state 22
     O_MUL  shift, and go to state 23
     O_DIV  shift, and go to state 24
     O_MOD  shift, and go to state 25
-    O_RIT  shift, and go to state 52
+    O_RIT  shift, and go to state 59
     O_LEQ  shift, and go to state 26
     O_GEQ  shift, and go to state 27
     O_LES  shift, and go to state 28
     O_GRE  shift, and go to state 29
     O_EQL  shift, and go to state 30
     O_NEQ  shift, and go to state 31
+    O_BND  shift, and go to state 32
+    O_BOR  shift, and go to state 33
+    O_OR   shift, and go to state 34
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
 
 
 State 18
 
-   18 bool_expr: bool_expr . O_OR bool_expr
-   19          | bool_expr . O_AND bool_expr
-   20          | bool_expr . O_XOR bool_expr
-   45          | O_LEF bool_expr . O_RIT
+   23 bool_expr: bool_expr . O_BOR bool_expr
+   24          | bool_expr . O_BND bool_expr
+   25          | bool_expr . O_OR bool_expr
+   26          | bool_expr . O_AND bool_expr
+   27          | bool_expr . O_XOR bool_expr
+   52          | O_LEF bool_expr . O_RIT
 
-    O_RIT  shift, and go to state 53
-    O_OR   shift, and go to state 33
-    O_AND  shift, and go to state 34
-    O_XOR  shift, and go to state 35
+    O_RIT  shift, and go to state 60
+    O_BND  shift, and go to state 38
+    O_BOR  shift, and go to state 39
+    O_OR   shift, and go to state 40
+    O_AND  shift, and go to state 41
+    O_XOR  shift, and go to state 42
 
 
 State 19
 
-   27 bool_expr: float_expr . O_LEQ float_expr
-   28          | float_expr . O_GEQ float_expr
-   29          | float_expr . O_LES float_expr
-   30          | float_expr . O_GRE float_expr
-   31          | float_expr . O_EQL float_expr
-   32          | float_expr . O_NEQ float_expr
-   33          | float_expr . O_LEQ int_expr
-   34          | float_expr . O_GEQ int_expr
-   35          | float_expr . O_LES int_expr
-   36          | float_expr . O_GRE int_expr
-   37          | float_expr . O_EQL int_expr
-   38          | float_expr . O_NEQ int_expr
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
-   59           | O_LEF float_expr . O_RIT
+   34 bool_expr: float_expr . O_LEQ float_expr
+   35          | float_expr . O_GEQ float_expr
+   36          | float_expr . O_LES float_expr
+   37          | float_expr . O_GRE float_expr
+   38          | float_expr . O_EQL float_expr
+   39          | float_expr . O_NEQ float_expr
+   40          | float_expr . O_LEQ int_expr
+   41          | float_expr . O_GEQ int_expr
+   42          | float_expr . O_LES int_expr
+   43          | float_expr . O_GRE int_expr
+   44          | float_expr . O_EQL int_expr
+   45          | float_expr . O_NEQ int_expr
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
+   66           | O_LEF float_expr . O_RIT
 
-    O_ADD  shift, and go to state 37
-    O_SUB  shift, and go to state 38
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
-    O_RIT  shift, and go to state 54
-    O_LEQ  shift, and go to state 41
-    O_GEQ  shift, and go to state 42
-    O_LES  shift, and go to state 43
-    O_GRE  shift, and go to state 44
-    O_EQL  shift, and go to state 45
-    O_NEQ  shift, and go to state 46
+    O_ADD  shift, and go to state 44
+    O_SUB  shift, and go to state 45
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
+    O_RIT  shift, and go to state 61
+    O_LEQ  shift, and go to state 48
+    O_GEQ  shift, and go to state 49
+    O_LES  shift, and go to state 50
+    O_GRE  shift, and go to state 51
+    O_EQL  shift, and go to state 52
+    O_NEQ  shift, and go to state 53
 
 
 State 20
@@ -462,192 +529,236 @@ State 20
 
 State 21
 
-    9 int_expr: int_expr O_ADD . int_expr
-   51 float_expr: int_expr O_ADD . float_expr
+   14 int_expr: int_expr O_ADD . int_expr
+   58 float_expr: int_expr O_ADD . float_expr
 
     T_INTG      shift, and go to state 3
     T_FLOT      shift, and go to state 4
     IDENTIFIER  shift, and go to state 14
     O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
+    O_LEF       shift, and go to state 62
 
-    int_expr    go to state 56
-    float_expr  go to state 57
+    int_expr    go to state 63
+    float_expr  go to state 64
 
 
 State 22
 
-   10 int_expr: int_expr O_SUB . int_expr
-   52 float_expr: int_expr O_SUB . float_expr
+   15 int_expr: int_expr O_SUB . int_expr
+   59 float_expr: int_expr O_SUB . float_expr
 
     T_INTG      shift, and go to state 3
     T_FLOT      shift, and go to state 4
     IDENTIFIER  shift, and go to state 14
     O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
+    O_LEF       shift, and go to state 62
 
-    int_expr    go to state 58
-    float_expr  go to state 59
+    int_expr    go to state 65
+    float_expr  go to state 66
 
 
 State 23
 
-   11 int_expr: int_expr O_MUL . int_expr
-   53 float_expr: int_expr O_MUL . float_expr
+   16 int_expr: int_expr O_MUL . int_expr
+   60 float_expr: int_expr O_MUL . float_expr
 
     T_INTG      shift, and go to state 3
     T_FLOT      shift, and go to state 4
     IDENTIFIER  shift, and go to state 14
     O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
+    O_LEF       shift, and go to state 62
 
-    int_expr    go to state 60
-    float_expr  go to state 61
+    int_expr    go to state 67
+    float_expr  go to state 68
 
 
 State 24
 
-   12 int_expr: int_expr O_DIV . int_expr
-   54 float_expr: int_expr O_DIV . float_expr
+   17 int_expr: int_expr O_DIV . int_expr
+   61 float_expr: int_expr O_DIV . float_expr
 
     T_INTG      shift, and go to state 3
     T_FLOT      shift, and go to state 4
     IDENTIFIER  shift, and go to state 14
     O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
+    O_LEF       shift, and go to state 62
 
-    int_expr    go to state 62
-    float_expr  go to state 63
+    int_expr    go to state 69
+    float_expr  go to state 70
 
 
 State 25
 
-   13 int_expr: int_expr O_MOD . int_expr
+   18 int_expr: int_expr O_MOD . int_expr
 
     T_INTG      shift, and go to state 3
     IDENTIFIER  shift, and go to state 14
     O_SUB       shift, and go to state 8
     O_LEF       shift, and go to state 15
 
-    int_expr  go to state 64
+    int_expr  go to state 71
 
 
 State 26
 
-   21 bool_expr: int_expr O_LEQ . int_expr
-   39          | int_expr O_LEQ . float_expr
+   28 bool_expr: int_expr O_LEQ . int_expr
+   46          | int_expr O_LEQ . float_expr
 
     T_INTG      shift, and go to state 3
     T_FLOT      shift, and go to state 4
     IDENTIFIER  shift, and go to state 14
     O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
+    O_LEF       shift, and go to state 62
 
-    int_expr    go to state 65
-    float_expr  go to state 66
+    int_expr    go to state 72
+    float_expr  go to state 73
 
 
 State 27
 
-   22 bool_expr: int_expr O_GEQ . int_expr
-   40          | int_expr O_GEQ . float_expr
+   29 bool_expr: int_expr O_GEQ . int_expr
+   47          | int_expr O_GEQ . float_expr
 
     T_INTG      shift, and go to state 3
     T_FLOT      shift, and go to state 4
     IDENTIFIER  shift, and go to state 14
     O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
+    O_LEF       shift, and go to state 62
 
-    int_expr    go to state 67
-    float_expr  go to state 68
+    int_expr    go to state 74
+    float_expr  go to state 75
 
 
 State 28
 
-   23 bool_expr: int_expr O_LES . int_expr
-   41          | int_expr O_LES . float_expr
+   30 bool_expr: int_expr O_LES . int_expr
+   48          | int_expr O_LES . float_expr
 
     T_INTG      shift, and go to state 3
     T_FLOT      shift, and go to state 4
     IDENTIFIER  shift, and go to state 14
     O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
+    O_LEF       shift, and go to state 62
 
-    int_expr    go to state 69
-    float_expr  go to state 70
+    int_expr    go to state 76
+    float_expr  go to state 77
 
 
 State 29
 
-   24 bool_expr: int_expr O_GRE . int_expr
-   42          | int_expr O_GRE . float_expr
+   31 bool_expr: int_expr O_GRE . int_expr
+   49          | int_expr O_GRE . float_expr
 
     T_INTG      shift, and go to state 3
     T_FLOT      shift, and go to state 4
     IDENTIFIER  shift, and go to state 14
     O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
+    O_LEF       shift, and go to state 62
 
-    int_expr    go to state 71
-    float_expr  go to state 72
+    int_expr    go to state 78
+    float_expr  go to state 79
 
 
 State 30
 
-   25 bool_expr: int_expr O_EQL . int_expr
-   43          | int_expr O_EQL . float_expr
+   32 bool_expr: int_expr O_EQL . int_expr
+   50          | int_expr O_EQL . float_expr
 
     T_INTG      shift, and go to state 3
     T_FLOT      shift, and go to state 4
     IDENTIFIER  shift, and go to state 14
     O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
+    O_LEF       shift, and go to state 62
 
-    int_expr    go to state 73
-    float_expr  go to state 74
+    int_expr    go to state 80
+    float_expr  go to state 81
 
 
 State 31
 
-   26 bool_expr: int_expr O_NEQ . int_expr
-   44          | int_expr O_NEQ . float_expr
+   33 bool_expr: int_expr O_NEQ . int_expr
+   51          | int_expr O_NEQ . float_expr
 
     T_INTG      shift, and go to state 3
     T_FLOT      shift, and go to state 4
     IDENTIFIER  shift, and go to state 14
     O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
+    O_LEF       shift, and go to state 62
 
-    int_expr    go to state 75
-    float_expr  go to state 76
+    int_expr    go to state 82
+    float_expr  go to state 83
 
 
 State 32
+
+   10 int_expr: int_expr O_BND . int_expr
+
+    T_INTG      shift, and go to state 3
+    IDENTIFIER  shift, and go to state 14
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 15
+
+    int_expr  go to state 84
+
+
+State 33
+
+    9 int_expr: int_expr O_BOR . int_expr
+
+    T_INTG      shift, and go to state 3
+    IDENTIFIER  shift, and go to state 14
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 15
+
+    int_expr  go to state 85
+
+
+State 34
+
+   11 int_expr: int_expr O_OR . int_expr
+
+    T_INTG      shift, and go to state 3
+    IDENTIFIER  shift, and go to state 14
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 15
+
+    int_expr  go to state 86
+
+
+State 35
+
+   12 int_expr: int_expr O_AND . int_expr
+
+    T_INTG      shift, and go to state 3
+    IDENTIFIER  shift, and go to state 14
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 15
+
+    int_expr  go to state 87
+
+
+State 36
+
+   13 int_expr: int_expr O_XOR . int_expr
+
+    T_INTG      shift, and go to state 3
+    IDENTIFIER  shift, and go to state 14
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 15
+
+    int_expr  go to state 88
+
+
+State 37
 
     6 expr: bool_expr T_NEWLINE .
 
     $default  reduce using rule 6 (expr)
 
 
-State 33
+State 38
 
-   18 bool_expr: bool_expr O_OR . bool_expr
-
-    T_INTG      shift, and go to state 3
-    T_FLOT      shift, and go to state 4
-    T_BOOL      shift, and go to state 5
-    IDENTIFIER  shift, and go to state 7
-    O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 9
-
-    int_expr    go to state 77
-    bool_expr   go to state 78
-    float_expr  go to state 79
-
-
-State 34
-
-   19 bool_expr: bool_expr O_AND . bool_expr
+   24 bool_expr: bool_expr O_BND . bool_expr
 
     T_INTG      shift, and go to state 3
     T_FLOT      shift, and go to state 4
@@ -656,14 +767,14 @@ State 34
     O_SUB       shift, and go to state 8
     O_LEF       shift, and go to state 9
 
-    int_expr    go to state 77
-    bool_expr   go to state 80
-    float_expr  go to state 79
+    int_expr    go to state 89
+    bool_expr   go to state 90
+    float_expr  go to state 91
 
 
-State 35
+State 39
 
-   20 bool_expr: bool_expr O_XOR . bool_expr
+   23 bool_expr: bool_expr O_BOR . bool_expr
 
     T_INTG      shift, and go to state 3
     T_FLOT      shift, and go to state 4
@@ -672,133 +783,76 @@ State 35
     O_SUB       shift, and go to state 8
     O_LEF       shift, and go to state 9
 
-    int_expr    go to state 77
-    bool_expr   go to state 81
-    float_expr  go to state 79
+    int_expr    go to state 89
+    bool_expr   go to state 92
+    float_expr  go to state 91
 
 
-State 36
+State 40
+
+   25 bool_expr: bool_expr O_OR . bool_expr
+
+    T_INTG      shift, and go to state 3
+    T_FLOT      shift, and go to state 4
+    T_BOOL      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 7
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 9
+
+    int_expr    go to state 89
+    bool_expr   go to state 93
+    float_expr  go to state 91
+
+
+State 41
+
+   26 bool_expr: bool_expr O_AND . bool_expr
+
+    T_INTG      shift, and go to state 3
+    T_FLOT      shift, and go to state 4
+    T_BOOL      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 7
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 9
+
+    int_expr    go to state 89
+    bool_expr   go to state 94
+    float_expr  go to state 91
+
+
+State 42
+
+   27 bool_expr: bool_expr O_XOR . bool_expr
+
+    T_INTG      shift, and go to state 3
+    T_FLOT      shift, and go to state 4
+    T_BOOL      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 7
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 9
+
+    int_expr    go to state 89
+    bool_expr   go to state 95
+    float_expr  go to state 91
+
+
+State 43
 
     5 expr: float_expr T_NEWLINE .
 
     $default  reduce using rule 5 (expr)
 
 
-State 37
-
-   47 float_expr: float_expr O_ADD . float_expr
-   55           | float_expr O_ADD . int_expr
-
-    T_INTG      shift, and go to state 3
-    T_FLOT      shift, and go to state 4
-    IDENTIFIER  shift, and go to state 14
-    O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
-
-    int_expr    go to state 82
-    float_expr  go to state 83
-
-
-State 38
-
-   48 float_expr: float_expr O_SUB . float_expr
-   56           | float_expr O_SUB . int_expr
-
-    T_INTG      shift, and go to state 3
-    T_FLOT      shift, and go to state 4
-    IDENTIFIER  shift, and go to state 14
-    O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
-
-    int_expr    go to state 84
-    float_expr  go to state 85
-
-
-State 39
-
-   49 float_expr: float_expr O_MUL . float_expr
-   57           | float_expr O_MUL . int_expr
-
-    T_INTG      shift, and go to state 3
-    T_FLOT      shift, and go to state 4
-    IDENTIFIER  shift, and go to state 14
-    O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
-
-    int_expr    go to state 86
-    float_expr  go to state 87
-
-
-State 40
-
-   50 float_expr: float_expr O_DIV . float_expr
-   58           | float_expr O_DIV . int_expr
-
-    T_INTG      shift, and go to state 3
-    T_FLOT      shift, and go to state 4
-    IDENTIFIER  shift, and go to state 14
-    O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
-
-    int_expr    go to state 88
-    float_expr  go to state 89
-
-
-State 41
-
-   27 bool_expr: float_expr O_LEQ . float_expr
-   33          | float_expr O_LEQ . int_expr
-
-    T_INTG      shift, and go to state 3
-    T_FLOT      shift, and go to state 4
-    IDENTIFIER  shift, and go to state 14
-    O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
-
-    int_expr    go to state 90
-    float_expr  go to state 91
-
-
-State 42
-
-   28 bool_expr: float_expr O_GEQ . float_expr
-   34          | float_expr O_GEQ . int_expr
-
-    T_INTG      shift, and go to state 3
-    T_FLOT      shift, and go to state 4
-    IDENTIFIER  shift, and go to state 14
-    O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
-
-    int_expr    go to state 92
-    float_expr  go to state 93
-
-
-State 43
-
-   29 bool_expr: float_expr O_LES . float_expr
-   35          | float_expr O_LES . int_expr
-
-    T_INTG      shift, and go to state 3
-    T_FLOT      shift, and go to state 4
-    IDENTIFIER  shift, and go to state 14
-    O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
-
-    int_expr    go to state 94
-    float_expr  go to state 95
-
-
 State 44
 
-   30 bool_expr: float_expr O_GRE . float_expr
-   36          | float_expr O_GRE . int_expr
+   54 float_expr: float_expr O_ADD . float_expr
+   62           | float_expr O_ADD . int_expr
 
     T_INTG      shift, and go to state 3
     T_FLOT      shift, and go to state 4
     IDENTIFIER  shift, and go to state 14
     O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
+    O_LEF       shift, and go to state 62
 
     int_expr    go to state 96
     float_expr  go to state 97
@@ -806,14 +860,14 @@ State 44
 
 State 45
 
-   31 bool_expr: float_expr O_EQL . float_expr
-   37          | float_expr O_EQL . int_expr
+   55 float_expr: float_expr O_SUB . float_expr
+   63           | float_expr O_SUB . int_expr
 
     T_INTG      shift, and go to state 3
     T_FLOT      shift, and go to state 4
     IDENTIFIER  shift, and go to state 14
     O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
+    O_LEF       shift, and go to state 62
 
     int_expr    go to state 98
     float_expr  go to state 99
@@ -821,14 +875,14 @@ State 45
 
 State 46
 
-   32 bool_expr: float_expr O_NEQ . float_expr
-   38          | float_expr O_NEQ . int_expr
+   56 float_expr: float_expr O_MUL . float_expr
+   64           | float_expr O_MUL . int_expr
 
     T_INTG      shift, and go to state 3
     T_FLOT      shift, and go to state 4
     IDENTIFIER  shift, and go to state 14
     O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
+    O_LEF       shift, and go to state 62
 
     int_expr    go to state 100
     float_expr  go to state 101
@@ -836,534 +890,894 @@ State 46
 
 State 47
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   14         | O_LEF int_expr . O_RIT
-
-    O_ADD  shift, and go to state 48
-    O_SUB  shift, and go to state 49
-    O_MUL  shift, and go to state 50
-    O_DIV  shift, and go to state 51
-    O_MOD  shift, and go to state 25
-    O_RIT  shift, and go to state 52
-
-
-State 48
-
-    9 int_expr: int_expr O_ADD . int_expr
-
-    T_INTG      shift, and go to state 3
-    IDENTIFIER  shift, and go to state 14
-    O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 15
-
-    int_expr  go to state 102
-
-
-State 49
-
-   10 int_expr: int_expr O_SUB . int_expr
-
-    T_INTG      shift, and go to state 3
-    IDENTIFIER  shift, and go to state 14
-    O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 15
-
-    int_expr  go to state 103
-
-
-State 50
-
-   11 int_expr: int_expr O_MUL . int_expr
-
-    T_INTG      shift, and go to state 3
-    IDENTIFIER  shift, and go to state 14
-    O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 15
-
-    int_expr  go to state 104
-
-
-State 51
-
-   12 int_expr: int_expr O_DIV . int_expr
-
-    T_INTG      shift, and go to state 3
-    IDENTIFIER  shift, and go to state 14
-    O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 15
-
-    int_expr  go to state 105
-
-
-State 52
-
-   14 int_expr: O_LEF int_expr O_RIT .
-
-    $default  reduce using rule 14 (int_expr)
-
-
-State 53
-
-   45 bool_expr: O_LEF bool_expr O_RIT .
-
-    $default  reduce using rule 45 (bool_expr)
-
-
-State 54
-
-   59 float_expr: O_LEF float_expr O_RIT .
-
-    $default  reduce using rule 59 (float_expr)
-
-
-State 55
-
-   14 int_expr: O_LEF . int_expr O_RIT
-   59 float_expr: O_LEF . float_expr O_RIT
+   57 float_expr: float_expr O_DIV . float_expr
+   65           | float_expr O_DIV . int_expr
 
     T_INTG      shift, and go to state 3
     T_FLOT      shift, and go to state 4
     IDENTIFIER  shift, and go to state 14
     O_SUB       shift, and go to state 8
-    O_LEF       shift, and go to state 55
+    O_LEF       shift, and go to state 62
+
+    int_expr    go to state 102
+    float_expr  go to state 103
+
+
+State 48
+
+   34 bool_expr: float_expr O_LEQ . float_expr
+   40          | float_expr O_LEQ . int_expr
+
+    T_INTG      shift, and go to state 3
+    T_FLOT      shift, and go to state 4
+    IDENTIFIER  shift, and go to state 14
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 62
+
+    int_expr    go to state 104
+    float_expr  go to state 105
+
+
+State 49
+
+   35 bool_expr: float_expr O_GEQ . float_expr
+   41          | float_expr O_GEQ . int_expr
+
+    T_INTG      shift, and go to state 3
+    T_FLOT      shift, and go to state 4
+    IDENTIFIER  shift, and go to state 14
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 62
 
     int_expr    go to state 106
     float_expr  go to state 107
 
 
+State 50
+
+   36 bool_expr: float_expr O_LES . float_expr
+   42          | float_expr O_LES . int_expr
+
+    T_INTG      shift, and go to state 3
+    T_FLOT      shift, and go to state 4
+    IDENTIFIER  shift, and go to state 14
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 62
+
+    int_expr    go to state 108
+    float_expr  go to state 109
+
+
+State 51
+
+   37 bool_expr: float_expr O_GRE . float_expr
+   43          | float_expr O_GRE . int_expr
+
+    T_INTG      shift, and go to state 3
+    T_FLOT      shift, and go to state 4
+    IDENTIFIER  shift, and go to state 14
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 62
+
+    int_expr    go to state 110
+    float_expr  go to state 111
+
+
+State 52
+
+   38 bool_expr: float_expr O_EQL . float_expr
+   44          | float_expr O_EQL . int_expr
+
+    T_INTG      shift, and go to state 3
+    T_FLOT      shift, and go to state 4
+    IDENTIFIER  shift, and go to state 14
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 62
+
+    int_expr    go to state 112
+    float_expr  go to state 113
+
+
+State 53
+
+   39 bool_expr: float_expr O_NEQ . float_expr
+   45          | float_expr O_NEQ . int_expr
+
+    T_INTG      shift, and go to state 3
+    T_FLOT      shift, and go to state 4
+    IDENTIFIER  shift, and go to state 14
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 62
+
+    int_expr    go to state 114
+    float_expr  go to state 115
+
+
+State 54
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   19         | O_LEF int_expr . O_RIT
+
+    O_ADD  shift, and go to state 55
+    O_SUB  shift, and go to state 56
+    O_MUL  shift, and go to state 57
+    O_DIV  shift, and go to state 58
+    O_MOD  shift, and go to state 25
+    O_RIT  shift, and go to state 59
+    O_BND  shift, and go to state 32
+    O_BOR  shift, and go to state 33
+    O_OR   shift, and go to state 34
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
+
+
+State 55
+
+   14 int_expr: int_expr O_ADD . int_expr
+
+    T_INTG      shift, and go to state 3
+    IDENTIFIER  shift, and go to state 14
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 15
+
+    int_expr  go to state 116
+
+
 State 56
 
-    9 int_expr: int_expr . O_ADD int_expr
-    9         | int_expr O_ADD int_expr .
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+   15 int_expr: int_expr O_SUB . int_expr
 
-    O_MUL  shift, and go to state 23
-    O_DIV  shift, and go to state 24
-    O_MOD  shift, and go to state 25
+    T_INTG      shift, and go to state 3
+    IDENTIFIER  shift, and go to state 14
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 15
 
-    $default  reduce using rule 9 (int_expr)
+    int_expr  go to state 117
 
 
 State 57
 
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   51           | int_expr O_ADD float_expr .
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
+   16 int_expr: int_expr O_MUL . int_expr
 
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
+    T_INTG      shift, and go to state 3
+    IDENTIFIER  shift, and go to state 14
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 15
 
-    $default  reduce using rule 51 (float_expr)
+    int_expr  go to state 118
 
 
 State 58
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   10         | int_expr O_SUB int_expr .
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+   17 int_expr: int_expr O_DIV . int_expr
 
-    O_MUL  shift, and go to state 23
-    O_DIV  shift, and go to state 24
-    O_MOD  shift, and go to state 25
+    T_INTG      shift, and go to state 3
+    IDENTIFIER  shift, and go to state 14
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 15
 
-    $default  reduce using rule 10 (int_expr)
+    int_expr  go to state 119
 
 
 State 59
 
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   52           | int_expr O_SUB float_expr .
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
+   19 int_expr: O_LEF int_expr O_RIT .
 
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
-
-    $default  reduce using rule 52 (float_expr)
+    $default  reduce using rule 19 (int_expr)
 
 
 State 60
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   11         | int_expr O_MUL int_expr .
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+   52 bool_expr: O_LEF bool_expr O_RIT .
 
-    O_MOD  shift, and go to state 25
-
-    $default  reduce using rule 11 (int_expr)
+    $default  reduce using rule 52 (bool_expr)
 
 
 State 61
 
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   53           | int_expr O_MUL float_expr .
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
+   66 float_expr: O_LEF float_expr O_RIT .
 
-    $default  reduce using rule 53 (float_expr)
+    $default  reduce using rule 66 (float_expr)
 
 
 State 62
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   12         | int_expr O_DIV int_expr .
-   13         | int_expr . O_MOD int_expr
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+   19 int_expr: O_LEF . int_expr O_RIT
+   66 float_expr: O_LEF . float_expr O_RIT
 
-    O_MOD  shift, and go to state 25
+    T_INTG      shift, and go to state 3
+    T_FLOT      shift, and go to state 4
+    IDENTIFIER  shift, and go to state 14
+    O_SUB       shift, and go to state 8
+    O_LEF       shift, and go to state 62
 
-    $default  reduce using rule 12 (int_expr)
+    int_expr    go to state 120
+    float_expr  go to state 121
 
 
 State 63
 
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   54           | int_expr O_DIV float_expr .
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   14         | int_expr O_ADD int_expr .
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
 
-    $default  reduce using rule 54 (float_expr)
+    O_MUL  shift, and go to state 23
+    O_DIV  shift, and go to state 24
+    O_MOD  shift, and go to state 25
+
+    $default  reduce using rule 14 (int_expr)
 
 
 State 64
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   13         | int_expr O_MOD int_expr .
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   58           | int_expr O_ADD float_expr .
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
 
-    $default  reduce using rule 13 (int_expr)
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
+
+    $default  reduce using rule 58 (float_expr)
 
 
 State 65
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   21 bool_expr: int_expr O_LEQ int_expr .
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   15         | int_expr O_SUB int_expr .
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
 
-    O_ADD  shift, and go to state 21
-    O_SUB  shift, and go to state 22
     O_MUL  shift, and go to state 23
     O_DIV  shift, and go to state 24
     O_MOD  shift, and go to state 25
 
-    $default  reduce using rule 21 (bool_expr)
+    $default  reduce using rule 15 (int_expr)
 
 
 State 66
 
-   39 bool_expr: int_expr O_LEQ float_expr .
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   59           | int_expr O_SUB float_expr .
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
 
-    O_ADD  shift, and go to state 37
-    O_SUB  shift, and go to state 38
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
 
-    $default  reduce using rule 39 (bool_expr)
+    $default  reduce using rule 59 (float_expr)
 
 
 State 67
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   22 bool_expr: int_expr O_GEQ int_expr .
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   16         | int_expr O_MUL int_expr .
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
 
-    O_ADD  shift, and go to state 21
-    O_SUB  shift, and go to state 22
-    O_MUL  shift, and go to state 23
-    O_DIV  shift, and go to state 24
     O_MOD  shift, and go to state 25
 
-    $default  reduce using rule 22 (bool_expr)
+    $default  reduce using rule 16 (int_expr)
 
 
 State 68
 
-   40 bool_expr: int_expr O_GEQ float_expr .
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   60           | int_expr O_MUL float_expr .
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
 
-    O_ADD  shift, and go to state 37
-    O_SUB  shift, and go to state 38
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
-
-    $default  reduce using rule 40 (bool_expr)
+    $default  reduce using rule 60 (float_expr)
 
 
 State 69
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   23 bool_expr: int_expr O_LES int_expr .
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   17         | int_expr O_DIV int_expr .
+   18         | int_expr . O_MOD int_expr
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
 
-    O_ADD  shift, and go to state 21
-    O_SUB  shift, and go to state 22
-    O_MUL  shift, and go to state 23
-    O_DIV  shift, and go to state 24
     O_MOD  shift, and go to state 25
 
-    $default  reduce using rule 23 (bool_expr)
+    $default  reduce using rule 17 (int_expr)
 
 
 State 70
 
-   41 bool_expr: int_expr O_LES float_expr .
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   61           | int_expr O_DIV float_expr .
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
 
-    O_ADD  shift, and go to state 37
-    O_SUB  shift, and go to state 38
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
-
-    $default  reduce using rule 41 (bool_expr)
+    $default  reduce using rule 61 (float_expr)
 
 
 State 71
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   24 bool_expr: int_expr O_GRE int_expr .
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   18         | int_expr O_MOD int_expr .
 
-    O_ADD  shift, and go to state 21
-    O_SUB  shift, and go to state 22
-    O_MUL  shift, and go to state 23
-    O_DIV  shift, and go to state 24
-    O_MOD  shift, and go to state 25
-
-    $default  reduce using rule 24 (bool_expr)
+    $default  reduce using rule 18 (int_expr)
 
 
 State 72
 
-   42 bool_expr: int_expr O_GRE float_expr .
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   28 bool_expr: int_expr O_LEQ int_expr .
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
 
-    O_ADD  shift, and go to state 37
-    O_SUB  shift, and go to state 38
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
+    O_ADD  shift, and go to state 21
+    O_SUB  shift, and go to state 22
+    O_MUL  shift, and go to state 23
+    O_DIV  shift, and go to state 24
+    O_MOD  shift, and go to state 25
+    O_BND  shift, and go to state 32
+    O_BOR  shift, and go to state 33
+    O_OR   shift, and go to state 34
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
 
-    $default  reduce using rule 42 (bool_expr)
+    O_BND     [reduce using rule 28 (bool_expr)]
+    O_BOR     [reduce using rule 28 (bool_expr)]
+    O_OR      [reduce using rule 28 (bool_expr)]
+    O_AND     [reduce using rule 28 (bool_expr)]
+    O_XOR     [reduce using rule 28 (bool_expr)]
+    $default  reduce using rule 28 (bool_expr)
 
 
 State 73
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   25 bool_expr: int_expr O_EQL int_expr .
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+   46 bool_expr: int_expr O_LEQ float_expr .
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
 
-    O_ADD  shift, and go to state 21
-    O_SUB  shift, and go to state 22
-    O_MUL  shift, and go to state 23
-    O_DIV  shift, and go to state 24
-    O_MOD  shift, and go to state 25
+    O_ADD  shift, and go to state 44
+    O_SUB  shift, and go to state 45
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
 
-    $default  reduce using rule 25 (bool_expr)
+    $default  reduce using rule 46 (bool_expr)
 
 
 State 74
 
-   43 bool_expr: int_expr O_EQL float_expr .
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
-
-    O_ADD  shift, and go to state 37
-    O_SUB  shift, and go to state 38
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
-
-    $default  reduce using rule 43 (bool_expr)
-
-
-State 75
-
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   26 bool_expr: int_expr O_NEQ int_expr .
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   29 bool_expr: int_expr O_GEQ int_expr .
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
 
     O_ADD  shift, and go to state 21
     O_SUB  shift, and go to state 22
     O_MUL  shift, and go to state 23
     O_DIV  shift, and go to state 24
     O_MOD  shift, and go to state 25
+    O_BND  shift, and go to state 32
+    O_BOR  shift, and go to state 33
+    O_OR   shift, and go to state 34
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
 
-    $default  reduce using rule 26 (bool_expr)
+    O_BND     [reduce using rule 29 (bool_expr)]
+    O_BOR     [reduce using rule 29 (bool_expr)]
+    O_OR      [reduce using rule 29 (bool_expr)]
+    O_AND     [reduce using rule 29 (bool_expr)]
+    O_XOR     [reduce using rule 29 (bool_expr)]
+    $default  reduce using rule 29 (bool_expr)
+
+
+State 75
+
+   47 bool_expr: int_expr O_GEQ float_expr .
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
+
+    O_ADD  shift, and go to state 44
+    O_SUB  shift, and go to state 45
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
+
+    $default  reduce using rule 47 (bool_expr)
 
 
 State 76
 
-   44 bool_expr: int_expr O_NEQ float_expr .
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   30 bool_expr: int_expr O_LES int_expr .
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
 
-    O_ADD  shift, and go to state 37
-    O_SUB  shift, and go to state 38
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
+    O_ADD  shift, and go to state 21
+    O_SUB  shift, and go to state 22
+    O_MUL  shift, and go to state 23
+    O_DIV  shift, and go to state 24
+    O_MOD  shift, and go to state 25
+    O_BND  shift, and go to state 32
+    O_BOR  shift, and go to state 33
+    O_OR   shift, and go to state 34
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
 
-    $default  reduce using rule 44 (bool_expr)
+    O_BND     [reduce using rule 30 (bool_expr)]
+    O_BOR     [reduce using rule 30 (bool_expr)]
+    O_OR      [reduce using rule 30 (bool_expr)]
+    O_AND     [reduce using rule 30 (bool_expr)]
+    O_XOR     [reduce using rule 30 (bool_expr)]
+    $default  reduce using rule 30 (bool_expr)
 
 
 State 77
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   21 bool_expr: int_expr . O_LEQ int_expr
-   22          | int_expr . O_GEQ int_expr
-   23          | int_expr . O_LES int_expr
-   24          | int_expr . O_GRE int_expr
-   25          | int_expr . O_EQL int_expr
-   26          | int_expr . O_NEQ int_expr
-   39          | int_expr . O_LEQ float_expr
-   40          | int_expr . O_GEQ float_expr
-   41          | int_expr . O_LES float_expr
-   42          | int_expr . O_GRE float_expr
-   43          | int_expr . O_EQL float_expr
-   44          | int_expr . O_NEQ float_expr
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+   48 bool_expr: int_expr O_LES float_expr .
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
+
+    O_ADD  shift, and go to state 44
+    O_SUB  shift, and go to state 45
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
+
+    $default  reduce using rule 48 (bool_expr)
+
+
+State 78
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   31 bool_expr: int_expr O_GRE int_expr .
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
+
+    O_ADD  shift, and go to state 21
+    O_SUB  shift, and go to state 22
+    O_MUL  shift, and go to state 23
+    O_DIV  shift, and go to state 24
+    O_MOD  shift, and go to state 25
+    O_BND  shift, and go to state 32
+    O_BOR  shift, and go to state 33
+    O_OR   shift, and go to state 34
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
+
+    O_BND     [reduce using rule 31 (bool_expr)]
+    O_BOR     [reduce using rule 31 (bool_expr)]
+    O_OR      [reduce using rule 31 (bool_expr)]
+    O_AND     [reduce using rule 31 (bool_expr)]
+    O_XOR     [reduce using rule 31 (bool_expr)]
+    $default  reduce using rule 31 (bool_expr)
+
+
+State 79
+
+   49 bool_expr: int_expr O_GRE float_expr .
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
+
+    O_ADD  shift, and go to state 44
+    O_SUB  shift, and go to state 45
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
+
+    $default  reduce using rule 49 (bool_expr)
+
+
+State 80
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   32 bool_expr: int_expr O_EQL int_expr .
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
+
+    O_ADD  shift, and go to state 21
+    O_SUB  shift, and go to state 22
+    O_MUL  shift, and go to state 23
+    O_DIV  shift, and go to state 24
+    O_MOD  shift, and go to state 25
+    O_BND  shift, and go to state 32
+    O_BOR  shift, and go to state 33
+    O_OR   shift, and go to state 34
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
+
+    O_BND     [reduce using rule 32 (bool_expr)]
+    O_BOR     [reduce using rule 32 (bool_expr)]
+    O_OR      [reduce using rule 32 (bool_expr)]
+    O_AND     [reduce using rule 32 (bool_expr)]
+    O_XOR     [reduce using rule 32 (bool_expr)]
+    $default  reduce using rule 32 (bool_expr)
+
+
+State 81
+
+   50 bool_expr: int_expr O_EQL float_expr .
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
+
+    O_ADD  shift, and go to state 44
+    O_SUB  shift, and go to state 45
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
+
+    $default  reduce using rule 50 (bool_expr)
+
+
+State 82
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   33 bool_expr: int_expr O_NEQ int_expr .
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
+
+    O_ADD  shift, and go to state 21
+    O_SUB  shift, and go to state 22
+    O_MUL  shift, and go to state 23
+    O_DIV  shift, and go to state 24
+    O_MOD  shift, and go to state 25
+    O_BND  shift, and go to state 32
+    O_BOR  shift, and go to state 33
+    O_OR   shift, and go to state 34
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
+
+    O_BND     [reduce using rule 33 (bool_expr)]
+    O_BOR     [reduce using rule 33 (bool_expr)]
+    O_OR      [reduce using rule 33 (bool_expr)]
+    O_AND     [reduce using rule 33 (bool_expr)]
+    O_XOR     [reduce using rule 33 (bool_expr)]
+    $default  reduce using rule 33 (bool_expr)
+
+
+State 83
+
+   51 bool_expr: int_expr O_NEQ float_expr .
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
+
+    O_ADD  shift, and go to state 44
+    O_SUB  shift, and go to state 45
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
+
+    $default  reduce using rule 51 (bool_expr)
+
+
+State 84
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   10         | int_expr O_BND int_expr .
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+
+    O_ADD  shift, and go to state 55
+    O_SUB  shift, and go to state 56
+    O_MUL  shift, and go to state 57
+    O_DIV  shift, and go to state 58
+    O_MOD  shift, and go to state 25
+    O_OR   shift, and go to state 34
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
+
+    $default  reduce using rule 10 (int_expr)
+
+
+State 85
+
+    9 int_expr: int_expr . O_BOR int_expr
+    9         | int_expr O_BOR int_expr .
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+
+    O_ADD  shift, and go to state 55
+    O_SUB  shift, and go to state 56
+    O_MUL  shift, and go to state 57
+    O_DIV  shift, and go to state 58
+    O_MOD  shift, and go to state 25
+    O_BND  shift, and go to state 32
+    O_OR   shift, and go to state 34
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
+
+    $default  reduce using rule 9 (int_expr)
+
+
+State 86
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   11         | int_expr O_OR int_expr .
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+
+    O_ADD  shift, and go to state 55
+    O_SUB  shift, and go to state 56
+    O_MUL  shift, and go to state 57
+    O_DIV  shift, and go to state 58
+    O_MOD  shift, and go to state 25
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
+
+    $default  reduce using rule 11 (int_expr)
+
+
+State 87
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   12         | int_expr O_AND int_expr .
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+
+    O_ADD  shift, and go to state 55
+    O_SUB  shift, and go to state 56
+    O_MUL  shift, and go to state 57
+    O_DIV  shift, and go to state 58
+    O_MOD  shift, and go to state 25
+    O_XOR  shift, and go to state 36
+
+    $default  reduce using rule 12 (int_expr)
+
+
+State 88
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   13         | int_expr O_XOR int_expr .
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+
+    O_ADD  shift, and go to state 55
+    O_SUB  shift, and go to state 56
+    O_MUL  shift, and go to state 57
+    O_DIV  shift, and go to state 58
+    O_MOD  shift, and go to state 25
+
+    $default  reduce using rule 13 (int_expr)
+
+
+State 89
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   28 bool_expr: int_expr . O_LEQ int_expr
+   29          | int_expr . O_GEQ int_expr
+   30          | int_expr . O_LES int_expr
+   31          | int_expr . O_GRE int_expr
+   32          | int_expr . O_EQL int_expr
+   33          | int_expr . O_NEQ int_expr
+   46          | int_expr . O_LEQ float_expr
+   47          | int_expr . O_GEQ float_expr
+   48          | int_expr . O_LES float_expr
+   49          | int_expr . O_GRE float_expr
+   50          | int_expr . O_EQL float_expr
+   51          | int_expr . O_NEQ float_expr
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
 
     O_ADD  shift, and go to state 21
     O_SUB  shift, and go to state 22
@@ -1376,567 +1790,751 @@ State 77
     O_GRE  shift, and go to state 29
     O_EQL  shift, and go to state 30
     O_NEQ  shift, and go to state 31
-
-
-State 78
-
-   18 bool_expr: bool_expr . O_OR bool_expr
-   18          | bool_expr O_OR bool_expr .
-   19          | bool_expr . O_AND bool_expr
-   20          | bool_expr . O_XOR bool_expr
-
-    O_AND  shift, and go to state 34
-    O_XOR  shift, and go to state 35
-
-    $default  reduce using rule 18 (bool_expr)
-
-
-State 79
-
-   27 bool_expr: float_expr . O_LEQ float_expr
-   28          | float_expr . O_GEQ float_expr
-   29          | float_expr . O_LES float_expr
-   30          | float_expr . O_GRE float_expr
-   31          | float_expr . O_EQL float_expr
-   32          | float_expr . O_NEQ float_expr
-   33          | float_expr . O_LEQ int_expr
-   34          | float_expr . O_GEQ int_expr
-   35          | float_expr . O_LES int_expr
-   36          | float_expr . O_GRE int_expr
-   37          | float_expr . O_EQL int_expr
-   38          | float_expr . O_NEQ int_expr
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
-
-    O_ADD  shift, and go to state 37
-    O_SUB  shift, and go to state 38
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
-    O_LEQ  shift, and go to state 41
-    O_GEQ  shift, and go to state 42
-    O_LES  shift, and go to state 43
-    O_GRE  shift, and go to state 44
-    O_EQL  shift, and go to state 45
-    O_NEQ  shift, and go to state 46
-
-
-State 80
-
-   18 bool_expr: bool_expr . O_OR bool_expr
-   19          | bool_expr . O_AND bool_expr
-   19          | bool_expr O_AND bool_expr .
-   20          | bool_expr . O_XOR bool_expr
-
-    O_XOR  shift, and go to state 35
-
-    $default  reduce using rule 19 (bool_expr)
-
-
-State 81
-
-   18 bool_expr: bool_expr . O_OR bool_expr
-   19          | bool_expr . O_AND bool_expr
-   20          | bool_expr . O_XOR bool_expr
-   20          | bool_expr O_XOR bool_expr .
-
-    $default  reduce using rule 20 (bool_expr)
-
-
-State 82
-
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
-   55           | float_expr O_ADD int_expr .
-
-    O_MUL  shift, and go to state 23
-    O_DIV  shift, and go to state 24
-    O_MOD  shift, and go to state 25
-
-    $default  reduce using rule 55 (float_expr)
-
-
-State 83
-
-   47 float_expr: float_expr . O_ADD float_expr
-   47           | float_expr O_ADD float_expr .
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
-
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
-
-    $default  reduce using rule 47 (float_expr)
-
-
-State 84
-
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
-   56           | float_expr O_SUB int_expr .
-
-    O_MUL  shift, and go to state 23
-    O_DIV  shift, and go to state 24
-    O_MOD  shift, and go to state 25
-
-    $default  reduce using rule 56 (float_expr)
-
-
-State 85
-
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   48           | float_expr O_SUB float_expr .
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
-
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
-
-    $default  reduce using rule 48 (float_expr)
-
-
-State 86
-
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
-   57           | float_expr O_MUL int_expr .
-
-    O_MOD  shift, and go to state 25
-
-    $default  reduce using rule 57 (float_expr)
-
-
-State 87
-
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   49           | float_expr O_MUL float_expr .
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
-
-    $default  reduce using rule 49 (float_expr)
-
-
-State 88
-
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
-   58           | float_expr O_DIV int_expr .
-
-    O_MOD  shift, and go to state 25
-
-    $default  reduce using rule 58 (float_expr)
-
-
-State 89
-
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   50           | float_expr O_DIV float_expr .
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
-
-    $default  reduce using rule 50 (float_expr)
+    O_BND  shift, and go to state 32
+    O_BOR  shift, and go to state 33
+    O_OR   shift, and go to state 34
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
 
 
 State 90
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   33 bool_expr: float_expr O_LEQ int_expr .
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+   23 bool_expr: bool_expr . O_BOR bool_expr
+   24          | bool_expr . O_BND bool_expr
+   24          | bool_expr O_BND bool_expr .
+   25          | bool_expr . O_OR bool_expr
+   26          | bool_expr . O_AND bool_expr
+   27          | bool_expr . O_XOR bool_expr
 
-    O_ADD  shift, and go to state 21
-    O_SUB  shift, and go to state 22
-    O_MUL  shift, and go to state 23
-    O_DIV  shift, and go to state 24
-    O_MOD  shift, and go to state 25
+    O_OR   shift, and go to state 40
+    O_AND  shift, and go to state 41
+    O_XOR  shift, and go to state 42
 
-    $default  reduce using rule 33 (bool_expr)
+    $default  reduce using rule 24 (bool_expr)
 
 
 State 91
 
-   27 bool_expr: float_expr O_LEQ float_expr .
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
+   34 bool_expr: float_expr . O_LEQ float_expr
+   35          | float_expr . O_GEQ float_expr
+   36          | float_expr . O_LES float_expr
+   37          | float_expr . O_GRE float_expr
+   38          | float_expr . O_EQL float_expr
+   39          | float_expr . O_NEQ float_expr
+   40          | float_expr . O_LEQ int_expr
+   41          | float_expr . O_GEQ int_expr
+   42          | float_expr . O_LES int_expr
+   43          | float_expr . O_GRE int_expr
+   44          | float_expr . O_EQL int_expr
+   45          | float_expr . O_NEQ int_expr
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
 
-    O_ADD  shift, and go to state 37
-    O_SUB  shift, and go to state 38
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
-
-    $default  reduce using rule 27 (bool_expr)
+    O_ADD  shift, and go to state 44
+    O_SUB  shift, and go to state 45
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
+    O_LEQ  shift, and go to state 48
+    O_GEQ  shift, and go to state 49
+    O_LES  shift, and go to state 50
+    O_GRE  shift, and go to state 51
+    O_EQL  shift, and go to state 52
+    O_NEQ  shift, and go to state 53
 
 
 State 92
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   34 bool_expr: float_expr O_GEQ int_expr .
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+   23 bool_expr: bool_expr . O_BOR bool_expr
+   23          | bool_expr O_BOR bool_expr .
+   24          | bool_expr . O_BND bool_expr
+   25          | bool_expr . O_OR bool_expr
+   26          | bool_expr . O_AND bool_expr
+   27          | bool_expr . O_XOR bool_expr
 
-    O_ADD  shift, and go to state 21
-    O_SUB  shift, and go to state 22
-    O_MUL  shift, and go to state 23
-    O_DIV  shift, and go to state 24
-    O_MOD  shift, and go to state 25
+    O_BND  shift, and go to state 38
+    O_OR   shift, and go to state 40
+    O_AND  shift, and go to state 41
+    O_XOR  shift, and go to state 42
 
-    $default  reduce using rule 34 (bool_expr)
+    $default  reduce using rule 23 (bool_expr)
 
 
 State 93
 
-   28 bool_expr: float_expr O_GEQ float_expr .
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
+   23 bool_expr: bool_expr . O_BOR bool_expr
+   24          | bool_expr . O_BND bool_expr
+   25          | bool_expr . O_OR bool_expr
+   25          | bool_expr O_OR bool_expr .
+   26          | bool_expr . O_AND bool_expr
+   27          | bool_expr . O_XOR bool_expr
 
-    O_ADD  shift, and go to state 37
-    O_SUB  shift, and go to state 38
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
+    O_AND  shift, and go to state 41
+    O_XOR  shift, and go to state 42
 
-    $default  reduce using rule 28 (bool_expr)
+    $default  reduce using rule 25 (bool_expr)
 
 
 State 94
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   35 bool_expr: float_expr O_LES int_expr .
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+   23 bool_expr: bool_expr . O_BOR bool_expr
+   24          | bool_expr . O_BND bool_expr
+   25          | bool_expr . O_OR bool_expr
+   26          | bool_expr . O_AND bool_expr
+   26          | bool_expr O_AND bool_expr .
+   27          | bool_expr . O_XOR bool_expr
 
-    O_ADD  shift, and go to state 21
-    O_SUB  shift, and go to state 22
-    O_MUL  shift, and go to state 23
-    O_DIV  shift, and go to state 24
-    O_MOD  shift, and go to state 25
+    O_XOR  shift, and go to state 42
 
-    $default  reduce using rule 35 (bool_expr)
+    $default  reduce using rule 26 (bool_expr)
 
 
 State 95
 
-   29 bool_expr: float_expr O_LES float_expr .
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
+   23 bool_expr: bool_expr . O_BOR bool_expr
+   24          | bool_expr . O_BND bool_expr
+   25          | bool_expr . O_OR bool_expr
+   26          | bool_expr . O_AND bool_expr
+   27          | bool_expr . O_XOR bool_expr
+   27          | bool_expr O_XOR bool_expr .
 
-    O_ADD  shift, and go to state 37
-    O_SUB  shift, and go to state 38
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
-
-    $default  reduce using rule 29 (bool_expr)
+    $default  reduce using rule 27 (bool_expr)
 
 
 State 96
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   36 bool_expr: float_expr O_GRE int_expr .
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
+   62           | float_expr O_ADD int_expr .
 
-    O_ADD  shift, and go to state 21
-    O_SUB  shift, and go to state 22
     O_MUL  shift, and go to state 23
     O_DIV  shift, and go to state 24
     O_MOD  shift, and go to state 25
 
-    $default  reduce using rule 36 (bool_expr)
+    $default  reduce using rule 62 (float_expr)
 
 
 State 97
 
-   30 bool_expr: float_expr O_GRE float_expr .
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
+   54 float_expr: float_expr . O_ADD float_expr
+   54           | float_expr O_ADD float_expr .
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
 
-    O_ADD  shift, and go to state 37
-    O_SUB  shift, and go to state 38
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
 
-    $default  reduce using rule 30 (bool_expr)
+    $default  reduce using rule 54 (float_expr)
 
 
 State 98
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   37 bool_expr: float_expr O_EQL int_expr .
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
+   63           | float_expr O_SUB int_expr .
 
-    O_ADD  shift, and go to state 21
-    O_SUB  shift, and go to state 22
     O_MUL  shift, and go to state 23
     O_DIV  shift, and go to state 24
     O_MOD  shift, and go to state 25
 
-    $default  reduce using rule 37 (bool_expr)
+    $default  reduce using rule 63 (float_expr)
 
 
 State 99
 
-   31 bool_expr: float_expr O_EQL float_expr .
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   55           | float_expr O_SUB float_expr .
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
 
-    O_ADD  shift, and go to state 37
-    O_SUB  shift, and go to state 38
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
 
-    $default  reduce using rule 31 (bool_expr)
+    $default  reduce using rule 55 (float_expr)
 
 
 State 100
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   38 bool_expr: float_expr O_NEQ int_expr .
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
+   64           | float_expr O_MUL int_expr .
 
-    O_ADD  shift, and go to state 21
-    O_SUB  shift, and go to state 22
-    O_MUL  shift, and go to state 23
-    O_DIV  shift, and go to state 24
     O_MOD  shift, and go to state 25
 
-    $default  reduce using rule 38 (bool_expr)
+    $default  reduce using rule 64 (float_expr)
 
 
 State 101
 
-   32 bool_expr: float_expr O_NEQ float_expr .
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   56           | float_expr O_MUL float_expr .
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
 
-    O_ADD  shift, and go to state 37
-    O_SUB  shift, and go to state 38
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
-
-    $default  reduce using rule 32 (bool_expr)
+    $default  reduce using rule 56 (float_expr)
 
 
 State 102
 
-    9 int_expr: int_expr . O_ADD int_expr
-    9         | int_expr O_ADD int_expr .
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
+   65           | float_expr O_DIV int_expr .
 
-    O_MUL  shift, and go to state 50
-    O_DIV  shift, and go to state 51
     O_MOD  shift, and go to state 25
 
-    $default  reduce using rule 9 (int_expr)
+    $default  reduce using rule 65 (float_expr)
 
 
 State 103
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   10         | int_expr O_SUB int_expr .
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   57           | float_expr O_DIV float_expr .
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
 
-    O_MUL  shift, and go to state 50
-    O_DIV  shift, and go to state 51
-    O_MOD  shift, and go to state 25
-
-    $default  reduce using rule 10 (int_expr)
+    $default  reduce using rule 57 (float_expr)
 
 
 State 104
 
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   11         | int_expr O_MUL int_expr .
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-
-    O_MOD  shift, and go to state 25
-
-    $default  reduce using rule 11 (int_expr)
-
-
-State 105
-
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   12         | int_expr O_DIV int_expr .
-   13         | int_expr . O_MOD int_expr
-
-    O_MOD  shift, and go to state 25
-
-    $default  reduce using rule 12 (int_expr)
-
-
-State 106
-
-    9 int_expr: int_expr . O_ADD int_expr
-   10         | int_expr . O_SUB int_expr
-   11         | int_expr . O_MUL int_expr
-   12         | int_expr . O_DIV int_expr
-   13         | int_expr . O_MOD int_expr
-   14         | O_LEF int_expr . O_RIT
-   51 float_expr: int_expr . O_ADD float_expr
-   52           | int_expr . O_SUB float_expr
-   53           | int_expr . O_MUL float_expr
-   54           | int_expr . O_DIV float_expr
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   40 bool_expr: float_expr O_LEQ int_expr .
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
 
     O_ADD  shift, and go to state 21
     O_SUB  shift, and go to state 22
     O_MUL  shift, and go to state 23
     O_DIV  shift, and go to state 24
     O_MOD  shift, and go to state 25
-    O_RIT  shift, and go to state 52
+    O_BND  shift, and go to state 32
+    O_BOR  shift, and go to state 33
+    O_OR   shift, and go to state 34
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
+
+    O_BND     [reduce using rule 40 (bool_expr)]
+    O_BOR     [reduce using rule 40 (bool_expr)]
+    O_OR      [reduce using rule 40 (bool_expr)]
+    O_AND     [reduce using rule 40 (bool_expr)]
+    O_XOR     [reduce using rule 40 (bool_expr)]
+    $default  reduce using rule 40 (bool_expr)
+
+
+State 105
+
+   34 bool_expr: float_expr O_LEQ float_expr .
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
+
+    O_ADD  shift, and go to state 44
+    O_SUB  shift, and go to state 45
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
+
+    $default  reduce using rule 34 (bool_expr)
+
+
+State 106
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   41 bool_expr: float_expr O_GEQ int_expr .
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
+
+    O_ADD  shift, and go to state 21
+    O_SUB  shift, and go to state 22
+    O_MUL  shift, and go to state 23
+    O_DIV  shift, and go to state 24
+    O_MOD  shift, and go to state 25
+    O_BND  shift, and go to state 32
+    O_BOR  shift, and go to state 33
+    O_OR   shift, and go to state 34
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
+
+    O_BND     [reduce using rule 41 (bool_expr)]
+    O_BOR     [reduce using rule 41 (bool_expr)]
+    O_OR      [reduce using rule 41 (bool_expr)]
+    O_AND     [reduce using rule 41 (bool_expr)]
+    O_XOR     [reduce using rule 41 (bool_expr)]
+    $default  reduce using rule 41 (bool_expr)
 
 
 State 107
 
-   47 float_expr: float_expr . O_ADD float_expr
-   48           | float_expr . O_SUB float_expr
-   49           | float_expr . O_MUL float_expr
-   50           | float_expr . O_DIV float_expr
-   55           | float_expr . O_ADD int_expr
-   56           | float_expr . O_SUB int_expr
-   57           | float_expr . O_MUL int_expr
-   58           | float_expr . O_DIV int_expr
-   59           | O_LEF float_expr . O_RIT
+   35 bool_expr: float_expr O_GEQ float_expr .
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
 
-    O_ADD  shift, and go to state 37
-    O_SUB  shift, and go to state 38
-    O_MUL  shift, and go to state 39
-    O_DIV  shift, and go to state 40
-    O_RIT  shift, and go to state 54
+    O_ADD  shift, and go to state 44
+    O_SUB  shift, and go to state 45
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
+
+    $default  reduce using rule 35 (bool_expr)
+
+
+State 108
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   42 bool_expr: float_expr O_LES int_expr .
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
+
+    O_ADD  shift, and go to state 21
+    O_SUB  shift, and go to state 22
+    O_MUL  shift, and go to state 23
+    O_DIV  shift, and go to state 24
+    O_MOD  shift, and go to state 25
+    O_BND  shift, and go to state 32
+    O_BOR  shift, and go to state 33
+    O_OR   shift, and go to state 34
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
+
+    O_BND     [reduce using rule 42 (bool_expr)]
+    O_BOR     [reduce using rule 42 (bool_expr)]
+    O_OR      [reduce using rule 42 (bool_expr)]
+    O_AND     [reduce using rule 42 (bool_expr)]
+    O_XOR     [reduce using rule 42 (bool_expr)]
+    $default  reduce using rule 42 (bool_expr)
+
+
+State 109
+
+   36 bool_expr: float_expr O_LES float_expr .
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
+
+    O_ADD  shift, and go to state 44
+    O_SUB  shift, and go to state 45
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
+
+    $default  reduce using rule 36 (bool_expr)
+
+
+State 110
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   43 bool_expr: float_expr O_GRE int_expr .
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
+
+    O_ADD  shift, and go to state 21
+    O_SUB  shift, and go to state 22
+    O_MUL  shift, and go to state 23
+    O_DIV  shift, and go to state 24
+    O_MOD  shift, and go to state 25
+    O_BND  shift, and go to state 32
+    O_BOR  shift, and go to state 33
+    O_OR   shift, and go to state 34
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
+
+    O_BND     [reduce using rule 43 (bool_expr)]
+    O_BOR     [reduce using rule 43 (bool_expr)]
+    O_OR      [reduce using rule 43 (bool_expr)]
+    O_AND     [reduce using rule 43 (bool_expr)]
+    O_XOR     [reduce using rule 43 (bool_expr)]
+    $default  reduce using rule 43 (bool_expr)
+
+
+State 111
+
+   37 bool_expr: float_expr O_GRE float_expr .
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
+
+    O_ADD  shift, and go to state 44
+    O_SUB  shift, and go to state 45
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
+
+    $default  reduce using rule 37 (bool_expr)
+
+
+State 112
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   44 bool_expr: float_expr O_EQL int_expr .
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
+
+    O_ADD  shift, and go to state 21
+    O_SUB  shift, and go to state 22
+    O_MUL  shift, and go to state 23
+    O_DIV  shift, and go to state 24
+    O_MOD  shift, and go to state 25
+    O_BND  shift, and go to state 32
+    O_BOR  shift, and go to state 33
+    O_OR   shift, and go to state 34
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
+
+    O_BND     [reduce using rule 44 (bool_expr)]
+    O_BOR     [reduce using rule 44 (bool_expr)]
+    O_OR      [reduce using rule 44 (bool_expr)]
+    O_AND     [reduce using rule 44 (bool_expr)]
+    O_XOR     [reduce using rule 44 (bool_expr)]
+    $default  reduce using rule 44 (bool_expr)
+
+
+State 113
+
+   38 bool_expr: float_expr O_EQL float_expr .
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
+
+    O_ADD  shift, and go to state 44
+    O_SUB  shift, and go to state 45
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
+
+    $default  reduce using rule 38 (bool_expr)
+
+
+State 114
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   45 bool_expr: float_expr O_NEQ int_expr .
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
+
+    O_ADD  shift, and go to state 21
+    O_SUB  shift, and go to state 22
+    O_MUL  shift, and go to state 23
+    O_DIV  shift, and go to state 24
+    O_MOD  shift, and go to state 25
+    O_BND  shift, and go to state 32
+    O_BOR  shift, and go to state 33
+    O_OR   shift, and go to state 34
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
+
+    O_BND     [reduce using rule 45 (bool_expr)]
+    O_BOR     [reduce using rule 45 (bool_expr)]
+    O_OR      [reduce using rule 45 (bool_expr)]
+    O_AND     [reduce using rule 45 (bool_expr)]
+    O_XOR     [reduce using rule 45 (bool_expr)]
+    $default  reduce using rule 45 (bool_expr)
+
+
+State 115
+
+   39 bool_expr: float_expr O_NEQ float_expr .
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
+
+    O_ADD  shift, and go to state 44
+    O_SUB  shift, and go to state 45
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
+
+    $default  reduce using rule 39 (bool_expr)
+
+
+State 116
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   14         | int_expr O_ADD int_expr .
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+
+    O_MUL  shift, and go to state 57
+    O_DIV  shift, and go to state 58
+    O_MOD  shift, and go to state 25
+
+    $default  reduce using rule 14 (int_expr)
+
+
+State 117
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   15         | int_expr O_SUB int_expr .
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+
+    O_MUL  shift, and go to state 57
+    O_DIV  shift, and go to state 58
+    O_MOD  shift, and go to state 25
+
+    $default  reduce using rule 15 (int_expr)
+
+
+State 118
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   16         | int_expr O_MUL int_expr .
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+
+    O_MOD  shift, and go to state 25
+
+    $default  reduce using rule 16 (int_expr)
+
+
+State 119
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   17         | int_expr O_DIV int_expr .
+   18         | int_expr . O_MOD int_expr
+
+    O_MOD  shift, and go to state 25
+
+    $default  reduce using rule 17 (int_expr)
+
+
+State 120
+
+    9 int_expr: int_expr . O_BOR int_expr
+   10         | int_expr . O_BND int_expr
+   11         | int_expr . O_OR int_expr
+   12         | int_expr . O_AND int_expr
+   13         | int_expr . O_XOR int_expr
+   14         | int_expr . O_ADD int_expr
+   15         | int_expr . O_SUB int_expr
+   16         | int_expr . O_MUL int_expr
+   17         | int_expr . O_DIV int_expr
+   18         | int_expr . O_MOD int_expr
+   19         | O_LEF int_expr . O_RIT
+   58 float_expr: int_expr . O_ADD float_expr
+   59           | int_expr . O_SUB float_expr
+   60           | int_expr . O_MUL float_expr
+   61           | int_expr . O_DIV float_expr
+
+    O_ADD  shift, and go to state 21
+    O_SUB  shift, and go to state 22
+    O_MUL  shift, and go to state 23
+    O_DIV  shift, and go to state 24
+    O_MOD  shift, and go to state 25
+    O_RIT  shift, and go to state 59
+    O_BND  shift, and go to state 32
+    O_BOR  shift, and go to state 33
+    O_OR   shift, and go to state 34
+    O_AND  shift, and go to state 35
+    O_XOR  shift, and go to state 36
+
+
+State 121
+
+   54 float_expr: float_expr . O_ADD float_expr
+   55           | float_expr . O_SUB float_expr
+   56           | float_expr . O_MUL float_expr
+   57           | float_expr . O_DIV float_expr
+   62           | float_expr . O_ADD int_expr
+   63           | float_expr . O_SUB int_expr
+   64           | float_expr . O_MUL int_expr
+   65           | float_expr . O_DIV int_expr
+   66           | O_LEF float_expr . O_RIT
+
+    O_ADD  shift, and go to state 44
+    O_SUB  shift, and go to state 45
+    O_MUL  shift, and go to state 46
+    O_DIV  shift, and go to state 47
+    O_RIT  shift, and go to state 61

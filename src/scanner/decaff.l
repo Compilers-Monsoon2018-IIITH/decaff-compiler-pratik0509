@@ -17,8 +17,8 @@ DIV     "/"
 MOD     "%"
 LEF     "("
 RIT     ")"
-OR      "|"
-AND     "&"
+OR      "||"
+AND     "&&"
 NOT     "!"
 XOR     "^"
 LEQ     "<="
@@ -27,6 +27,8 @@ EQL     "=="
 NEQ     "!="
 LES     "<"
 GRE     ">"
+BOR     "|"
+BND     "&"
 
 %%
 
@@ -43,7 +45,9 @@ GRE     ">"
 {LEF}                    { return O_LEF; }
 {RIT}                    { return O_RIT; }
 {OR}                     { return O_OR; }
+{BOR}                     { return O_BOR; }
 {AND}                    { return O_AND; }
+{BND}                    { return O_BND; }
 {XOR}                    { return O_XOR; }
 {NOT}                    { return O_NOT; }
 {LEQ}                    { return O_LEQ; }

@@ -24,6 +24,9 @@
 %token IDENTIFIER
 %token O_ADD O_SUB O_MUL O_DIV O_MOD O_LEF O_RIT
 %token O_NOT O_LEQ O_GEQ O_LES O_GRE O_EQL O_NEQ
+%token O_BND O_BOR
+%left O_BOR
+%left O_BND
 %left O_OR
 %left O_AND
 %left O_XOR
@@ -50,6 +53,11 @@ expr:
 int_expr:
     IDENTIFIER                       { $$ = 0; }
     | T_INTG                          { $$ = $1; }
+    | int_expr O_BOR int_expr       { $$ = $1 | $3; }
+    | int_expr O_BND int_expr       { $$ = $1 & $3; }
+    | int_expr O_OR int_expr       { $$ = $1 || $3; }
+    | int_expr O_AND int_expr       { $$ = $1 && $3; }
+    | int_expr O_XOR int_expr       { $$ = $1 ^ $3; }
     | int_expr O_ADD int_expr       { $$ = $1 + $3; }
     | int_expr O_SUB int_expr       { $$ = $1 - $3; }
     | int_expr O_MUL int_expr       { $$ = $1 * $3; }
@@ -62,8 +70,10 @@ int_expr:
 bool_expr:
     IDENTIFIER                       { $$ = 0; }
     | T_BOOL                          { $$ = $1; }
-    | bool_expr O_OR bool_expr       { $$ = $1 | $3; }
-    | bool_expr O_AND bool_expr       { $$ = $1 & $3; }
+    | bool_expr O_BOR bool_expr       { $$ = $1 | $3; }
+    | bool_expr O_BND bool_expr       { $$ = $1 & $3; }
+    | bool_expr O_OR bool_expr       { $$ = $1 || $3; }
+    | bool_expr O_AND bool_expr       { $$ = $1 && $3; }
     | bool_expr O_XOR bool_expr       { $$ = $1 ^ $3; }
     | int_expr  O_LEQ int_expr        { $$ = $1 <= $3; }
     | int_expr  O_GEQ int_expr        { $$ = $1 >= $3; }
