@@ -1,5 +1,8 @@
-
-all: decaff.l decaff.y decaff.tab.h decaff.tab.c lex.yy.c
+decaff.tab.c decaff.tab.h: decaff.y
 	bison -d decaff.y
+
+lex.yy.c: decaff.l decaff.tab.h
 	flex decaff.l
-	gcc decaff.tab.c lex.yy.c -lfl -o ./decaff
+
+decaff: lex.yy.c decaff.tab.c decaff.tab.h
+	gcc decaff.tab.c lex.yy.c -lfl -o decaff

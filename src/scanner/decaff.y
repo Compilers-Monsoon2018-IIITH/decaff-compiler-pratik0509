@@ -14,21 +14,72 @@
     int ival;
     float fval;
     bool bval;
+    char cval;
 }
 
-%token <ival> INT
-%token <fval> FLOAT
-%token <bval> BOOL
+%token <ival> T_INTG
+%token <fval> T_FLOT
+%token <bval> T_BOOL
+%token T_NEWLINE
+%token O_ADD O_SUB O_MUL O_DIV O_MOD O_LEF O_RIT
+%token O_NOT O_LEQ O_GEQ O_LES O_GRE O_EQL O_NEQ
+%left O_OR
+%left O_AND
+%left O_XOR
+%left O_ADD O_SUB
+%right O_MUL O_DIV
+%right O_MOD
+%type <ival> int_expr
+%type <fval> float_expr
+%type <bval> bool_expr
 
 %%
 
+expr_list:
+    | expr_list expr
+    ;
+
 expr:
-    expr INT    { printf("Found: %d\n", $2); }
-    | expr FLOAT    { printf("Found: %f\n", $2); }
-    | expr BOOL    { printf("Found: %d\n", $2); }
-    | INT   { printf("Found: %d\n", $1); }
-    | FLOAT    { printf("Found: %f\n", $1); }
-    | BOOL    { printf("Found: %d\n", $1); }
+    T_NEWLINE
+    | int_expr T_NEWLINE { printf("RESULT: %d\n", $1); }
+    | float_expr T_NEWLINE { printf("RESULT: %f\n", $1); }
+    | bool_expr T_NEWLINE { printf("RESULT: %d\n", $1); }
+    ;
+
+int_expr:
+    T_INTG                          { $$ = $1; }
+    | int_expr O_ADD int_expr       { $$ = $1 + $3; }
+    | int_expr O_SUB int_expr       { $$ = $1 - $3; }
+    | int_expr O_MUL int_expr       { $$ = $1 * $3; }
+    | int_expr O_DIV int_expr       { $$ = $1 / $3; }
+    | int_expr O_MOD int_expr       { $$ = $1 % $3; }
+    | O_LEF int_expr O_RIT          { $$ = $2; }
+    | O_SUB int_expr                { $$ = -$2; }
+    ;
+
+bool_expr:
+    T_BOOL                          { $$ = $1; }
+    | bool_expr O_OR bool_expr       { $$ = $1 | $3; }
+    | bool_expr O_AND bool_expr       { $$ = $1 & $3; }
+    | bool_expr O_XOR bool_expr       { $$ = $1 ^ $3; }
+    | O_LEF bool_expr O_RIT          { $$ = $2; }
+    ;
+
+float_expr:
+    T_FLOT                          { $$ = $1; }
+    | float_expr O_ADD float_expr       { $$ = $1 + $3; }
+    | float_expr O_SUB float_expr       { $$ = $1 - $3; }
+    | float_expr O_MUL float_expr       { $$ = $1 * $3; }
+    | float_expr O_DIV float_expr       { $$ = $1 / $3; }
+    | int_expr O_ADD float_expr       { $$ = $1 + $3; }
+    | int_expr O_SUB float_expr       { $$ = $1 - $3; }
+    | int_expr O_MUL float_expr       { $$ = $1 * $3; }
+    | int_expr O_DIV float_expr       { $$ = $1 / $3; }
+    | float_expr O_ADD int_expr       { $$ = $1 + $3; }
+    | float_expr O_SUB int_expr       { $$ = $1 - $3; }
+    | float_expr O_MUL int_expr       { $$ = $1 * $3; }
+    | float_expr O_DIV int_expr       { $$ = $1 / $3; }
+    | O_LEF float_expr O_RIT          { $$ = $2; }
     ;
 
 %%
