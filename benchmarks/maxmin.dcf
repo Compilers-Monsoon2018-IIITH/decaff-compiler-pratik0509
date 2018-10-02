@@ -8,10 +8,12 @@ class Program {
         int min = 500000;
         int max = -1;
         for i = 0, 50 {
-            if (min > arr[i])
+            if (min > arr[i]) {
                 min = arr[i];
-            if (max < arr[i])
+            }
+            if (max < arr[i]) {
                 max = arr[i];
+            }
         }
         callout("printf", "min = %d, max = %d\n", min, max);
         return 0;
