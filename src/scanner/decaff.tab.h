@@ -50,25 +50,47 @@ extern int yydebug;
     T_BOOL = 260,
     T_NEWLINE = 261,
     IDENTIFIER = 262,
-    O_ADD = 263,
-    O_SUB = 264,
-    O_MUL = 265,
-    O_DIV = 266,
-    O_MOD = 267,
-    O_LEF = 268,
-    O_RIT = 269,
-    O_NOT = 270,
-    O_LEQ = 271,
-    O_GEQ = 272,
-    O_LES = 273,
-    O_GRE = 274,
-    O_EQL = 275,
-    O_NEQ = 276,
-    O_BND = 277,
-    O_BOR = 278,
-    O_OR = 279,
-    O_AND = 280,
-    O_XOR = 281
+    KEY_CLASS = 263,
+    KEY_PROGRAM = 264,
+    O_COMMA = 265,
+    KEY_TYPE = 266,
+    O_SEMICOLON = 267,
+    KEY_IF = 268,
+    KEY_ELSE = 269,
+    KEY_CALLOUT = 270,
+    STRING = 271,
+    EQUAL_OP = 272,
+    ADD_EQUAL_OP = 273,
+    SUB_EQUAL_OP = 274,
+    LEFT_CBRACE = 275,
+    RIGHT_CBRACE = 276,
+    INT_LITERAL = 277,
+    LEFT_SBRACE = 278,
+    RIGHT_SBRACE = 279,
+    BOOL_LITERAL = 280,
+    BINARY_ADD = 281,
+    BINARY_SUBTRACT = 282,
+    BINARY_MULTIPLY = 283,
+    BINARY_DIVISION = 284,
+    BINARY_MOD = 285,
+    O_LEF = 286,
+    O_RIT = 287,
+    O_NOT = 288,
+    O_LEQ = 289,
+    O_GEQ = 290,
+    O_LES = 291,
+    O_GRE = 292,
+    O_EQL = 293,
+    O_NEQ = 294,
+    R_AND = 295,
+    R_OR = 296,
+    R_EQUALS = 297,
+    R_NOT_EQUALS = 298,
+    R_GREATER_THAN = 299,
+    R_GREATER_THAN_EQUAL = 300,
+    R_LESS_THAN = 301,
+    R_LESS_THAN_EQUAL = 302,
+    UNARY_NOT = 303
   };
 #endif
 
@@ -84,7 +106,7 @@ union YYSTYPE
     bool bval;
     char cval;
 
-#line 88 "decaff.tab.h" /* yacc.c:1910  */
+#line 110 "decaff.tab.h" /* yacc.c:1910  */
 };
 
 typedef union YYSTYPE YYSTYPE;

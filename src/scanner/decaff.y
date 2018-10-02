@@ -21,103 +21,120 @@
 %token <fval> T_FLOT
 %token <bval> T_BOOL
 %token T_NEWLINE
-%token IDENTIFIER
-%token O_ADD O_SUB O_MUL O_DIV O_MOD O_LEF O_RIT
+%token IDENTIFIER KEY_CLASS KEY_PROGRAM O_COMMA KEY_TYPE
+%token O_SEMICOLON KEY_IF KEY_ELSE KEY_CALLOUT STRING
+%token EQUAL_OP ADD_EQUAL_OP SUB_EQUAL_OP
+%token LEFT_CBRACE RIGHT_CBRACE INT_LITERAL LEFT_SBRACE RIGHT_SBRACE BOOL_LITERAL
+%token BINARY_ADD BINARY_SUBTRACT BINARY_MULTIPLY BINARY_DIVISION BINARY_MOD O_LEF O_RIT
 %token O_NOT O_LEQ O_GEQ O_LES O_GRE O_EQL O_NEQ
-%token O_BND O_BOR
-%left O_BOR
-%left O_BND
-%left O_OR
-%left O_AND
-%left O_XOR
-%left O_ADD O_SUB
-%left O_MUL O_DIV
-%left O_MOD
-%type <ival> int_expr
-%type <fval> float_expr
-%type <bval> bool_expr
+%token R_AND R_OR R_EQUALS R_NOT_EQUALS R_GREATER_THAN R_GREATER_THAN_EQUAL R_LESS_THAN R_LESS_THAN_EQUAL
+%token UNARY_NOT
+
+%start PROGRAM
 
 %%
 
-expr_list:
-    | expr_list expr
+PROGRAM: KEY_CLASS KEY_PROGRAM LEFT_CBRACE T_ELINES FIELD_DECLS T_ELINES METHOD_DECLS T_ELINES RIGHT_CBRACE T_NEWLINES
+        ;
+
+T_NEWLINES: %empty
+        | T_NEWLINES T_NEWLINE
+        ;
+
+T_ELINES: T_NEWLINES
+        | O_SEMICOLONS
+        ;
+
+O_SEMICOLONS: O_SEMICOLON
+            | O_SEMICOLONS O_SEMICOLON
+            | O_SEMICOLONS O_SEMICOLON T_NEWLINES
+            ;
+
+FIELD_DECLS: %empty
+            | KEY_TYPE IDENTIFIER_LIST O_SEMICOLONS
+            ;
+
+IDENTIFIER_LIST: IDENTIFIER
+                | IDENTIFIER LEFT_SBRACE INT_LITERAL RIGHT_SBRACE
+                |  IDENTIFIER_LIST O_COMMA IDENTIFIER
+                | IDENTIFIER_LIST O_COMMA IDENTIFIER LEFT_SBRACE INT_LITERAL RIGHT_SBRACE
+                ;
+
+METHOD_DECLS: %empty
+            | KEY_TYPE IDENTIFIER O_LEF ARG_LIST O_RIT BLOCK O_SEMICOLONS
+            ;
+
+BLOCK: %empty
+    | LEFT_CBRACE VAR_DECLS STATEMENTS  RIGHT_CBRACE T_ELINES
     ;
 
-expr:
-    T_NEWLINE
-    | int_expr T_NEWLINE { printf("RESULT: %d\n", $1); }
-    | float_expr T_NEWLINE { printf("RESULT: %f\n", $1); }
-    | bool_expr T_NEWLINE { printf("RESULT: %d\n", $1); }
-    ;
+VAR_DECLS: KEY_TYPE IDENTIFIER_LIST O_SEMICOLONS
+        ;
 
-int_expr:
-    IDENTIFIER                       { $$ = 0; }
-    | T_INTG                          { $$ = $1; }
-    | int_expr O_BOR int_expr       { $$ = $1 | $3; }
-    | int_expr O_BND int_expr       { $$ = $1 & $3; }
-    | int_expr O_OR int_expr       { $$ = $1 || $3; }
-    | int_expr O_AND int_expr       { $$ = $1 && $3; }
-    | int_expr O_XOR int_expr       { $$ = $1 ^ $3; }
-    | int_expr O_ADD int_expr       { $$ = $1 + $3; }
-    | int_expr O_SUB int_expr       { $$ = $1 - $3; }
-    | int_expr O_MUL int_expr       { $$ = $1 * $3; }
-    | int_expr O_DIV int_expr       { $$ = $1 / $3; }
-    | int_expr O_MOD int_expr       { $$ = $1 % $3; }
-    | O_LEF int_expr O_RIT          { $$ = $2; }
-    | O_SUB int_expr                { $$ = -$2; }
-    ;
+EXPRESSION: LOCATION
+            | METHOD_CALL
+            | LITERAL
+            | EXPRESSION BINARY_OP EXPRESSION
+            | BINARY_SUBTRACT EXPRESSION
+            | UNARY_NOT EXPRESSION
+            | O_LEF EXPRESSION O_RIT
+            ;
 
-bool_expr:
-    IDENTIFIER                       { $$ = 0; }
-    | T_BOOL                          { $$ = $1; }
-    | bool_expr O_BOR bool_expr       { $$ = $1 | $3; }
-    | bool_expr O_BND bool_expr       { $$ = $1 & $3; }
-    | bool_expr O_OR bool_expr       { $$ = $1 || $3; }
-    | bool_expr O_AND bool_expr       { $$ = $1 && $3; }
-    | bool_expr O_XOR bool_expr       { $$ = $1 ^ $3; }
-    | int_expr  O_LEQ int_expr        { $$ = $1 <= $3; }
-    | int_expr  O_GEQ int_expr        { $$ = $1 >= $3; }
-    | int_expr  O_LES int_expr        { $$ = $1 < $3; }
-    | int_expr  O_GRE int_expr        { $$ = $1 > $3; }
-    | int_expr  O_EQL int_expr        { $$ = $1 == $3; }
-    | int_expr  O_NEQ int_expr        { $$ = $1 != $3; }
-    | float_expr O_LEQ float_expr        { $$ = $1 <= $3; }
-    | float_expr O_GEQ float_expr        { $$ = $1 >= $3; }
-    | float_expr O_LES float_expr        { $$ = $1 < $3; }
-    | float_expr O_GRE float_expr        { $$ = $1 > $3; }
-    | float_expr O_EQL float_expr        { $$ = $1 == $3; }
-    | float_expr O_NEQ float_expr        { $$ = $1 != $3; }
-    | float_expr  O_LEQ int_expr        { $$ = $1 <= $3; }
-    | float_expr  O_GEQ int_expr        { $$ = $1 >= $3; }
-    | float_expr  O_LES int_expr        { $$ = $1 < $3; }
-    | float_expr  O_GRE int_expr        { $$ = $1 > $3; }
-    | float_expr  O_EQL int_expr        { $$ = $1 == $3; }
-    | float_expr  O_NEQ int_expr        { $$ = $1 != $3; }
-    | int_expr O_LEQ float_expr        { $$ = $1 <= $3; }
-    | int_expr O_GEQ float_expr        { $$ = $1 >= $3; }
-    | int_expr O_LES float_expr        { $$ = $1 < $3; }
-    | int_expr O_GRE float_expr        { $$ = $1 > $3; }
-    | int_expr O_EQL float_expr        { $$ = $1 == $3; }
-    | int_expr O_NEQ float_expr        { $$ = $1 != $3; }
-    | O_LEF bool_expr O_RIT          { $$ = $2; }
-    ;
+BINARY_OP: ARITHMETIC_OP
+        | RELATIONAL_OP
+        | EQ_OP
+        | CONDITIONAL_OP
+        ;
 
-float_expr:
-    T_FLOT                          { $$ = $1; }
-    | float_expr O_ADD float_expr       { $$ = $1 + $3; }
-    | float_expr O_SUB float_expr       { $$ = $1 - $3; }
-    | float_expr O_MUL float_expr       { $$ = $1 * $3; }
-    | float_expr O_DIV float_expr       { $$ = $1 / $3; }
-    | int_expr O_ADD float_expr       { $$ = $1 + $3; }
-    | int_expr O_SUB float_expr       { $$ = $1 - $3; }
-    | int_expr O_MUL float_expr       { $$ = $1 * $3; }
-    | int_expr O_DIV float_expr       { $$ = $1 / $3; }
-    | float_expr O_ADD int_expr       { $$ = $1 + $3; }
-    | float_expr O_SUB int_expr       { $$ = $1 - $3; }
-    | float_expr O_MUL int_expr       { $$ = $1 * $3; }
-    | float_expr O_DIV int_expr       { $$ = $1 / $3; }
-    | O_LEF float_expr O_RIT          { $$ = $2; }
-    ;
+ARITHMETIC_OP: BINARY_ADD
+            | BINARY_SUBTRACT
+            | BINARY_MULTIPLY
+            | BINARY_DIVISION
+            | BINARY_MOD
+            ;
+
+RELATIONAL_OP: R_LESS_THAN
+            | R_GREATER_THAN
+            | R_LESS_THAN_EQUAL
+            | R_GREATER_THAN_EQUAL
+            ;
+
+EQ_OP: R_EQUALS | R_NOT_EQUALS;
+
+CONDITIONAL_OP: R_AND | R_OR;
+
+LITERAL: INT_LITERAL | BOOL_LITERAL;
+
+STATEMENTS: %empty
+        | LOCATION ASSIGNMENT_OP EXPRESSION O_SEMICOLONS
+        | METHOD_CALL O_SEMICOLONS
+        | KEY_IF O_LEF EXPRESSION O_RIT BLOCK
+        | KEY_IF O_LEF EXPRESSION O_RIT BLOCK KEY_ELSE BLOCK
+        | BLOCK
+        ;
+
+METHOD_CALL: METHOD_NAME O_LEF PARAM_LIST O_RIT
+            | KEY_CALLOUT O_LEF STRING O_COMMA PARAM_LIST O_RIT
+            ;
+
+PARAM_LIST: %empty
+        | EXPRESSION
+        | PARAM_LIST O_COMMA EXPRESSION
+        ;
+
+METHOD_NAME: IDENTIFIER
+            ;
+ASSIGNMENT_OP: EQUAL_OP
+            | ADD_EQUAL_OP
+            | SUB_EQUAL_OP
+            ;
+
+LOCATION: IDENTIFIER
+        | IDENTIFIER LEFT_SBRACE EXPRESSION RIGHT_SBRACE
+
+ARG_LIST: %empty
+        | KEY_TYPE IDENTIFIER
+        | ARG_LIST O_COMMA KEY_TYPE IDENTIFIER
 
 %%
 
