@@ -1,8 +1,8 @@
 %{
-    #include <stdio.h>
-    #include <stdbool.h>
-    #include <string.h>
-    #include "decaff.tab.h"
+    #include <bits/stdc++.h>
+    #include "decaff.tab.hpp"
+    #define YY_DECL extern "C" int yylex()
+    using namespace std;
 %}
 
 DIGIT   [0-9]

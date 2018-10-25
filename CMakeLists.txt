@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 
 project(Decaff)
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_C_COMPILER ${CMAKE_C_COMPILER})
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -ldl -lfl")
+set(CMAKE_C_COMPILER ${CMAKE_CXX_COMPILER})
+set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -ldl -lfl")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_FLEX_BISON_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/flex_bison_output)
@@ -27,8 +27,8 @@ include_directories(src)
 # include_directories(src/class_definitions)
 
 # Make Lexical analyser and parser using flex and bison
-BISON_TARGET(Parser src/decaff.y ${CMAKE_FLEX_BISON_OUTPUT_DIRECTORY}/decaff.tab.c)
-FLEX_TARGET(Lexer src/decaff.l ${CMAKE_FLEX_BISON_OUTPUT_DIRECTORY}/lex.yy.c)
+BISON_TARGET(Parser src/decaff.ypp ${CMAKE_FLEX_BISON_OUTPUT_DIRECTORY}/decaff.tab.cpp)
+FLEX_TARGET(Lexer src/decaff.l ${CMAKE_FLEX_BISON_OUTPUT_DIRECTORY}/lex.yy.cc)
 
 
 # Build the core functionality shared library

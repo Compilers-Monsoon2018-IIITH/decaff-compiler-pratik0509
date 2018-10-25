@@ -1,13 +1,9 @@
 %{
-    #include <stdio.h>
-    #include <stdbool.h>
-    #include <stdlib.h>
-
-    extern int yylex();
-    extern int yyparse();
-    extern FILE *yyin;
- 
-    void yyerror(const char* str);
+        #include <bits/stdc++.h>
+        extern "C" int yylex();
+        extern int yyparse();
+        void yyerror(const char *s);
+        extern FILE* yyin;
 %}
 
 %union {
