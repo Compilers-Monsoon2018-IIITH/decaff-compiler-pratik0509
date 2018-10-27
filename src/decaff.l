@@ -54,44 +54,44 @@ CHR     "'"
 
 [ \t]                    ;
 \n                       ;
-{K_CLASS}                { printf("class ");return KEY_CLASS; }
-{K_PROG}                 { printf("Program ");return KEY_PROGRAM; }
-{LCB}                    { printf("{ ");return LEFT_CBRACE; }
-{LSB}                    { printf("[ ");return LEFT_SBRACE; }
-{RCB}                    { printf("} ");return RIGHT_CBRACE; }
-{RSB}                    { printf("] ");return RIGHT_SBRACE; }
+{K_CLASS}                { return KEY_CLASS; }
+{K_PROG}                 { return KEY_PROGRAM; }
+{LCB}                    { return LEFT_CBRACE; }
+{LSB}                    { return LEFT_SBRACE; }
+{RCB}                    { return RIGHT_CBRACE; }
+{RSB}                    { return RIGHT_SBRACE; }
 {COMMA}                  { return O_COMMA; }
-{INT}|{BOOL}             { printf(" *TYPE* "); return KEY_TYPE; }
-{CALLOUT}                { printf(" *callout* "); return KEY_CALLOUT; }
-{LEF}                    { printf("( ");return O_LEF; }
-{RIT}                    { printf(") ");return O_RIT; }
-{RETURN}                   { printf(" <return> "); return KEY_RETURN;}
-{STR}.*{STR}               { printf("<string> ");return STRING; }
-{CHR}.{CHR}                 { printf("<character> ");return CHAR_LITERAL; }
-{K_IF}                     { printf("if ");return KEY_IF; }
-{K_FOR}                     { printf("for "); return KEY_FOR; }
-{K_ELSE}                   { printf("else ");return KEY_ELSE; }
-{TRUE}|{FALSE}           { printf("return "); return BOOL_LITERAL; }
+{INT}|{BOOL}             {  return KEY_TYPE; }
+{CALLOUT}                { return KEY_CALLOUT; }
+{LEF}                    { return O_LEF; }
+{RIT}                    { return O_RIT; }
+{RETURN}                 { return KEY_RETURN;}
+{STR}.*{STR}             { return STRING; }
+{CHR}.{CHR}              { return CHAR_LITERAL; }
+{K_IF}                   { return KEY_IF; }
+{K_FOR}                  { return KEY_FOR; }
+{K_ELSE}                 { return KEY_ELSE; }
+{TRUE}|{FALSE}           { return BOOL_LITERAL; }
 
-{SEMICOL}                { printf("Semicolon ");return O_SEMICOLON; }
-{DIGIT}+                 { printf(" DIGIT ");return INT_LITERAL; }
-{EQUAL}                    { printf(" = "); return EQUAL_OP; }
-{ADDEQ}                    { printf(" += ");return ADD_EQUAL_OP; }
-{SUBEQ}                    { printf(" -= ");return SUB_EQUAL_OP; }
-{ADD}                       { printf(" + ");return BINARY_ADD; }     
-{SUB}                       { printf(" - ");return BINARY_SUBTRACT; }     
-{MUL}                       { printf(" * ");return BINARY_MULTIPLY; }
-{DIV}                       { printf(" / ");return BINARY_DIVISION; }
-{MOD}                       { printf(" % ");return BINARY_MOD; }
-{OR}                        { return R_OR; }
-{AND}                       { return R_AND; }
-{EQL}                       { return R_EQUALS; }
-{NEQ}                       { return R_NOT_EQUALS; }
-{LEQ}                       { return R_LESS_THAN_EQUAL; }
-{GEQ}                       { return R_GREATER_THAN_EQUAL; }
-{LES}                       { return R_LESS_THAN; }
-{GRE}                       { return R_GREATER_THAN; }
-{NOT}                       { return UNARY_NOT; }
-{ALPHA}{ALNUM}*          { printf("identifiers ");return IDENTIFIER; }
+{SEMICOL}                { return O_SEMICOLON; }
+{DIGIT}+                 { return INT_LITERAL; }
+{EQUAL}                  { return EQUAL_OP; }
+{ADDEQ}                  { return ADD_EQUAL_OP; }
+{SUBEQ}                  { return SUB_EQUAL_OP; }
+{ADD}                    { return BINARY_ADD; }     
+{SUB}                    { return BINARY_SUBTRACT; }     
+{MUL}                    { return BINARY_MULTIPLY; }
+{DIV}                    { return BINARY_DIVISION; }
+{MOD}                    { return BINARY_MOD; }
+{OR}                     { return R_OR; }
+{AND}                    { return R_AND; }
+{EQL}                    { return R_EQUALS; }
+{NEQ}                    { return R_NOT_EQUALS; }
+{LEQ}                    { return R_LESS_THAN_EQUAL; }
+{GEQ}                    { return R_GREATER_THAN_EQUAL; }
+{LES}                    { return R_LESS_THAN; }
+{GRE}                    { return R_GREATER_THAN; }
+{NOT}                    { return UNARY_NOT; }
+{ALPHA}{ALNUM}*          { return IDENTIFIER; }
 
 %%

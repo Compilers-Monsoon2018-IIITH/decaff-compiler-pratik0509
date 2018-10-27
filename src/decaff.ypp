@@ -30,14 +30,14 @@
 
 %%
 
-PROGRAM: KEY_CLASS KEY_PROGRAM LEFT_CBRACE T_ELINES GLOBAL_DECL RIGHT_CBRACE T_ELINES { printf(" \\MAIN\\ "); }
+PROGRAM: KEY_CLASS KEY_PROGRAM LEFT_CBRACE T_ELINES GLOBAL_DECL RIGHT_CBRACE T_ELINES 
         ;
 
-GLOBAL_DECL: %empty { printf(" \\GLOBAL0\\ "); }
-            | FIELD_DECLS T_ELINES { printf(" \\GLOBAL1\\ "); }
-            | METHOD_DECLS T_ELINES { printf(" \\GLOBAL2\\ "); }
-            | GLOBAL_DECL FIELD_DECLS T_ELINES { printf(" \\GLOBAL3\\ "); }
-            | GLOBAL_DECL METHOD_DECLS T_ELINES { printf(" \\GLOBAL4\\ "); }
+GLOBAL_DECL: %empty 
+            | FIELD_DECLS T_ELINES 
+            | METHOD_DECLS T_ELINES 
+            | GLOBAL_DECL FIELD_DECLS T_ELINES 
+            | GLOBAL_DECL METHOD_DECLS T_ELINES 
             ;
 
 T_NEWLINES: T_NEWLINE
@@ -58,7 +58,7 @@ O_SEMICOLONS: O_SEMICOLON
 FIELD_DECLS: KEY_TYPE IDENTIFIER_LIST O_SEMICOLONS
             ;
 
-IDENTIFIER_LIST: IDENTIFIER { printf(" \\IDS\\ "); }
+IDENTIFIER_LIST: IDENTIFIER 
                 | IDENTIFIER ASSIGNMENT_OP EXPRESSION
                 | IDENTIFIER LEFT_SBRACE INT_LITERAL RIGHT_SBRACE ASSIGNMENT_OP EXPRESSION
                 | IDENTIFIER LEFT_SBRACE INT_LITERAL RIGHT_SBRACE
@@ -69,12 +69,12 @@ IDENTIFIER_LIST: IDENTIFIER { printf(" \\IDS\\ "); }
 METHOD_DECLS: KEY_TYPE IDENTIFIER O_LEF ARG_LIST O_RIT BLOCK
             ;
 
-BLOCK: T_ELINES LEFT_CBRACE EXECUTABLES RIGHT_CBRACE T_ELINES { printf(" \\BLOCKS\\ "); }
+BLOCK: T_ELINES LEFT_CBRACE EXECUTABLES RIGHT_CBRACE T_ELINES 
     ;
 
-EXECUTABLES: %empty { printf(" \\EXECS0\\ "); }
-            | EXECUTABLES T_ELINES VAR_DECL { printf(" \\EXECS1\\ "); }
-            | EXECUTABLES T_ELINES STATEMENT { printf(" \\EXECS2\\ "); }
+EXECUTABLES: %empty 
+            | EXECUTABLES T_ELINES VAR_DECL 
+            | EXECUTABLES T_ELINES STATEMENT 
             ;
 
 VAR_DECL: KEY_TYPE IDENTIFIER_LIST O_SEMICOLONS
@@ -162,14 +162,14 @@ ARG_LIST: %empty
 
 int main(int argc, char** argv) {
 	// Open a file handle to a particular file:
-	FILE *myfile = fopen("test.decaff.file", "r");
+	// FILE *myfile = fopen("test.decaff.file", "r");
 	// Make sure it is valid:
-	if (!myfile) {
-		printf("I can't open test.decaff.file!\n");
-		return -1;
-	}
+	// if (!myfile) {
+	// 	printf("I can't open test.decaff.file!\n");
+	// 	return -1;
+	// }
 	// Set Flex to read from it instead of defaulting to STDIN:
-	yyin = myfile;
+	// yyin = myfile;
 	
 	// Parse through the input:
 	yyparse();
