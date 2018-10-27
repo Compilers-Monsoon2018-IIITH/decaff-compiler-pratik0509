@@ -35,6 +35,32 @@
 %left BINARY_DIVISION BINARY_MOD BINARY_MULTIPLY
 %nonassoc UNARY_NOT
 
+// Non-terminal type declarations
+// %type <program> PROGRAM
+// %type <global_decl> GLOBAL_DECL
+// %type <o_semicolons> O_SEMICOLONS
+// %type <field_decls> FIELD_DECLS
+// %type <identifier_list> IDENTIFIER_LIST
+// %type <method_decls> METHOD_DECLS
+// %type <block> BLOCK
+// %type <executables> EXECUTABLES
+// %type <var_decl> VAR_DECL
+// %type <expression> EXPRESSION
+// %type <binary_op> BINARY_OP
+// %type <arithmetic_op> ARITHMETIC_OP
+// %type <relational_op> RELATIONAL_OP
+// %type <eq_op> EQ_OP
+// %type <conditional_op> CONDITIONAL_OP
+// %type <literal> LITERAL
+// %type <statement> STATEMENT
+// %type <else_block> ELSE_BLOCK
+// %type <method_call> METHOD_CALL
+// %type <param_list> PARAM_LIST
+// %type <method_name> METHOD_NAME
+// %type <assignment_op> ASSIGNMENT_OP
+// %type <location> LOCATION
+// %type <arg_list> ARG_LIST
+
 %start PROGRAM
 
 %%
@@ -84,6 +110,7 @@ EXPRESSION: LOCATION
             | LITERAL
             | EXPRESSION BINARY_OP EXPRESSION
             | BINARY_SUBTRACT EXPRESSION
+            | BINARY_ADD EXPRESSION
             | UNARY_NOT EXPRESSION
             | O_LEF EXPRESSION O_RIT
             ;
