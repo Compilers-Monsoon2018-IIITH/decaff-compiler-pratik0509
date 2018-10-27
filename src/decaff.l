@@ -45,6 +45,8 @@ SEMICOL ";"
 K_FOR   "for"
 K_IF    "if"
 K_ELSE  "else"
+K_BREAK  "break"
+K_CONT  "continue"
 CALLOUT "callout"
 RETURN  "return"
 STR     "\""
@@ -61,8 +63,10 @@ CHR     "'"
 {RCB}                    { return RIGHT_CBRACE; }
 {RSB}                    { return RIGHT_SBRACE; }
 {COMMA}                  { return O_COMMA; }
-{INT}|{BOOL}             {  return KEY_TYPE; }
+{INT}|{BOOL}             { return KEY_TYPE; }
 {CALLOUT}                { return KEY_CALLOUT; }
+{K_BREAK}                { return KEY_BREAK; }
+{K_CONT}                 { return KEY_CONTINUE; }
 {LEF}                    { return O_LEF; }
 {RIT}                    { return O_RIT; }
 {RETURN}                 { return KEY_RETURN;}
