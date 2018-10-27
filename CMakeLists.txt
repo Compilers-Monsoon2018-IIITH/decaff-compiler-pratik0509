@@ -18,6 +18,7 @@ message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
 find_package(BISON)
 find_package(FLEX)
 
+set(BISON_FLAGS "-v --debug")
 # Link the directories which contain required libraries
 # link_directories(/usr/lib/llvm-6.0/build/lib)
 
@@ -27,7 +28,7 @@ include_directories(src)
 # include_directories(src/class_definitions)
 
 # Make Lexical analyser and parser using flex and bison
-BISON_TARGET(Parser src/decaff.ypp ${CMAKE_FLEX_BISON_OUTPUT_DIRECTORY}/decaff.tab.cpp)
+BISON_TARGET(Parser src/decaff.ypp ${CMAKE_FLEX_BISON_OUTPUT_DIRECTORY}/decaff.tab.cpp COMPILE_FLAGS "-v")
 FLEX_TARGET(Lexer src/decaff.l ${CMAKE_FLEX_BISON_OUTPUT_DIRECTORY}/lex.yy.cc)
 
 
