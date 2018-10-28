@@ -4,6 +4,8 @@
         extern int yyparse();
         void yyerror(const char *s);
         extern FILE* yyin;
+        extern int line_no;
+        using namespace std;
 %}
 
 %union {
@@ -204,7 +206,8 @@ int main(int argc, char** argv) {
 }
 
 void yyerror(const char *s) {
-	printf("EEK, parse error!  Message: %s\n", s);
+	// printf("EEK, parse error!  Message: %s\n", s);
+        cerr << "Error: Line:" << line_no << " : " << s << endl;
 	// might as well halt now:
 	exit(-1);
 }

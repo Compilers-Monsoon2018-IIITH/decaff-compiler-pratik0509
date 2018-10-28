@@ -3,6 +3,7 @@
     #include "decaff.tab.hpp"
     #define YY_DECL extern "C" int yylex()
     using namespace std;
+    int line_no = 1;
 %}
 
 DIGIT   [0-9]
@@ -55,7 +56,7 @@ CHR     "'"
 %%
 
 [ \t]                    ;
-\n                       ;
+\n                       { line_no++; }
 {K_CLASS}                { return KEY_CLASS; }
 {K_PROG}                 { return KEY_PROGRAM; }
 {LCB}                    { return LEFT_CBRACE; }
