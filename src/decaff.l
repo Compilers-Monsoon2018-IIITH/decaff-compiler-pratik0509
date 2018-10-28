@@ -1,8 +1,10 @@
 %{
     #include <bits/stdc++.h>
+    #include "node.h"
     #include "decaff.tab.hpp"
     #define YY_DECL extern "C" int yylex()
     using namespace std;
+    extern union node yylval;
     int line_no = 1;
 %}
 
@@ -64,7 +66,7 @@ CHR     "'"
 {RCB}                    { return RIGHT_CBRACE; }
 {RSB}                    { return RIGHT_SBRACE; }
 {COMMA}                  { return O_COMMA; }
-{INT}|{BOOL}             { return KEY_TYPE; }
+{INT}|{BOOL}             { yylval.str_value = strdup(yytext); return KEY_TYPE; }
 {CALLOUT}                { return KEY_CALLOUT; }
 {K_BREAK}                { return KEY_BREAK; }
 {K_CONT}                 { return KEY_CONTINUE; }

@@ -1,24 +1,17 @@
 %{
         #include <bits/stdc++.h>
+        #include "node.h"
+        using namespace std;
         extern "C" int yylex();
         extern int yyparse();
-        void yyerror(const char *s);
+        extern union node yylval;
         extern FILE* yyin;
         extern int line_no;
-        using namespace std;
+        void yyerror(const char *s);
 %}
 
-%union {
-    int ival;
-    float fval;
-    bool bval;
-    char cval;
-}
-
-%token <ival> T_INTG
-%token <fval> T_FLOT
-%token <bval> T_BOOL
-%token IDENTIFIER KEY_CLASS KEY_PROGRAM O_COMMA KEY_TYPE KEY_FOR
+%token IDENTIFIER KEY_CLASS KEY_PROGRAM O_COMMA KEY_FOR
+%token <str_value> KEY_TYPE
 %token O_SEMICOLON KEY_IF KEY_ELSE KEY_CALLOUT STRING
 %token EQUAL_OP ADD_EQUAL_OP SUB_EQUAL_OP
 %token LEFT_CBRACE RIGHT_CBRACE INT_LITERAL LEFT_SBRACE RIGHT_SBRACE BOOL_LITERAL CHAR_LITERAL
@@ -38,12 +31,12 @@
 %nonassoc UNARY_NOT
 
 // Non-terminal type declarations
-// %type <program> PROGRAM
-// %type <global_decl> GLOBAL_DECL
+%type <prog> PROGRAM
+%type <g_decl> GLOBAL_DECL
 // %type <o_semicolons> O_SEMICOLONS
-// %type <field_decls> FIELD_DECLS
-// %type <identifier_list> IDENTIFIER_LIST
-// %type <method_decls> METHOD_DECLS
+%type <f_decls> FIELD_DECLS
+%type <id_list> IDENTIFIER_LIST
+%type <m_decls> METHOD_DECLS
 // %type <block> BLOCK
 // %type <executables> EXECUTABLES
 // %type <var_decl> VAR_DECL
@@ -67,21 +60,27 @@
 
 %%
 
-PROGRAM: KEY_CLASS KEY_PROGRAM LEFT_CBRACE GLOBAL_DECL RIGHT_CBRACE 
+PROGRAM: KEY_CLASS KEY_PROGRAM LEFT_CBRACE GLOBAL_DECL RIGHT_CBRACE
+                { 
+                        $$ = new program();
+                        $$->set_global_decl($4);
+                }
         ;
 
-GLOBAL_DECL: %empty 
-            | FIELD_DECLS
-            | METHOD_DECLS 
-            | GLOBAL_DECL FIELD_DECLS 
-            | GLOBAL_DECL METHOD_DECLS 
+GLOBAL_DECL: %empty                     { $$ = new global_decl(); }
+            | GLOBAL_DECL FIELD_DECLS   { $$->add_field($2); }
+            | GLOBAL_DECL METHOD_DECLS  { $$->add_method($2); }
             ;
 
 O_SEMICOLONS: O_SEMICOLON
         | O_SEMICOLONS O_SEMICOLON
         ;
 
-FIELD_DECLS: KEY_TYPE IDENTIFIER_LIST O_SEMICOLON
+FIELD_DECLS: KEY_TYPE IDENTIFIER_LIST O_SEMICOLON 
+                {
+                        $$ = new field_decls();
+                        $$->set_field(string($1), $2);
+                }
             ;
 
 IDENTIFIER_LIST: IDENTIFIER 
@@ -92,7 +91,7 @@ IDENTIFIER_LIST: IDENTIFIER
                 | IDENTIFIER_LIST O_COMMA IDENTIFIER LEFT_SBRACE INT_LITERAL RIGHT_SBRACE
                 ;
 
-METHOD_DECLS: KEY_TYPE IDENTIFIER O_LEF ARG_LIST O_RIT BLOCK
+METHOD_DECLS: KEY_TYPE IDENTIFIER O_LEF ARG_LIST O_RIT BLOCK { $$ = new method_decls(); }
             ;
 
 BLOCK: LEFT_CBRACE EXECUTABLES RIGHT_CBRACE
