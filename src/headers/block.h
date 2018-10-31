@@ -4,6 +4,8 @@
 #include <bits/stdc++.h>
 #include "executables.h"
 
+class executables;
+
 class block {
 private:
     executables *exec;

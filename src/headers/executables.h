@@ -3,9 +3,13 @@
 
 #include <bits/stdc++.h>
 #include "var_decl.h"
+#include "statement.h"
+
+class statement;
 
 typedef union {
     var_decl *v_dec;
+    statement *stmnt;
 } exec_types; 
 
 enum class exec_modes {
@@ -18,6 +22,7 @@ private:
 public:
     executables();
     void add_executable(var_decl*);
+    void add_executable(statement*);
 };
 
 #endif

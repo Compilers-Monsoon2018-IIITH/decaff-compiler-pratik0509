@@ -13,3 +13,11 @@ void executables::add_executable(var_decl *v) {
     execs.push_back({et, exec_modes::v_decl});
     return;
 }
+
+
+void executables::add_executable(statement *v) {
+    exec_types et;
+    et.stmnt = v;
+    execs.push_back({et, exec_modes::stmnt});
+    return;
+}

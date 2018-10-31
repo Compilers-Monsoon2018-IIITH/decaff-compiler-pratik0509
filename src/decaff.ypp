@@ -52,7 +52,7 @@
 %type <str_value> EQ_OP
 %type <str_value> CONDITIONAL_OP
 %type <lit> LITERAL
-// %type <statement> STATEMENT
+%type <stmnt> STATEMENT
 // %type <else_block> ELSE_BLOCK
 %type <m_call> METHOD_CALL
 // %type <param_list> PARAM_LIST
@@ -114,7 +114,8 @@ EXECUTABLES: %empty
                 { $$ = new executables(); }
             | EXECUTABLES VAR_DECL
                 { $$->add_executable($2); }
-            | EXECUTABLES STATEMENT 
+            | EXECUTABLES STATEMENT
+                { $$->add_executable($2); }
             | EXECUTABLES O_SEMICOLONS
             ;
 
@@ -176,14 +177,29 @@ LITERAL: INT_LITERAL
         ;
 
 STATEMENT: LOCATION ASSIGNMENT_OP EXPRESSION O_SEMICOLON
+                {
+                        $$ = new statement();
+                        $$->add_statement(new assignment($1, $2, $3));
+                }
         | METHOD_CALL O_SEMICOLON
+                { $$ = new statement(); }
         | KEY_IF O_LEF EXPRESSION O_RIT BLOCK
+                { $$ = new statement(); }
         | KEY_IF O_LEF EXPRESSION O_RIT BLOCK KEY_ELSE ELSE_BLOCK
+                { $$ = new statement(); }
         | KEY_FOR IDENTIFIER EQUAL_OP EXPRESSION O_COMMA EXPRESSION BLOCK
+                { $$ = new statement(); }
         | BLOCK
+                {
+                        $$ = new statement();
+                        $$->add_statement($1);
+                }
         | KEY_RETURN EXPRESSION O_SEMICOLON
+                { $$ = new statement(); }
         | KEY_BREAK O_SEMICOLON
+                { $$ = new statement(); }
         | KEY_CONTINUE O_SEMICOLON
+                { $$ = new statement(); }
         ;
 
 ELSE_BLOCK: BLOCK

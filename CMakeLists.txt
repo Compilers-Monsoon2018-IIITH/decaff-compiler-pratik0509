@@ -47,11 +47,13 @@ add_library(coreLibrary SHARED
                 src/var_decl.cpp
                 src/binary_op.cpp
                 src/literal.cpp
-                src/location.cpp
                 src/expression.cpp
+                src/location.cpp
                 src/method_call.cpp
                 src/unary_op.cpp
                 src/arg_list.cpp
+                src/statement.cpp
+                src/assignment.cpp
         )
 
 # Add the main executable

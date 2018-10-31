@@ -15,6 +15,8 @@
 #include "method_call.h"
 #include "binary_op.h"
 #include "arg_list.h"
+#include "statement.h"
+#include "assignment.h"
 
 union node {
     int ival;
@@ -35,6 +37,7 @@ union node {
     class method_call *m_call;
     class binary_op *bin_op;
     class arg_list *a_list;
+    class statement *stmnt;
     node() = default;
 
     ~ node() = default;
