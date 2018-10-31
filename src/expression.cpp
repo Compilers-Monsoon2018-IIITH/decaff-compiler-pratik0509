@@ -5,6 +5,7 @@ expression::expression(location *v) {
         std::cout << "expression created\n";
     #endif
     val.loc = v;
+    e_type = type::loc;
 }
 
 expression::expression(method_call *v) {
@@ -12,6 +13,7 @@ expression::expression(method_call *v) {
         std::cout << "expression created\n";
     #endif
     val.mcall = v;
+    e_type = type::mcall;
 }
 
 expression::expression(literal *v) {
@@ -19,6 +21,23 @@ expression::expression(literal *v) {
         std::cout << "expression created\n";
     #endif
     val.lit = v;
+    e_type = type::lit;
+}
+
+expression::expression(binary_op *v) {
+    #ifdef __TEST
+        std::cout << "expression created\n";
+    #endif
+    val.b_op = v;
+    e_type = type::b_op;
+}
+
+expression::expression(unary_op *v) {
+    #ifdef __TEST
+        std::cout << "expression created\n";
+    #endif
+    val.u_op = v;
+    e_type = type::u_op;
 }
 
 expression::~expression() {
@@ -26,5 +45,6 @@ expression::~expression() {
         case type::loc: delete val.loc; break;
         case type::mcall: delete val.mcall; break;
         case type::lit: delete val.lit; break;
+        case type::b_op: delete val.b_op; break;
     }
 }

@@ -13,6 +13,8 @@
 #include "literal.h"
 #include "location.h"
 #include "method_call.h"
+#include "binary_op.h"
+#include "arg_list.h"
 
 union node {
     int ival;
@@ -31,6 +33,8 @@ union node {
     class literal *lit;
     class location *loc;
     class method_call *m_call;
+    class binary_op *bin_op;
+    class arg_list *a_list;
     node() = default;
 
     ~ node() = default;

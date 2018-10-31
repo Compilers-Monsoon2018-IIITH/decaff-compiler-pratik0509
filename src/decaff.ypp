@@ -15,13 +15,14 @@
 %token <str_value> KEY_TYPE
 %token O_SEMICOLON KEY_IF KEY_ELSE KEY_CALLOUT STRING
 %token EQUAL_OP ADD_EQUAL_OP SUB_EQUAL_OP
-%token LEFT_CBRACE RIGHT_CBRACE INT_LITERAL LEFT_SBRACE RIGHT_SBRACE BOOL_LITERAL CHAR_LITERAL
+%token LEFT_CBRACE RIGHT_CBRACE LEFT_SBRACE RIGHT_SBRACE
 %token <ival> INT_LITERAL
 %token <bval> BOOL_LITERAL
 %token <cval> CHAR_LITERAL
-%token BINARY_ADD BINARY_SUBTRACT BINARY_MULTIPLY BINARY_DIVISION BINARY_MOD O_LEF O_RIT
-%token R_AND R_OR R_EQUALS R_NOT_EQUALS R_GREATER_THAN R_GREATER_THAN_EQUAL R_LESS_THAN R_LESS_THAN_EQUAL
-%token UNARY_NOT KEY_RETURN
+%token <str_value> BINARY_ADD BINARY_SUBTRACT BINARY_MULTIPLY BINARY_DIVISION BINARY_MOD O_LEF O_RIT
+%token <str_value> R_AND R_OR R_EQUALS R_NOT_EQUALS R_GREATER_THAN R_GREATER_THAN_EQUAL R_LESS_THAN R_LESS_THAN_EQUAL
+%token <str_value> UNARY_NOT
+%token KEY_RETURN
 %token KEY_BREAK KEY_CONTINUE
 
 // Precedence
@@ -45,20 +46,20 @@
 %type <exe> EXECUTABLES
 %type <v_decl> VAR_DECL
 %type <expr> EXPRESSION
-// %type <binary_op> BINARY_OP
-// %type <arithmetic_op> ARITHMETIC_OP
-// %type <relational_op> RELATIONAL_OP
-// %type <eq_op> EQ_OP
-// %type <conditional_op> CONDITIONAL_OP
+%type <str_value> BINARY_OP
+%type <str_value> ARITHMETIC_OP
+%type <str_value> RELATIONAL_OP
+%type <str_value> EQ_OP
+%type <str_value> CONDITIONAL_OP
 %type <lit> LITERAL
 // %type <statement> STATEMENT
 // %type <else_block> ELSE_BLOCK
 %type <m_call> METHOD_CALL
 // %type <param_list> PARAM_LIST
-// %type <method_name> METHOD_NAME
+%type <loc> METHOD_NAME
 // %type <assignment_op> ASSIGNMENT_OP
 %type <loc> LOCATION
-// %type <arg_list> ARG_LIST
+%type <a_list> ARG_LIST
 
 %start PROGRAM
 
@@ -127,34 +128,43 @@ EXPRESSION: LOCATION
             | LITERAL
                 { $$ = new expression($1); }
             | EXPRESSION BINARY_OP EXPRESSION
+                { $$ = new expression(new binary_op($1, $3, std::string($2))); }
             | BINARY_SUBTRACT EXPRESSION
+                { $$ = new expression(new unary_op($2, std::string($1))); }
             | BINARY_ADD EXPRESSION
+                { $$ = new expression(new unary_op($2, std::string($1))); }
             | UNARY_NOT EXPRESSION
+                { $$ = new expression(new unary_op($2, std::string($1))); }
             | O_LEF EXPRESSION O_RIT
+                { $$ = $2; }
             ;
 
-BINARY_OP: ARITHMETIC_OP
-        | RELATIONAL_OP
-        | EQ_OP
-        | CONDITIONAL_OP
+BINARY_OP: ARITHMETIC_OP        { $$ = $1; }
+        | RELATIONAL_OP         { $$ = $1; }
+        | EQ_OP                 { $$ = $1; }
+        | CONDITIONAL_OP        { $$ = $1; }
         ;
 
-ARITHMETIC_OP: BINARY_ADD
-            | BINARY_SUBTRACT
-            | BINARY_MULTIPLY
-            | BINARY_DIVISION
-            | BINARY_MOD
+ARITHMETIC_OP: BINARY_ADD       { $$ = $1; }
+            | BINARY_SUBTRACT   { $$ = $1; }
+            | BINARY_MULTIPLY   { $$ = $1; }
+            | BINARY_DIVISION   { $$ = $1; }
+            | BINARY_MOD        { $$ = $1; }
             ;
 
-RELATIONAL_OP: R_LESS_THAN
-            | R_GREATER_THAN
-            | R_LESS_THAN_EQUAL
-            | R_GREATER_THAN_EQUAL
+RELATIONAL_OP: R_LESS_THAN              { $$ = $1; }
+            | R_GREATER_THAN            { $$ = $1; }
+            | R_LESS_THAN_EQUAL         { $$ = $1; }
+            | R_GREATER_THAN_EQUAL      { $$ = $1; }
             ;
 
-EQ_OP: R_EQUALS | R_NOT_EQUALS;
+EQ_OP: R_EQUALS         { $$ = $1; }
+        | R_NOT_EQUALS  { $$ = $1; }
+        ;
 
-CONDITIONAL_OP: R_AND | R_OR;
+CONDITIONAL_OP: R_AND   { $$ = $1; }
+                | R_OR  { $$ = $1; }
+                ;
 
 LITERAL: INT_LITERAL
                 { $$ = new literal($1); }
@@ -180,8 +190,10 @@ ELSE_BLOCK: BLOCK
         | KEY_IF O_LEF EXPRESSION O_RIT BLOCK KEY_ELSE ELSE_BLOCK
         ;
 
-METHOD_CALL: METHOD_NAME O_LEF PARAM_LIST O_RIT { $$ = new method_call(); }
+METHOD_CALL: METHOD_NAME O_LEF PARAM_LIST O_RIT
+                        { $$ = new method_call(); }
             | KEY_CALLOUT O_LEF STRING O_COMMA PARAM_LIST O_RIT
+                        { $$ = new method_call(); }
             ;
 
 PARAM_LIST: %empty
@@ -191,7 +203,7 @@ PARAM_LIST: %empty
         | PARAM_LIST O_COMMA STRING
         ;
 
-METHOD_NAME: IDENTIFIER
+METHOD_NAME: IDENTIFIER         { $$ = new location(); }
             ;
 
 ASSIGNMENT_OP: EQUAL_OP
@@ -199,13 +211,15 @@ ASSIGNMENT_OP: EQUAL_OP
             | SUB_EQUAL_OP
             ;
 
-LOCATION: IDENTIFIER { $$ = new location(); }
+LOCATION: IDENTIFIER
+                { $$ = new location(); }
         | IDENTIFIER LEFT_SBRACE EXPRESSION RIGHT_SBRACE
         ;
 
 ARG_LIST: %empty
-        | KEY_TYPE IDENTIFIER
+                { $$ = new arg_list();}
         | ARG_LIST O_COMMA KEY_TYPE IDENTIFIER
+                { $$->add_identifier(std::string($3), new identifier($4));}
         ;
 
 

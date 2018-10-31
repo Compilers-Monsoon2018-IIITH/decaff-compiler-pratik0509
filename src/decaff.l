@@ -82,23 +82,23 @@ CHR     "'"
 
 {SEMICOL}                { return O_SEMICOLON; }
 {DIGIT}+                 { yylval.ival = atoi(yytext); return INT_LITERAL; }
-{EQUAL}                  { return EQUAL_OP; }
-{ADDEQ}                  { return ADD_EQUAL_OP; }
-{SUBEQ}                  { return SUB_EQUAL_OP; }
-{ADD}                    { return BINARY_ADD; }     
-{SUB}                    { return BINARY_SUBTRACT; }     
-{MUL}                    { return BINARY_MULTIPLY; }
-{DIV}                    { return BINARY_DIVISION; }
-{MOD}                    { return BINARY_MOD; }
-{OR}                     { return R_OR; }
-{AND}                    { return R_AND; }
-{EQL}                    { return R_EQUALS; }
-{NEQ}                    { return R_NOT_EQUALS; }
-{LEQ}                    { return R_LESS_THAN_EQUAL; }
-{GEQ}                    { return R_GREATER_THAN_EQUAL; }
-{LES}                    { return R_LESS_THAN; }
-{GRE}                    { return R_GREATER_THAN; }
-{NOT}                    { return UNARY_NOT; }
+{EQUAL}                  { yylval.str_value = strdup(yytext); return EQUAL_OP; }
+{ADDEQ}                  { yylval.str_value = strdup(yytext); return ADD_EQUAL_OP; }
+{SUBEQ}                  { yylval.str_value = strdup(yytext); return SUB_EQUAL_OP; }
+{ADD}                    { yylval.str_value = strdup(yytext); return BINARY_ADD; }     
+{SUB}                    { yylval.str_value = strdup(yytext); return BINARY_SUBTRACT; }     
+{MUL}                    { yylval.str_value = strdup(yytext); return BINARY_MULTIPLY; }
+{DIV}                    { yylval.str_value = strdup(yytext); return BINARY_DIVISION; }
+{MOD}                    { yylval.str_value = strdup(yytext); return BINARY_MOD; }
+{OR}                     { yylval.str_value = strdup(yytext); return R_OR; }
+{AND}                    { yylval.str_value = strdup(yytext); return R_AND; }
+{EQL}                    { yylval.str_value = strdup(yytext); return R_EQUALS; }
+{NEQ}                    { yylval.str_value = strdup(yytext); return R_NOT_EQUALS; }
+{LEQ}                    { yylval.str_value = strdup(yytext); return R_LESS_THAN_EQUAL; }
+{GEQ}                    { yylval.str_value = strdup(yytext); return R_GREATER_THAN_EQUAL; }
+{LES}                    { yylval.str_value = strdup(yytext); return R_LESS_THAN; }
+{GRE}                    { yylval.str_value = strdup(yytext); return R_GREATER_THAN; }
+{NOT}                    { yylval.str_value = strdup(yytext); return UNARY_NOT; }
 {ALPHA}{ALNUM}*          { yylval.str_value = strdup(yytext); return IDENTIFIER; }
 
 %%
