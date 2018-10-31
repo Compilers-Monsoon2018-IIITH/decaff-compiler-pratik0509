@@ -3,8 +3,9 @@
 
 #include <bits/stdc++.h>
 #include "expression.h"
+#include <new>
 
-typedef union {
+typedef struct pp {
     std::string str;
     expression *expr;
 } param_type;
@@ -15,7 +16,7 @@ enum class param_mode {
 
 class param_list {
 private:
-    int x;
+    std::list<std::pair<param_type, param_mode>> p_list;
 public:
     param_list();
     void add_param(std::string);

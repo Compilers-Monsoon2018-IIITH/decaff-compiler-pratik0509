@@ -29,6 +29,7 @@ private:
     value val;
     type e_type;
 public:
+    expression();
     expression(location *val);
     expression(binary_op *val);
     expression(method_call *val);

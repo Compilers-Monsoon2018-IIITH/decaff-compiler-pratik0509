@@ -17,6 +17,7 @@
 #include "arg_list.h"
 #include "statement.h"
 #include "assignment.h"
+#include "param_list.h"
 
 union node {
     int ival;
@@ -38,6 +39,7 @@ union node {
     class binary_op *bin_op;
     class arg_list *a_list;
     class statement *stmnt;
+    class param_list *p_list;
     node() = default;
 
     ~ node() = default;

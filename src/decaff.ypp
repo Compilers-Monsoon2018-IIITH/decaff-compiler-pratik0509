@@ -55,7 +55,7 @@
 %type <stmnt> STATEMENT
 // %type <else_block> ELSE_BLOCK
 %type <m_call> METHOD_CALL
-// %type <param_list> PARAM_LIST
+%type <p_list> PARAM_LIST
 %type <loc> METHOD_NAME
 %type <str_value> ASSIGNMENT_OP
 %type <loc> LOCATION
@@ -214,10 +214,15 @@ METHOD_CALL: METHOD_NAME O_LEF PARAM_LIST O_RIT
             ;
 
 PARAM_LIST: %empty
+                { $$ = new param_list(); }
         | EXPRESSION
+                { $$ = new param_list(); }
         | STRING
+                { $$ = new param_list(); }
         | PARAM_LIST O_COMMA EXPRESSION
+                { $$ = new param_list(); }
         | PARAM_LIST O_COMMA STRING
+                { $$ = new param_list(); }
         ;
 
 METHOD_NAME: IDENTIFIER         { $$ = new location($1); }

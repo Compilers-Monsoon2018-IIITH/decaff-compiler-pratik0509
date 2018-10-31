@@ -1,5 +1,11 @@
 #include "expression.h"
 
+expression::expression() {
+    #ifdef __TEST
+        std::cout << "expression created\n";
+    #endif
+}
+
 expression::expression(location *v) {
     #ifdef __TEST
         std::cout << "expression created\n";
