@@ -10,6 +10,7 @@
 
 class binary_op;
 class unary_op;
+class location;
 
 typedef union {
     location *loc;

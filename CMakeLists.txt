@@ -46,9 +46,9 @@ add_library(coreLibrary SHARED
                 src/executables.cpp
                 src/var_decl.cpp
                 src/binary_op.cpp
-                src/expression.cpp
                 src/literal.cpp
                 src/location.cpp
+                src/expression.cpp
                 src/method_call.cpp
                 src/unary_op.cpp
                 src/arg_list.cpp

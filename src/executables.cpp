@@ -4,10 +4,12 @@ executables::executables() {
     #ifdef __TEST
         std::cout << "executables created\n";
     #endif
-    id_list = NULL;
+    execs = std::list<std::pair<exec_types, exec_modes>>();
 }
 
-executables::~executables() {
-    if (id_list != NULL)
-        delete id_list;
+void executables::add_executable(var_decl *v) {
+    exec_types et;
+    et.v_dec = v;
+    execs.push_back({et, exec_modes::v_decl});
+    return;
 }

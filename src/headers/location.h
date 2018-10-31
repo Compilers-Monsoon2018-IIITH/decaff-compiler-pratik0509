@@ -2,26 +2,23 @@
 #define __LOCATION__
 
 #include <bits/stdc++.h>
+#include "expression.h"
 
-typedef union {
-    int ival;
-    char cval;
-    bool bval;
-} value3;
+class expression;
 
-enum class type3 {
-    ival, cval, bval
+enum class location_type {
+    scalar, vector
 };
 
 class location {
 private:
-    value3 v;
-    type3 loc_type;
+    location_type loc_type;
+    std::string name;
+    expression *idx;
 public:
     location();
-    location(int val);
-    location(char val);
-    location(bool val);
+    location(std::string);
+    location(std::string, expression*);
 };
 
 #endif

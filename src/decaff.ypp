@@ -14,7 +14,7 @@
 %token <str_value> IDENTIFIER
 %token <str_value> KEY_TYPE
 %token O_SEMICOLON KEY_IF KEY_ELSE KEY_CALLOUT STRING
-%token EQUAL_OP ADD_EQUAL_OP SUB_EQUAL_OP
+%token <str_value> EQUAL_OP ADD_EQUAL_OP SUB_EQUAL_OP
 %token LEFT_CBRACE RIGHT_CBRACE LEFT_SBRACE RIGHT_SBRACE
 %token <ival> INT_LITERAL
 %token <bval> BOOL_LITERAL
@@ -57,7 +57,7 @@
 %type <m_call> METHOD_CALL
 // %type <param_list> PARAM_LIST
 %type <loc> METHOD_NAME
-// %type <assignment_op> ASSIGNMENT_OP
+%type <str_value> ASSIGNMENT_OP
 %type <loc> LOCATION
 %type <a_list> ARG_LIST
 
@@ -112,7 +112,8 @@ BLOCK: LEFT_CBRACE EXECUTABLES RIGHT_CBRACE
 
 EXECUTABLES: %empty
                 { $$ = new executables(); }
-            | EXECUTABLES VAR_DECL 
+            | EXECUTABLES VAR_DECL
+                { $$->add_executable($2); }
             | EXECUTABLES STATEMENT 
             | EXECUTABLES O_SEMICOLONS
             ;
@@ -203,23 +204,24 @@ PARAM_LIST: %empty
         | PARAM_LIST O_COMMA STRING
         ;
 
-METHOD_NAME: IDENTIFIER         { $$ = new location(); }
+METHOD_NAME: IDENTIFIER         { $$ = new location($1); }
             ;
 
-ASSIGNMENT_OP: EQUAL_OP
-            | ADD_EQUAL_OP
-            | SUB_EQUAL_OP
+ASSIGNMENT_OP: EQUAL_OP         { $$ = $1;}
+            | ADD_EQUAL_OP      { $$ = $1;}
+            | SUB_EQUAL_OP      { $$ = $1;}
             ;
 
 LOCATION: IDENTIFIER
-                { $$ = new location(); }
+                { $$ = new location($1); }
         | IDENTIFIER LEFT_SBRACE EXPRESSION RIGHT_SBRACE
+                { $$ = new location($1, $3); }
         ;
 
 ARG_LIST: %empty
-                { $$ = new arg_list();}
+                { $$ = new arg_list(); }
         | ARG_LIST O_COMMA KEY_TYPE IDENTIFIER
-                { $$->add_identifier(std::string($3), new identifier($4));}
+                { $$->add_identifier(std::string($3), new identifier($4)); }
         ;
 
 

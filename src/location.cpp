@@ -6,26 +6,21 @@ location::location() {
     #endif
 }
 
-location::location(int val) {
+location::location(std::string val) {
     #ifdef __TEST
         std::cout << "location created\n";
     #endif
-    v.ival = val;
-    loc_type = type3::ival;
+    name = val;
+    loc_type = location_type::scalar;
+    idx = NULL;
 }
 
-location::location(char val) {
+location::location(std::string val, expression *e) {
     #ifdef __TEST
         std::cout << "location created\n";
     #endif
-    v.cval = val;
-    loc_type = type3::cval;
+    name = val;
+    loc_type = location_type::vector;
+    idx = e;
 }
 
-location::location(bool val) {
-    #ifdef __TEST
-        std::cout << "location created\n";
-    #endif
-    v.bval = val;
-    loc_type = type3::bval;
-}
