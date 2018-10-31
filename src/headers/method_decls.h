@@ -2,13 +2,14 @@
 #define __METHOD_DECLS__
 
 #include <bits/stdc++.h>
+#include "identifier.h"
 
 class method_decls {
 private:
-    int *m_decl;
+    std::string r_type;
+    identifier *m_id;
 public:
-    void add_int(int *decl);
-    method_decls();
+    method_decls(std::string, identifier*);
     ~ method_decls();
 };
 

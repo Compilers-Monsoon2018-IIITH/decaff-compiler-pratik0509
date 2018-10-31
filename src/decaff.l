@@ -74,14 +74,14 @@ CHR     "'"
 {RIT}                    { return O_RIT; }
 {RETURN}                 { return KEY_RETURN;}
 {STR}.*{STR}             { return STRING; }
-{CHR}.{CHR}              { return CHAR_LITERAL; }
+{CHR}.{CHR}              { yylval.cval = yytext[1]; return CHAR_LITERAL; }
 {K_IF}                   { return KEY_IF; }
 {K_FOR}                  { return KEY_FOR; }
 {K_ELSE}                 { return KEY_ELSE; }
-{TRUE}|{FALSE}           { return BOOL_LITERAL; }
+{TRUE}|{FALSE}           { yylval.bval = ((strcmp(yytext, "true") == 0) ? true : false); return BOOL_LITERAL; }
 
 {SEMICOL}                { return O_SEMICOLON; }
-{DIGIT}+                 { return INT_LITERAL; }
+{DIGIT}+                 { yylval.ival = atoi(yytext); return INT_LITERAL; }
 {EQUAL}                  { return EQUAL_OP; }
 {ADDEQ}                  { return ADD_EQUAL_OP; }
 {SUBEQ}                  { return SUB_EQUAL_OP; }
@@ -99,6 +99,6 @@ CHR     "'"
 {LES}                    { return R_LESS_THAN; }
 {GRE}                    { return R_GREATER_THAN; }
 {NOT}                    { return UNARY_NOT; }
-{ALPHA}{ALNUM}*          { return IDENTIFIER; }
+{ALPHA}{ALNUM}*          { yylval.str_value = strdup(yytext); return IDENTIFIER; }
 
 %%

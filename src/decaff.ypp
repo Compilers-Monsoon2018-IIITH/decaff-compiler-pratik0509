@@ -10,11 +10,15 @@
         void yyerror(const char *s);
 %}
 
-%token IDENTIFIER KEY_CLASS KEY_PROGRAM O_COMMA KEY_FOR
+%token KEY_CLASS KEY_PROGRAM O_COMMA KEY_FOR
+%token <str_value> IDENTIFIER
 %token <str_value> KEY_TYPE
 %token O_SEMICOLON KEY_IF KEY_ELSE KEY_CALLOUT STRING
 %token EQUAL_OP ADD_EQUAL_OP SUB_EQUAL_OP
 %token LEFT_CBRACE RIGHT_CBRACE INT_LITERAL LEFT_SBRACE RIGHT_SBRACE BOOL_LITERAL CHAR_LITERAL
+%token <ival> INT_LITERAL
+%token <bval> BOOL_LITERAL
+%token <cval> CHAR_LITERAL
 %token BINARY_ADD BINARY_SUBTRACT BINARY_MULTIPLY BINARY_DIVISION BINARY_MOD O_LEF O_RIT
 %token R_AND R_OR R_EQUALS R_NOT_EQUALS R_GREATER_THAN R_GREATER_THAN_EQUAL R_LESS_THAN R_LESS_THAN_EQUAL
 %token UNARY_NOT KEY_RETURN
@@ -37,23 +41,23 @@
 %type <f_decls> FIELD_DECLS
 %type <id_list> IDENTIFIER_LIST
 %type <m_decls> METHOD_DECLS
-// %type <block> BLOCK
-// %type <executables> EXECUTABLES
-// %type <var_decl> VAR_DECL
-// %type <expression> EXPRESSION
+%type <blk> BLOCK
+%type <exe> EXECUTABLES
+%type <v_decl> VAR_DECL
+%type <expr> EXPRESSION
 // %type <binary_op> BINARY_OP
 // %type <arithmetic_op> ARITHMETIC_OP
 // %type <relational_op> RELATIONAL_OP
 // %type <eq_op> EQ_OP
 // %type <conditional_op> CONDITIONAL_OP
-// %type <literal> LITERAL
+%type <lit> LITERAL
 // %type <statement> STATEMENT
 // %type <else_block> ELSE_BLOCK
-// %type <method_call> METHOD_CALL
+%type <m_call> METHOD_CALL
 // %type <param_list> PARAM_LIST
 // %type <method_name> METHOD_NAME
 // %type <assignment_op> ASSIGNMENT_OP
-// %type <location> LOCATION
+%type <loc> LOCATION
 // %type <arg_list> ARG_LIST
 
 %start PROGRAM
@@ -83,32 +87,45 @@ FIELD_DECLS: KEY_TYPE IDENTIFIER_LIST O_SEMICOLON
                 }
             ;
 
-IDENTIFIER_LIST: IDENTIFIER 
+IDENTIFIER_LIST: IDENTIFIER
+                        { $$ = new identifier_list(); $$->add_identifier(new identifier($1));}
                 | IDENTIFIER ASSIGNMENT_OP EXPRESSION
+                        { $$->add_identifier(new identifier($1)); }
                 | IDENTIFIER LEFT_SBRACE INT_LITERAL RIGHT_SBRACE ASSIGNMENT_OP EXPRESSION
+                        { $$->add_identifier(new identifier($1)); }
                 | IDENTIFIER LEFT_SBRACE INT_LITERAL RIGHT_SBRACE
+                        { $$->add_identifier(new identifier($1)); }
                 | IDENTIFIER_LIST O_COMMA IDENTIFIER
+                        { $$->add_identifier(new identifier($3)); }
                 | IDENTIFIER_LIST O_COMMA IDENTIFIER LEFT_SBRACE INT_LITERAL RIGHT_SBRACE
+                        { $$->add_identifier(new identifier($3)); }
                 ;
 
-METHOD_DECLS: KEY_TYPE IDENTIFIER O_LEF ARG_LIST O_RIT BLOCK { $$ = new method_decls(); }
+METHOD_DECLS: KEY_TYPE IDENTIFIER O_LEF ARG_LIST O_RIT BLOCK
+                        { $$ = new method_decls($1, new identifier($2)); }
             ;
 
 BLOCK: LEFT_CBRACE EXECUTABLES RIGHT_CBRACE
+                { $$ = new block($2); }
     ;
 
-EXECUTABLES: %empty 
+EXECUTABLES: %empty
+                { $$ = new executables(); }
             | EXECUTABLES VAR_DECL 
             | EXECUTABLES STATEMENT 
             | EXECUTABLES O_SEMICOLONS
             ;
 
 VAR_DECL: KEY_TYPE IDENTIFIER_LIST O_SEMICOLON
+                { $$ = new var_decl(); $$->set_field($1, $2); }
         ;
 
 EXPRESSION: LOCATION
+                { $$ = new expression($1); }
             | METHOD_CALL
+                { $$ = new expression($1); }
             | LITERAL
+                { $$ = new expression($1); }
             | EXPRESSION BINARY_OP EXPRESSION
             | BINARY_SUBTRACT EXPRESSION
             | BINARY_ADD EXPRESSION
@@ -139,7 +156,13 @@ EQ_OP: R_EQUALS | R_NOT_EQUALS;
 
 CONDITIONAL_OP: R_AND | R_OR;
 
-LITERAL: INT_LITERAL | BOOL_LITERAL | CHAR_LITERAL;
+LITERAL: INT_LITERAL
+                { $$ = new literal($1); }
+        | BOOL_LITERAL
+                { $$ = new literal($1); }
+        | CHAR_LITERAL
+                { $$ = new literal($1); }
+        ;
 
 STATEMENT: LOCATION ASSIGNMENT_OP EXPRESSION O_SEMICOLON
         | METHOD_CALL O_SEMICOLON
@@ -157,7 +180,7 @@ ELSE_BLOCK: BLOCK
         | KEY_IF O_LEF EXPRESSION O_RIT BLOCK KEY_ELSE ELSE_BLOCK
         ;
 
-METHOD_CALL: METHOD_NAME O_LEF PARAM_LIST O_RIT
+METHOD_CALL: METHOD_NAME O_LEF PARAM_LIST O_RIT { $$ = new method_call(); }
             | KEY_CALLOUT O_LEF STRING O_COMMA PARAM_LIST O_RIT
             ;
 
@@ -176,7 +199,7 @@ ASSIGNMENT_OP: EQUAL_OP
             | SUB_EQUAL_OP
             ;
 
-LOCATION: IDENTIFIER
+LOCATION: IDENTIFIER { $$ = new location(); }
         | IDENTIFIER LEFT_SBRACE EXPRESSION RIGHT_SBRACE
         ;
 

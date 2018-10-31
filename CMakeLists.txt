@@ -41,7 +41,15 @@ add_library(coreLibrary SHARED
                 src/field_decls.cpp
                 src/method_decls.cpp
                 src/identifier_list.cpp
-                )
+                src/identifier.cpp
+                src/block.cpp
+                src/executables.cpp
+                src/var_decl.cpp
+                src/expression.cpp
+                src/literal.cpp
+                src/location.cpp
+                src/method_call.cpp
+        )
 
 # Add the main executable
 add_executable(decaff
