@@ -5,6 +5,9 @@
 #include "expression.h"
 #include <new>
 
+class expression;
+class location;
+
 typedef struct pp {
     std::string str;
     expression *expr;

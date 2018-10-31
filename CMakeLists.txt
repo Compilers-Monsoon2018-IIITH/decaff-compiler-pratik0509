@@ -55,6 +55,8 @@ add_library(coreLibrary SHARED
                 src/statement.cpp
                 src/assignment.cpp
                 src/param_list.cpp
+                src/for.cpp
+                src/if_else.cpp
         )
 
 # Add the main executable

@@ -23,3 +23,48 @@ void statement::add_statement(assignment* b) {
     s.asg = b;
     stmnts.push_back({s, statement_mode::asg});
 }
+
+void statement::add_statement(method_call* b) {
+    #ifdef __TEST
+        std::cout << "statement created" << std::endl;
+    #endif
+    statement_type s;
+    s.m_call = b;
+    stmnts.push_back({s, statement_mode::m_call});
+}
+
+void statement::add_statement(expression* b) {
+    #ifdef __TEST
+        std::cout << "statement created" << std::endl;
+    #endif
+    statement_type s;
+    s.ret = b;
+    stmnts.push_back({s, statement_mode::ret});
+}
+
+void statement::add_statement(char b) {
+    #ifdef __TEST
+        std::cout << "statement created" << std::endl;
+    #endif
+    statement_type s;
+    s.jump = b;
+    stmnts.push_back({s, (b == 'b') ? statement_mode::brek : statement_mode::cont});
+}
+
+void statement::add_statement(kfor *b) {
+    #ifdef __TEST
+        std::cout << "statement created" << std::endl;
+    #endif
+    statement_type s;
+    s.loop = b;
+    stmnts.push_back({s, statement_mode::loop});
+}
+
+void statement::add_statement(kif *b) {
+    #ifdef __TEST
+        std::cout << "statement created" << std::endl;
+    #endif
+    statement_type s;
+    s.cond = b;
+    stmnts.push_back({s, statement_mode::cond});
+}

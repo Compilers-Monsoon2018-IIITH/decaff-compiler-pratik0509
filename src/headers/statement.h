@@ -4,16 +4,26 @@
 #include "statement.h"
 #include "block.h"
 #include "assignment.h"
+#include "method_call.h"
+#include "for.h"
+#include "if_else.h"
 
 class block;
+class kfor;
+class kif;
 
 typedef union {
     block *blk;
     assignment *asg;
+    method_call *m_call;
+    expression *ret;
+    int jump;
+    kfor *loop;
+    kif *cond;
 } statement_type;
 
 enum class statement_mode {
-    blk, asg
+    blk, asg, m_call, ret, brek, cont, loop, cond
 };
 
 class statement {
@@ -23,6 +33,11 @@ public:
     statement();
     void add_statement(block*);
     void add_statement(assignment*);
+    void add_statement(method_call*);
+    void add_statement(expression*);
+    void add_statement(kfor*);
+    void add_statement(kif*);
+    void add_statement(char);
 };
 
 #endif

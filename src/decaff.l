@@ -67,7 +67,7 @@ CHR     "'"
 {RSB}                    { return RIGHT_SBRACE; }
 {COMMA}                  { return O_COMMA; }
 {INT}|{BOOL}             { yylval.str_value = strdup(yytext); return KEY_TYPE; }
-{CALLOUT}                { return KEY_CALLOUT; }
+{CALLOUT}                { yylval.str_value = strdup(yytext); return KEY_CALLOUT; }
 {K_BREAK}                { return KEY_BREAK; }
 {K_CONT}                 { return KEY_CONTINUE; }
 {LEF}                    { return O_LEF; }

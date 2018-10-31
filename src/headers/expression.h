@@ -11,6 +11,7 @@
 class binary_op;
 class unary_op;
 class location;
+class method_call;
 
 typedef union {
     location *loc;

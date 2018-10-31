@@ -18,6 +18,7 @@
 #include "statement.h"
 #include "assignment.h"
 #include "param_list.h"
+#include "for.h"
 
 union node {
     int ival;
@@ -40,6 +41,8 @@ union node {
     class arg_list *a_list;
     class statement *stmnt;
     class param_list *p_list;
+    class kif *k_if;
+    class kelse *k_else;
     node() = default;
 
     ~ node() = default;
