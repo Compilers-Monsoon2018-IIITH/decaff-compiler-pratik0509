@@ -25,7 +25,7 @@ set(BISON_FLAGS "-v --debug")
 # link_directories(/usr/lib/llvm-6.0/build/lib)
 
 # Add directories which has the header files that are used in the project
-# include_directories(/usr/lib/llvm-6.0/build/include)
+# include_directories(/usr/include/llvm)
 include_directories(src)
 include_directories(src/headers)
 
