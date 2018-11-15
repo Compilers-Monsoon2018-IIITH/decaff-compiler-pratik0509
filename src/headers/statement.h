@@ -7,6 +7,7 @@
 #include "method_call.h"
 #include "for.h"
 #include "if_else.h"
+#include "llvm/IR/Value.h"
 
 class block;
 class kfor;
@@ -31,6 +32,7 @@ private:
     std::list<std::pair<statement_type, statement_mode>> stmnts;
 public:
     statement();
+    llvm::Value* codegen();
     void add_statement(block*);
     void add_statement(assignment*);
     void add_statement(method_call*);

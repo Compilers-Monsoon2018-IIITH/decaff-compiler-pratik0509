@@ -2,6 +2,7 @@
 #define __LITERAL__
 
 #include <bits/stdc++.h>
+#include "llvm/IR/Value.h"
 
 typedef union {
     int ival;
@@ -18,6 +19,7 @@ private:
     l_value v;
     l_type type;
 public:
+    llvm::Value* codegen();
     literal(int val);
     literal(char val);
     literal(bool val);

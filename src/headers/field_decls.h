@@ -3,6 +3,7 @@
 
 #include <bits/stdc++.h>
 #include "identifier_list.h"
+#include "llvm/IR/Value.h"
 
 class field_decls {
 private:
@@ -10,6 +11,7 @@ private:
     identifier_list *id_list;
 public:
     void set_field(std::string, identifier_list*);
+    llvm::Value* codegen();
     field_decls();
     ~ field_decls();
 };

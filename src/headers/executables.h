@@ -4,6 +4,7 @@
 #include <bits/stdc++.h>
 #include "var_decl.h"
 #include "statement.h"
+#include "llvm/IR/Value.h"
 
 class statement;
 
@@ -21,6 +22,7 @@ private:
     std::list<std::pair<exec_types, exec_modes>> execs;
 public:
     executables();
+    llvm::Value* codegen();
     void add_executable(var_decl*);
     void add_executable(statement*);
 };

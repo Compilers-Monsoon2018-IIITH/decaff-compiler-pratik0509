@@ -3,6 +3,7 @@
 
 #include <bits/stdc++.h>
 #include "block.h"
+#include "llvm/IR/Value.h"
 
 class kelse;
 class block;
@@ -22,6 +23,7 @@ private:
     kif *elif;
     block *blk;
 public:
+    llvm::Value* codegen();
     kelse(kif*, block*);
 };
 

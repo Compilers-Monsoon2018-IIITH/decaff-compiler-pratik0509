@@ -3,6 +3,7 @@
 
 #include <bits/stdc++.h>
 #include "expression.h"
+#include "llvm/IR/Value.h"
 
 class expression;
 
@@ -15,6 +16,7 @@ private:
     expression *expr;
     unary_operator op;
 public:
+    llvm::Value* codegen();
     unary_op(expression*, std::string);
 };
 

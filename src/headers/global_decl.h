@@ -4,6 +4,7 @@
 #include <bits/stdc++.h>
 #include "field_decls.h"
 #include "method_decls.h"
+#include "llvm/IR/Value.h"
 
 class global_decl {
 private:
@@ -11,6 +12,7 @@ private:
     std::list<method_decls*> m_decls;
 public:
     void add_field(field_decls *decl);
+    llvm::Value* codegen();
     void add_method(method_decls *decl);
     global_decl();
 };

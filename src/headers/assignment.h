@@ -3,6 +3,7 @@
 
 #include <bits/stdc++.h>
 #include "expression.h"
+#include "llvm/IR/Value.h"
 
 class expression;
 
@@ -12,6 +13,7 @@ private:
     std::string op;
     expression *expr;
 public:
+    llvm::Value* codegen();
     assignment(location*, std::string, expression*);
 };
 

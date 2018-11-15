@@ -3,6 +3,7 @@
 
 #include <bits/stdc++.h>
 #include "expression.h"
+#include "llvm/IR/Value.h"
 
 class expression;
 
@@ -18,6 +19,7 @@ private:
     expression *expr2;
     binary_operator op;
 public:
+    llvm::Value* codegen();
     friend void set_operator(binary_op*, std::string);
     binary_op(expression*, expression*, std::string);
 };

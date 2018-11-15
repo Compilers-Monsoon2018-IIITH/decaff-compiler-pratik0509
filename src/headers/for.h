@@ -4,6 +4,7 @@
 #include <bits/stdc++.h>
 #include "expression.h"
 #include "block.h"
+#include "llvm/IR/Value.h"
 
 class block;
 
@@ -14,6 +15,7 @@ private:
     expression *end;
     block *blk;
 public:
+    llvm::Value* codegen();
     kfor(std::string, expression*, expression*, block*);
 };
 

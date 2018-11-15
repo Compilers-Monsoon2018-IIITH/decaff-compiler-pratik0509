@@ -7,6 +7,7 @@
 #include "literal.h"
 #include "binary_op.h"
 #include "unary_op.h"
+#include "llvm/IR/Value.h"
 
 class binary_op;
 class unary_op;
@@ -36,6 +37,7 @@ public:
     expression(method_call *val);
     expression(literal *val);
     expression(unary_op *val);
+    llvm::Value* codegen();
     ~ expression();
 };
 

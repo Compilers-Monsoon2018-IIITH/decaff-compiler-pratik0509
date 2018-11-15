@@ -3,6 +3,7 @@
 
 #include <bits/stdc++.h>
 #include "executables.h"
+#include "llvm/IR/Value.h"
 
 class executables;
 
@@ -10,6 +11,7 @@ class block {
 private:
     executables *exec;
 public:
+    llvm::Value* codegen();
     block(executables*);
     ~ block();
 };

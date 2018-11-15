@@ -4,6 +4,7 @@
 #include <bits/stdc++.h>
 #include "expression.h"
 #include <new>
+#include "llvm/IR/Value.h"
 
 class expression;
 class location;
@@ -22,6 +23,7 @@ private:
     std::list<std::pair<param_type, param_mode>> p_list;
 public:
     param_list();
+    llvm::Value* codegen();
     void add_param(std::string);
     void add_param(expression*);
 };
