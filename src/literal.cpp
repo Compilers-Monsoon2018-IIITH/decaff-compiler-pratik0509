@@ -1,5 +1,16 @@
 #include "literal.h"
 
+#include "iostream"
+#include "llvm/IR/Value.h"
+#include "llvm/IR/LLVMContext.h"
+#include "llvm/IR/Module.h"
+#include "llvm/IR/IRBuilder.h"
+#include "llvm/IR/Constants.h"
+
+#define INT_WIDTH 32
+#define CHAR_WIDTH 8
+#define BOOL_WIDTH 8
+
 literal::literal(int val) {
     #ifdef __TEST
         std::cout << "literal created\n";
@@ -23,6 +34,18 @@ literal::literal(bool val) {
     v.bval = val;
     this->type = l_type::bval;
 }
+
+
+llvm::LLVMContext the_context;
+llvm::IRBuilder<> Builder(the_context);
+std::unique_ptr<llvm::Module> the_module;
+std::map<std::string, llvm::Value *> named_values;
+
+llvm::Value *LogErrorV(const char *str) {
+    std::cerr << str << std::endl;
+    return nullptr;
+}
+
 
 llvm::Value* literal::codegen() {
     llvm::Value* val;
