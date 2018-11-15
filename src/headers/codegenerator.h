@@ -18,6 +18,6 @@ extern llvm::IRBuilder<> Builder;
 extern std::unique_ptr<llvm::Module> the_module;
 extern std::map<std::string, llvm::Value *> named_values;
 
-llvm::Value *LogErrorV(const char *str);
+llvm::Value *log_error(std::string);
 
 #endif

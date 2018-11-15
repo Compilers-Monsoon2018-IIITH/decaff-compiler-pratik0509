@@ -10,3 +10,10 @@ identifier::identifier(std::string id) {
     #endif
     name = id;
 }
+
+llvm::Value* identifier::codegen() {
+    llvm::Value* val = named_values[name];
+    if (!val)
+        log_error("Unknown Variable Name : " + name);
+    return val;
+}
