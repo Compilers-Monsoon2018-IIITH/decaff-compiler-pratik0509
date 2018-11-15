@@ -22,10 +22,10 @@ find_package(FLEX)
 
 set(BISON_FLAGS "-v --debug")
 # Link the directories which contain required libraries
-# link_directories(/usr/lib/llvm-6.0/build/lib)
+link_directories(/usr/lib)
 
 # Add directories which has the header files that are used in the project
-# include_directories(/usr/include/llvm)
+include_directories(/usr/include/llvm)
 include_directories(src)
 include_directories(src/headers)
 
@@ -57,6 +57,7 @@ add_library(coreLibrary SHARED
                 src/param_list.cpp
                 src/for.cpp
                 src/if_else.cpp
+                src/codegenerator.cpp
         )
 
 # Add the main executable
