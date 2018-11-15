@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 
 project(Decaff)
-set(CMAKE_CXX_STANDARD 11)
+# set(CMAKE_CXX_COMPILER "/usr/bin/g++")
 set(CMAKE_C_COMPILER ${CMAKE_CXX_COMPILER})
-set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -ldl -lfl")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_C_FLAGS} -ldl -lfl -O3")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_C_FLAGS} -ldl -lfl -D__TEST")
+set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -lLLVM-6.0 -ldl -lfl")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_C_FLAGS} -lLLVM-6.0 -ldl -lfl -O3")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_C_FLAGS} -lLLVM-6.0 -ldl -lfl -D__TEST")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_FLEX_BISON_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/flex_bison_output)
@@ -15,17 +15,17 @@ file(MAKE_DIRECTORY ${CMAKE_FLEX_BISON_OUTPUT_DIRECTORY})
 
 # Setup the required Libraries
 find_package(LLVM REQUIRED CONFIG)
-message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
+message(STATUS "Found LLVM: ${LLVM_INCLUDE_DIRS} ${LLVM_LIBRARY_DIRS} ${LLVM_PACKAGE_VERSION}")
 message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
 find_package(BISON)
 find_package(FLEX)
 
 set(BISON_FLAGS "-v --debug")
 # Link the directories which contain required libraries
-# link_directories(/usr/lib/llvm-6.0/build/lib)
+link_directories(/usr/lib)
 
 # Add directories which has the header files that are used in the project
-# include_directories(/usr/include/llvm)
+include_directories(${LLVM_INCLUDE_DIRS})
 include_directories(src)
 include_directories(src/headers)
 
@@ -57,6 +57,7 @@ add_library(coreLibrary SHARED
                 src/param_list.cpp
                 src/for.cpp
                 src/if_else.cpp
+                src/codegenerator.cpp
         )
 
 # Add the main executable

@@ -23,3 +23,21 @@ literal::literal(bool val) {
     v.bval = val;
     this->type = l_type::bval;
 }
+
+llvm::Value* literal::codegen() {
+    llvm::Value* val;
+    switch(this->type) {
+        case l_type::ival:
+        val = llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, v.ival));
+        break;
+        case l_type::cval:
+        val = llvm::ConstantInt::get(the_context, llvm::APInt(CHAR_WIDTH, v.cval));
+        break;
+        case l_type::bval:
+        val = llvm::ConstantInt::get(the_context, llvm::APInt(BOOL_WIDTH, v.bval));
+        break;
+        default:
+        val = nullptr;
+    }
+    return val;
+}

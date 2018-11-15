@@ -2,7 +2,7 @@
 #define __LITERAL__
 
 #include <bits/stdc++.h>
-#include "llvm/IR/Value.h"
+#include "codegenerator.h"
 
 typedef union {
     int ival;
