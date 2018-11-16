@@ -9,6 +9,15 @@ identifier::identifier(std::string id) {
         std::cout << "Identifier created\n";
     #endif
     name = id;
+    arr_sz = -1;
+}
+
+identifier::identifier(std::string id, int sz) {
+    #ifdef __TEST
+        std::cout << "Identifier created\n";
+    #endif
+    name = id;
+    arr_sz = sz;
 }
 
 llvm::Value* identifier::codegen() {

@@ -7,6 +7,7 @@
 #include "llvm/IR/Module.h"
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/Constants.h"
+#include "llvm/IR/Function.h"
 
 #define INT_WIDTH 32
 #define CHAR_WIDTH 8

@@ -4,7 +4,7 @@
 #include <bits/stdc++.h>
 #include "expression.h"
 #include <new>
-#include "llvm/IR/Value.h"
+#include "codegenerator.h"
 
 class expression;
 class location;
@@ -20,10 +20,11 @@ enum class param_mode {
 
 class param_list {
 private:
-    std::list<std::pair<param_type, param_mode>> p_list;
+    std::vector<std::pair<param_type, param_mode>> p_list;
 public:
     param_list();
-    llvm::Value* codegen();
+    llvm::Value* codegen(int);
+    unsigned int get_num_args();
     void add_param(std::string);
     void add_param(expression*);
 };

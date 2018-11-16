@@ -18,6 +18,7 @@ private:
     expression *idx;
 public:
     llvm::Value* codegen();
+    std::string get_name();
     location();
     location(std::string);
     location(std::string, expression*);

@@ -37,3 +37,7 @@ llvm::Value* location::codegen() {
         return log_error("Unknown Location Type!!");
     }
 }
+
+std::string location::get_name() {
+    return name;
+}

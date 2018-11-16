@@ -17,3 +17,18 @@ void param_list::add_param(expression* v) {
     p.expr = v;
     p_list.push_back({p, param_mode::expr});
 }
+
+unsigned int param_list::get_num_args() {
+    return p_list.size();
+}
+
+llvm::Value* param_list::codegen(int i) {
+    if (i >= p_list.size())
+        return log_error("Invalid Index of Parameter List!!");
+    switch(p_list[i].second) {
+        case param_mode::expr:
+        return p_list[i].first.expr->codegen();
+        default:
+        return log_error("Invalid Parameter Type");
+    }
+}
