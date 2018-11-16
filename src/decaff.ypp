@@ -103,7 +103,7 @@ IDENTIFIER_LIST: IDENTIFIER
                 ;
 
 METHOD_DECLS: KEY_TYPE IDENTIFIER O_LEF ARG_LIST O_RIT BLOCK
-                        { $$ = new method_decls($1, new identifier($2)); }
+                        { $$ = new method_decls($1, new identifier($2), $4); }
             ;
 
 BLOCK: LEFT_CBRACE EXECUTABLES RIGHT_CBRACE
