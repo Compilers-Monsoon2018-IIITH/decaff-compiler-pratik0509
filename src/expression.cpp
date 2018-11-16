@@ -54,3 +54,19 @@ expression::~expression() {
         case type::b_op: delete val.b_op; break;
     }
 }
+
+llvm::Value* expression::codegen() {
+    llvm::Value* ret_val;
+    switch(e_type) {
+        case type::loc:
+        return nullptr;
+        case type::mcall:
+        return nullptr;
+        case type::lit:
+        return val.lit->codegen();
+        case type::b_op:
+        return val.b_op->codegen();
+        default:
+        return log_error("Unknown Expression Found");
+    }
+}

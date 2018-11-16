@@ -24,3 +24,16 @@ location::location(std::string val, expression *e) {
     idx = e;
 }
 
+llvm::Value* location::codegen() {
+    llvm::Value* val = named_values[name];
+    if (!val)
+        return log_error("Location Not Declared!!");
+    switch(loc_type) {
+        case location_type::scalar:
+        return val;
+        case location_type::vector:
+        return nullptr;
+        default:
+        return log_error("Unknown Location Type!!");
+    }
+}

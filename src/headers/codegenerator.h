@@ -14,7 +14,7 @@
 
 
 extern llvm::LLVMContext the_context;
-extern llvm::IRBuilder<> Builder;
+extern llvm::IRBuilder<> builder;
 extern std::unique_ptr<llvm::Module> the_module;
 extern std::map<std::string, llvm::Value *> named_values;
 
