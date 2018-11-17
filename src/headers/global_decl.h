@@ -4,7 +4,7 @@
 #include <bits/stdc++.h>
 #include "field_decls.h"
 #include "method_decls.h"
-#include "llvm/IR/Value.h"
+#include "codegenerator.h"
 
 class global_decl {
 private:

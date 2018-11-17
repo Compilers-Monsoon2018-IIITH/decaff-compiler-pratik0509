@@ -48,6 +48,6 @@ llvm::Value* field_decls::codegen() {
             gv->setInitializer(llvm::Constant::getNullValue(typ));
         }
     }
-    llvm::Value* val = llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, 0));
+    llvm::Value* val = llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, SUCCESS));
     return val;
 }

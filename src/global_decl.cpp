@@ -17,3 +17,11 @@ global_decl::global_decl() {
     f_decls = std::list<field_decls*>();
     m_decls = std::list<method_decls*>();
 }
+
+llvm::Value* global_decl::codegen() {
+    for(auto &itr: f_decls) {
+        itr->codegen();
+    }
+    llvm::Value *val = llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, SUCCESS));
+    return val;
+}

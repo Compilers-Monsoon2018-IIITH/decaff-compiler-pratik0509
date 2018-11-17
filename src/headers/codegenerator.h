@@ -18,10 +18,10 @@
 #include "llvm/Transforms/Scalar.h"
 #include "llvm/Transforms/Scalar/GVN.h"
 
-#define INT_WIDTH 32
-#define CHAR_WIDTH 8
-#define BOOL_WIDTH 1
-
+#define INT_WIDTH   32
+#define CHAR_WIDTH  8
+#define BOOL_WIDTH  1
+#define SUCCESS     0
 
 extern llvm::LLVMContext the_context;
 extern llvm::IRBuilder<> builder;
