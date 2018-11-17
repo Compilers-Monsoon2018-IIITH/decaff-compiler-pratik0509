@@ -10,10 +10,25 @@ assignment::assignment(location *l, std::string s, expression *e) {
 }
 
 llvm::Value* assignment::codegen() {
-    llvm::Value* val = named_values[loc->get_name()];
-    if(val == nullptr)
-        val = the_module->getGlobalVariable(loc->get_name());
-    if(val == nullptr)
+    llvm::Value* lval = named_values[loc->get_name()];
+    if(!lval)
+        lval = the_module->getGlobalVariable(loc->get_name());
+    if(!lval)
         return log_error("Unknown Variable Symbol Found!!");
+
+    llvm::Value* val = expr->codegen();
+    if (expr->get_type() == type::loc)
+        val = builder.CreateLoad(val);
     
+    if(!val)
+        return log_error("Unknown rvalue!!");
+    
+    llvm::Value* lloc = loc->codegen();
+    lval = builder.CreateLoad(lloc);
+
+    if (op == "+=")
+        val = builder.CreateAdd(lval, val, "add_eql_tmp");
+    else if (op == "-=")
+        val = builder.CreateSub(lval, val, "sub_eql_tmp");
+    return builder.CreateStore(val, lloc);
 }
