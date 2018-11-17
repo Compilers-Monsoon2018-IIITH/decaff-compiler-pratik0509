@@ -26,7 +26,7 @@
 extern llvm::LLVMContext the_context;
 extern llvm::IRBuilder<> builder;
 extern llvm::Module* the_module;
-extern std::map<std::string, llvm::Value *> named_values;
+extern std::map<std::string, llvm::AllocaInst*> named_values;
 
 llvm::Value *log_error(std::string);
 llvm::AllocaInst *create_entry_alloc(llvm::Function*, std::string, std::string);

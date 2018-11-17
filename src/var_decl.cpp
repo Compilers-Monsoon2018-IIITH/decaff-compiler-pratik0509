@@ -22,7 +22,7 @@ var_decl::~ var_decl() {
         delete id_list;
 }
 
-llvm::Value* var_decl::codegen() {
+llvm::Value* var_decl::codegen(std::map<std::string, llvm::AllocaInst*> &old_vals) {
     llvm::Function* the_func = builder.GetInsertBlock()->getParent();
     for(int i = 0; i < id_list->get_size(); ++i) {
         llvm::Value* init = nullptr;
@@ -38,6 +38,7 @@ llvm::Value* var_decl::codegen() {
             alloc = create_entry_alloc(the_func, id_list->get_name(i), v_type);
         }
         builder.CreateStore(init, alloc);
+        old_vals[id_list->get_name(i)] = named_values[id_list->get_name(i)];
         named_values[id_list->get_name(i)] = alloc;
     }
     llvm::Value* val = llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, SUCCESS));
