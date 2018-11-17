@@ -10,6 +10,8 @@
 #include "llvm/IR/Function.h"
 #include "llvm/IR/Type.h"
 #include "llvm/IR/DerivedTypes.h"
+#include "llvm/IR/Constant.h"
+#include "llvm/IR/Constants.h"
 
 #define INT_WIDTH 32
 #define CHAR_WIDTH 8
