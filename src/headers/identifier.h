@@ -10,6 +10,7 @@ private:
     int arr_sz;
 public:
     std::string get_name();
+    int get_size();
     llvm::Value* codegen();
     identifier(std::string);
     identifier(std::string, int);

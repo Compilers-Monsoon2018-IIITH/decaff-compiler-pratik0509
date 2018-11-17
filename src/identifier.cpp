@@ -26,3 +26,7 @@ llvm::Value* identifier::codegen() {
         log_error("Unknown Variable Name : " + name);
     return val;
 }
+
+int identifier::get_size() {
+    return arr_sz;
+}

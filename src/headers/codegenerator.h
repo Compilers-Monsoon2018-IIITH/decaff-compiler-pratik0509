@@ -12,10 +12,15 @@
 #include "llvm/IR/DerivedTypes.h"
 #include "llvm/IR/Constant.h"
 #include "llvm/IR/Constants.h"
+#include "llvm/IR/Verifier.h"
+#include "llvm/IR/GlobalVariable.h"
+#include "llvm/Target/TargetMachine.h"
+#include "llvm/Transforms/Scalar.h"
+#include "llvm/Transforms/Scalar/GVN.h"
 
 #define INT_WIDTH 32
 #define CHAR_WIDTH 8
-#define BOOL_WIDTH 8
+#define BOOL_WIDTH 1
 
 
 extern llvm::LLVMContext the_context;

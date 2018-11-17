@@ -92,10 +92,8 @@ FIELD_DECLS: KEY_TYPE IDENTIFIER_LIST O_SEMICOLON
 
 IDENTIFIER_LIST: IDENTIFIER
                         { $$ = new identifier_list(); $$->add_identifier(new identifier($1));}
-                | IDENTIFIER ASSIGNMENT_OP EXPRESSION
-                        { $$->add_identifier(new identifier($1)); }
                 | IDENTIFIER LEFT_SBRACE INT_LITERAL RIGHT_SBRACE
-                        { $$->add_identifier(new identifier($1, $3)); }
+                        { $$ = new identifier_list(); $$->add_identifier(new identifier($1, $3)); }
                 | IDENTIFIER_LIST O_COMMA IDENTIFIER
                         { $$->add_identifier(new identifier($3)); }
                 | IDENTIFIER_LIST O_COMMA IDENTIFIER LEFT_SBRACE INT_LITERAL RIGHT_SBRACE
