@@ -38,6 +38,7 @@ public:
     expression(literal *val);
     expression(unary_op *val);
     llvm::Value* codegen();
+    type get_type();
     ~ expression();
 };
 

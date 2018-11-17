@@ -70,3 +70,7 @@ llvm::Value* expression::codegen() {
         return log_error("Unknown Expression Found");
     }
 }
+
+type expression::get_type() {
+    return e_type;
+}

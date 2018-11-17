@@ -26,13 +26,28 @@ location::location(std::string val, expression *e) {
 
 llvm::Value* location::codegen() {
     llvm::Value* val = named_values[name];
-    if (!val)
+    if(!val)
+        val = the_module->getNamedGlobal(name);
+    if(!val)
         return log_error("Location Not Declared!!");
+    std::vector<llvm::Value*> array_idx;
+    llvm::Value* index;
     switch(loc_type) {
         case location_type::scalar:
         return val;
         case location_type::vector:
-        return nullptr;
+        if(!idx)
+            return log_error("Index Value Not Present!!");
+        index = idx->codegen();
+        if (idx->get_type() == type::loc) {
+            index = builder.CreateLoad(index);
+        }
+        if(!index)
+            return log_error("Invalid Index Access!!");
+        array_idx.emplace_back(builder.getInt32(0));
+        array_idx.push_back(index);
+        return builder.CreateGEP(val, array_idx, name + "_idx");
+        break;
         default:
         return log_error("Unknown Location Type!!");
     }
