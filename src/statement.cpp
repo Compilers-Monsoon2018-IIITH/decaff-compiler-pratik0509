@@ -82,6 +82,12 @@ llvm::Value* statement::codegen() {
             case statement_mode::m_call:
             val = itr->first.m_call->codegen();
             break;
+            case statement_mode::ret:
+            val = itr->first.ret->codegen();
+            if(itr->first.ret->get_type() == type::loc)
+                val = builder.CreateLoad(val);
+            builder.CreateRet(val);
+            break;
         }
     }
     return val;
