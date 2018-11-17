@@ -2,7 +2,8 @@ class Program {
     int n[1];
     int main() {
         callout("scanf", "%d", n);
-        int a = n[0];
+        int a;
+        a = n[0];
         callout("printf", "sum = %d\n", a*(a+1)/2);
         return 0;
     }

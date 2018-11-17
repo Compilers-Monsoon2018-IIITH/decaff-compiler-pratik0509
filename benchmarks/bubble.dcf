@@ -1,12 +1,12 @@
 class Program {
     int arr[50];
     int main() {
-        int i = 0;
+        int i;
         for i = 1, 51 {
             arr[i-1] = (i * (i + 1) + i + 23) % 107;
         }
         for i = 0, 50 {
-            int j = 0;
+            int j;
             for j = i + 1, 50 {
                 if (arr[j] < arr[j-1]) {
                     int t = arr[j];

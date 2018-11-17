@@ -1,13 +1,15 @@
 class Program {
     int arr[50];
     int main() {
-        int i = 0;
+        int i;
         for i = 1, 51 {
             arr[i-1] = (i * (i + 1) + i + 23) % 107;
         }
 
-        int max1 = -1;
-        int max2 = -1;
+        int max1;
+        int max2;
+        max1 = -1;
+        max2 = -1;
         for i = 0, 50 {
             if (max1 < arr[i]) {
                 max2 = max1;
