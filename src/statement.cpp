@@ -68,3 +68,21 @@ void statement::add_statement(kif *b) {
     s.cond = b;
     stmnts.push_back({s, statement_mode::cond});
 }
+
+llvm::Value* statement::codegen() {
+    llvm::Value* val = llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, SUCCESS));
+    for(auto itr = stmnts.begin(); itr != stmnts.end(); ++itr) {
+        switch(itr->second) {
+            case statement_mode::blk:
+            val = itr->first.blk->codegen();
+            break;
+            case statement_mode::asg:
+            val = itr->first.asg->codegen();
+            break;
+            case statement_mode::m_call:
+            val = itr->first.m_call->codegen();
+            break;
+        }
+    }
+    return val;
+}

@@ -22,6 +22,10 @@ unsigned int param_list::get_num_args() {
     return p_list.size();
 }
 
+bool param_list::is_loc(int i) {
+    return (p_list[i].second == param_mode::expr && p_list[i].first.expr->get_type() == type::loc);
+}
+
 llvm::Value* param_list::codegen(int i) {
     if (i >= p_list.size())
         return log_error("Invalid Index of Parameter List!!");

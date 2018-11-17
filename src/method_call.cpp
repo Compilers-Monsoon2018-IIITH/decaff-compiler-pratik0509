@@ -22,9 +22,15 @@ llvm::Value* method_call::codegen() {
     
     std::vector <llvm::Value*> argsv;
     for (unsigned int i = 0; i < p_list->get_num_args(); ++i) {
-        argsv.push_back(p_list->codegen(i));
-        if(!argsv.back())
-         return nullptr;
+        llvm::Value* val = p_list->codegen(i);
+        if(!val)
+            return nullptr;
+        if(p_list->is_loc(i))
+            val = builder.CreateLoad(val);
+        if(!val)
+            return nullptr;
+        argsv.push_back(val);
     }
+    std::reverse(argsv.begin(), argsv.end());
     return builder.CreateCall(calleef, argsv, "cal_tmp");
 }
