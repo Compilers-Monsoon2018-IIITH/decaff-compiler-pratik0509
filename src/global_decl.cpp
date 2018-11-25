@@ -19,9 +19,17 @@ global_decl::global_decl() {
 }
 
 llvm::Value* global_decl::codegen() {
+    llvm::Value* val = nullptr;
     for(auto &itr: f_decls) {
-        itr->codegen();
+        val = itr->codegen();
+        if(!val)
+            return nullptr;
     }
-    llvm::Value *val = llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, SUCCESS));
-    return val;
+    for(auto &itr: m_decls) {
+        val = itr->codegen();
+        if(!val)
+            return nullptr;
+    }
+    llvm::Value *ret_val = llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, SUCCESS));
+    return ret_val;
 }

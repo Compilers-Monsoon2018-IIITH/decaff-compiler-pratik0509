@@ -24,7 +24,7 @@
 #define STEP_DEFAULT 1
 
 extern llvm::LLVMContext the_context;
-extern llvm::IRBuilder<> builder;
+extern llvm::IRBuilder<> *builder;
 extern llvm::Module* the_module;
 extern std::map<std::string, llvm::AllocaInst*> named_values;
 

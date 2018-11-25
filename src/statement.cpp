@@ -93,8 +93,8 @@ llvm::Value* statement::codegen() {
             case statement_mode::ret:
             val = itr->first.ret->codegen();
             if(itr->first.ret->get_type() == type::loc)
-                val = builder.CreateLoad(val);
-            builder.CreateRet(val);
+                val = builder->CreateLoad(val);
+            builder->CreateRet(val);
             break;
             case statement_mode::cond:
             val = itr->first.cond->codegen();
@@ -106,7 +106,7 @@ llvm::Value* statement::codegen() {
             {
             val = llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, SUCCESS));
             loop_metadata* cur_loop = loop_stack.top();
-            builder.CreateBr(cur_loop->afterloop_bb);
+            builder->CreateBr(cur_loop->afterloop_bb);
             }
             break;
             case statement_mode::cont:
@@ -116,13 +116,13 @@ llvm::Value* statement::codegen() {
             std::string iter = cur_loop->iter_name;
             llvm::AllocaInst *iter_var = named_values[iter];
             llvm::Value *iter_step = llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, SUCCESS));
-            llvm::Value *cur_iter = builder.CreateLoad(iter_var, iter);
-            llvm::Value *next_iter = builder.CreateAdd(cur_iter, iter_step, "next_value");
-            builder.CreateStore(next_iter, iter_var);
-            llvm::Value *cond = builder.CreateICmpULE(next_iter, cur_loop->end_cond,
+            llvm::Value *cur_iter = builder->CreateLoad(iter_var, iter);
+            llvm::Value *next_iter = builder->CreateAdd(cur_iter, iter_step, "next_value");
+            builder->CreateStore(next_iter, iter_var);
+            llvm::Value *cond = builder->CreateICmpULE(next_iter, cur_loop->end_cond,
                                                                         "end_cond");
-            llvm::BasicBlock *loop_after_bb = builder.GetInsertBlock();
-            builder.CreateCondBr(cond, cur_loop->loop_bb, cur_loop->afterloop_bb);
+            llvm::BasicBlock *loop_after_bb = builder->GetInsertBlock();
+            builder->CreateCondBr(cond, cur_loop->loop_bb, cur_loop->afterloop_bb);
             }
             break;
         }

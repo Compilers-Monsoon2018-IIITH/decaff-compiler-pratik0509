@@ -66,6 +66,8 @@ llvm::Value* expression::codegen() {
         return val.lit->codegen();
         case type::b_op:
         return val.b_op->codegen();
+        case type::u_op:
+        return val.u_op->codegen();
         default:
         return log_error("Unknown Expression Found");
     }

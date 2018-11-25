@@ -7,6 +7,7 @@
         extern union node yylval;
         extern FILE* yyin;
         extern int line_no;
+        program *start;
         void yyerror(const char *s);
 %}
 
@@ -70,6 +71,7 @@ PROGRAM: KEY_CLASS KEY_PROGRAM LEFT_CBRACE GLOBAL_DECL RIGHT_CBRACE
                 { 
                         $$ = new program();
                         $$->set_global_decl($4);
+                        start = $$;
                 }
         ;
 
@@ -100,7 +102,7 @@ IDENTIFIER_LIST: IDENTIFIER
                 ;
 
 METHOD_DECLS: KEY_TYPE IDENTIFIER O_LEF ARG_LIST O_RIT BLOCK
-                        { $$ = new method_decls($1, new identifier($2), $4); }
+                        { $$ = new method_decls($1, new identifier($2), $4, $6); }
             ;
 
 BLOCK: LEFT_CBRACE EXECUTABLES RIGHT_CBRACE
@@ -286,7 +288,14 @@ int main(int argc, char** argv) {
 	
 	// Parse through the input:
 	yyparse();
-	
+
+	if(start) {
+                if(start->codegen())
+                        start->codeout();
+                else
+                        std::cerr << "Error generating code!!" << std::endl;
+        }
+        return 0;
 }
 
 void yyerror(const char *s) {

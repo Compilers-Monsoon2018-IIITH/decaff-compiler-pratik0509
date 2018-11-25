@@ -1,8 +1,8 @@
 #include "codegenerator.h"
 
 llvm::LLVMContext the_context;
-llvm::IRBuilder<> builder(the_context);
-llvm::Module* the_module;
+llvm::IRBuilder<> *builder = new llvm::IRBuilder<>(the_context);
+llvm::Module* the_module = new llvm::Module("decaf_prog", the_context);
 std::map<std::string, llvm::AllocaInst*> named_values;
 
 std::stack<loop_metadata*> loop_stack;

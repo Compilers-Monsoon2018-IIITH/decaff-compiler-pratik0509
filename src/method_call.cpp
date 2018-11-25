@@ -26,11 +26,11 @@ llvm::Value* method_call::codegen() {
         if(!val)
             return nullptr;
         if(p_list->is_loc(i))
-            val = builder.CreateLoad(val);
+            val = builder->CreateLoad(val);
         if(!val)
             return nullptr;
         argsv.push_back(val);
     }
     std::reverse(argsv.begin(), argsv.end());
-    return builder.CreateCall(calleef, argsv, "cal_tmp");
+    return builder->CreateCall(calleef, argsv, "cal_tmp");
 }

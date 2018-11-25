@@ -40,13 +40,13 @@ llvm::Value* location::codegen() {
             return log_error("Index Value Not Present!!");
         index = idx->codegen();
         if (idx->get_type() == type::loc) {
-            index = builder.CreateLoad(index);
+            index = builder->CreateLoad(index);
         }
         if(!index)
             return log_error("Invalid Index Access!!");
-        array_idx.emplace_back(builder.getInt32(0));
+        array_idx.emplace_back(builder->getInt32(0));
         array_idx.push_back(index);
-        return builder.CreateGEP(val, array_idx, name + "_idx");
+        return builder->CreateGEP(val, array_idx, name + "_idx");
         break;
         default:
         return log_error("Unknown Location Type!!");

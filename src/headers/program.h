@@ -11,6 +11,7 @@ private:
 public:
     llvm::Value* codegen();
     void set_global_decl(global_decl *decl);
+    void codeout();
     program();
     ~ program();
 };

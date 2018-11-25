@@ -47,43 +47,43 @@ llvm::Value* binary_op::codegen() {
         return nullptr;
     switch(op) {
         case binary_operator::multiply:
-        return builder.CreateMul(left_op, right_op, "mul_tmp");
+        return builder->CreateMul(left_op, right_op, "mul_tmp");
         break;
         case binary_operator::add:
-        return builder.CreateAdd(left_op, right_op, "add_tmp");
+        return builder->CreateAdd(left_op, right_op, "add_tmp");
         break;
         case binary_operator::subtract:
-        return builder.CreateSub(left_op, right_op, "sub_tmp");
+        return builder->CreateSub(left_op, right_op, "sub_tmp");
         break;
         case binary_operator::divide:
-        return builder.CreateSDiv(left_op, right_op, "div_tmp");
+        return builder->CreateSDiv(left_op, right_op, "div_tmp");
         break;
         case binary_operator::modulo:
-        return builder.CreateSRem(left_op, right_op, "mod_tmp");
+        return builder->CreateSRem(left_op, right_op, "mod_tmp");
         break;
         case binary_operator::logical_and:
-        return builder.CreateAnd(left_op, right_op, "lad_tmp");
+        return builder->CreateAnd(left_op, right_op, "lad_tmp");
         break;
         case binary_operator::logical_or:
-        return builder.CreateOr(left_op, right_op, "lor_tmp");
+        return builder->CreateOr(left_op, right_op, "lor_tmp");
         break;
         case binary_operator::less_than:
-        return builder.CreateICmpSLT(left_op, right_op, "les_tmp");
+        return builder->CreateICmpSLT(left_op, right_op, "les_tmp");
         break;
         case binary_operator::greater_than:
-        return builder.CreateICmpSGT(left_op, right_op, "gre_tmp");
+        return builder->CreateICmpSGT(left_op, right_op, "gre_tmp");
         break;
         case binary_operator::less_than_equals:
-        return builder.CreateICmpSLE(left_op, right_op, "leq_tmp");
+        return builder->CreateICmpSLE(left_op, right_op, "leq_tmp");
         break;
         case binary_operator::greater_than_equals:
-        return builder.CreateICmpSGE(left_op, right_op, "geq_tmp");
+        return builder->CreateICmpSGE(left_op, right_op, "geq_tmp");
         break;
         case binary_operator::equals:
-        return builder.CreateICmpEQ(left_op, right_op, "eql_tmp");
+        return builder->CreateICmpEQ(left_op, right_op, "eql_tmp");
         break;
         case binary_operator::not_equals:
-        return builder.CreateICmpNE(left_op, right_op, "neq_tmp");
+        return builder->CreateICmpNE(left_op, right_op, "neq_tmp");
         break;
         default:
         return log_error("Operator Not Supplied!!");

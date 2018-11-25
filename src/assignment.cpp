@@ -18,17 +18,17 @@ llvm::Value* assignment::codegen() {
 
     llvm::Value* val = expr->codegen();
     if (expr->get_type() == type::loc)
-        val = builder.CreateLoad(val);
+        val = builder->CreateLoad(val);
     
     if(!val)
         return log_error("Unknown rvalue!!");
     
     llvm::Value* lloc = loc->codegen();
-    lval = builder.CreateLoad(lloc);
+    lval = builder->CreateLoad(lloc);
 
     if (op == "+=")
-        val = builder.CreateAdd(lval, val, "add_eql_tmp");
+        val = builder->CreateAdd(lval, val, "add_eql_tmp");
     else if (op == "-=")
-        val = builder.CreateSub(lval, val, "sub_eql_tmp");
-    return builder.CreateStore(val, lloc);
+        val = builder->CreateSub(lval, val, "sub_eql_tmp");
+    return builder->CreateStore(val, lloc);
 }
