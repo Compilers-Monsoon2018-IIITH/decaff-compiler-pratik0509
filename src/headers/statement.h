@@ -18,7 +18,7 @@ typedef union {
     assignment *asg;
     method_call *m_call;
     expression *ret;
-    int jump;
+    char jump;
     kfor *loop;
     kif *cond;
 } statement_type;

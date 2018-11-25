@@ -5,6 +5,8 @@ llvm::IRBuilder<> builder(the_context);
 llvm::Module* the_module;
 std::map<std::string, llvm::AllocaInst*> named_values;
 
+std::stack<loop_metadata*> loop_stack;
+
 llvm::Value *log_error(std::string str) {
     std::cerr << str << std::endl;
     return nullptr;

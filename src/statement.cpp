@@ -36,7 +36,7 @@ void statement::add_statement(method_call* b) {
     has_return = false;
 }
 
-// Return <Expression>
+// Return <expression>
 void statement::add_statement(expression* b) {
     #ifdef __TEST
         std::cout << "statement created" << std::endl;
@@ -96,10 +96,34 @@ llvm::Value* statement::codegen() {
                 val = builder.CreateLoad(val);
             builder.CreateRet(val);
             break;
+            case statement_mode::cond:
+            val = itr->first.cond->codegen();
+            break;
+            case statement_mode::loop:
+            val = itr->first.loop->codegen();
+            break;
             case statement_mode::brek:
+            {
             val = llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, SUCCESS));
-            // llvm::LoopInfo* curr_loop = 
-            // TODO
+            loop_metadata* cur_loop = loop_stack.top();
+            builder.CreateBr(cur_loop->afterloop_bb);
+            }
+            break;
+            case statement_mode::cont:
+            {
+            val = llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, SUCCESS));
+            loop_metadata* cur_loop = loop_stack.top();
+            std::string iter = cur_loop->iter_name;
+            llvm::AllocaInst *iter_var = named_values[iter];
+            llvm::Value *iter_step = llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, SUCCESS));
+            llvm::Value *cur_iter = builder.CreateLoad(iter_var, iter);
+            llvm::Value *next_iter = builder.CreateAdd(cur_iter, iter_step, "next_value");
+            builder.CreateStore(next_iter, iter_var);
+            llvm::Value *cond = builder.CreateICmpULE(next_iter, cur_loop->end_cond,
+                                                                        "end_cond");
+            llvm::BasicBlock *loop_after_bb = builder.GetInsertBlock();
+            builder.CreateCondBr(cond, cur_loop->loop_bb, cur_loop->afterloop_bb);
+            }
             break;
         }
     }

@@ -48,12 +48,13 @@ llvm::Value* kfor::codegen() {
     llvm::Value* block_val = blk->codegen();
     if (!block_val)
         return block_val;
+    loop_stack.push(new loop_metadata(end_state, iter, iter_var, afterloop_bb, loop_bb));
 
     llvm::Value *cur_iter_val = builder.CreateLoad(local_var, iter);
     llvm::Value *iter_step = llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, STEP_DEFAULT));
     llvm::Value *next_iter_val = builder.CreateAdd(cur_iter_val, iter_step, "nxt_val");
     builder.CreateStore(next_iter_val, local_var);
-    end_state = builder.CreateICmpSLT(next_iter_val, end_state, "cond");
+    end_state = builder.CreateICmpSLT(next_iter_val, end_state, "end_cond");
     llvm::BasicBlock *end_blk = builder.GetInsertBlock();
     builder.CreateCondBr(end_state, loop_bb, afterloop_bb);
     builder.SetInsertPoint(afterloop_bb);
