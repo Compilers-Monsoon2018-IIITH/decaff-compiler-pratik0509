@@ -25,6 +25,7 @@ public:
     llvm::Value* codegen(std::map<std::string, llvm::AllocaInst*> &);
     void add_executable(var_decl*);
     void add_executable(statement*);
+    bool has_return();
 };
 
 #endif

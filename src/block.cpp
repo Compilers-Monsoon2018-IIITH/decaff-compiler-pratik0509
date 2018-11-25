@@ -16,3 +16,7 @@ llvm::Value* block::codegen() {
     std::map<std::string, llvm::AllocaInst*> old_values;
     return exec->codegen(old_values);
 }
+
+bool block::has_return() {
+    return exec->has_return();
+}

@@ -17,6 +17,7 @@ private:
 public:
     llvm::Value* codegen();
     kfor(std::string, expression*, expression*, block*);
+    bool has_return();
 };
 
 #endif

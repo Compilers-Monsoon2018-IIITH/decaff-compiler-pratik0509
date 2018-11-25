@@ -13,6 +13,7 @@ private:
 public:
     llvm::Value* codegen();
     block(executables*);
+    bool has_return();
     ~ block();
 };
 

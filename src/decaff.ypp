@@ -55,7 +55,6 @@
 %type <str_value> CONDITIONAL_OP
 %type <lit> LITERAL
 %type <stmnt> STATEMENT
-%type <k_else> ELSE_BLOCK
 %type <m_call> METHOD_CALL
 %type <p_list> PARAM_LIST
 %type <loc> METHOD_NAME
@@ -189,7 +188,7 @@ STATEMENT: LOCATION ASSIGNMENT_OP EXPRESSION O_SEMICOLON
                         $$ = new statement();
                         $$->add_statement(new kif($3, $5));
                 }
-        | KEY_IF O_LEF EXPRESSION O_RIT BLOCK KEY_ELSE ELSE_BLOCK
+        | KEY_IF O_LEF EXPRESSION O_RIT BLOCK KEY_ELSE BLOCK
                 {
                         $$ = new statement();
                         $$->add_statement(new kif($3, $5, $7));
@@ -219,14 +218,6 @@ STATEMENT: LOCATION ASSIGNMENT_OP EXPRESSION O_SEMICOLON
                         $$ = new statement();
                         $$->add_statement('c');
                 }
-        ;
-
-ELSE_BLOCK: BLOCK
-                { $$ = new kelse(NULL, $1); }
-        | KEY_IF O_LEF EXPRESSION O_RIT BLOCK
-                { $$ = new kelse(new kif($3, $5), NULL); }
-        | KEY_IF O_LEF EXPRESSION O_RIT BLOCK KEY_ELSE ELSE_BLOCK
-                { $$ = new kelse(new kif($3, $5, $7), NULL); }
         ;
 
 METHOD_CALL: METHOD_NAME O_LEF PARAM_LIST O_RIT

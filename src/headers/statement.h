@@ -30,6 +30,7 @@ enum class statement_mode {
 class statement {
 private:
     std::list<std::pair<statement_type, statement_mode>> stmnts;
+    bool has_return;
 public:
     statement();
     llvm::Value* codegen();
@@ -40,6 +41,7 @@ public:
     void add_statement(kfor*);
     void add_statement(kif*);
     void add_statement(char);
+    bool is_return();
 };
 
 #endif

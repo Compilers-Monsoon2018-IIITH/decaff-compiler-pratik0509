@@ -42,3 +42,11 @@ llvm::Value* executables::codegen(std::map<std::string, llvm::AllocaInst*> &old_
     }
     return val;
 }
+
+bool executables::has_return() {
+    for (auto itr = execs.begin(); itr != execs.end(); ++itr) {
+        if(itr->second == exec_modes::stmnt && itr->first.stmnt->is_return())
+            return true;
+    }
+    return false;
+}

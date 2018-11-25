@@ -9,3 +9,7 @@ kfor::kfor(std::string i, expression *e1, expression *e2, block *b) {
     end = e2;
     blk = b;
 }
+
+bool kfor::has_return() {
+    return blk->has_return();
+}

@@ -12,11 +12,12 @@ class kif {
 private:
     expression *cond;
     block *blk;
-    kelse *els;
+    block *els_blk;
 public:
     llvm::Value* codegen();
+    bool has_return();
     kif(expression*, block*);
-    kif(expression*, block*, kelse*);
+    kif(expression*, block*, block*);
 };
 
 class kelse {
