@@ -9,7 +9,8 @@ class Program {
             int j;
             for j = i + 1, 50 {
                 if (arr[j] < arr[j-1]) {
-                    int t = arr[j];
+                    int t;
+                    t = arr[j];
                     arr[j] = arr[j-1];
                     arr[j-1] = t;
                 }
