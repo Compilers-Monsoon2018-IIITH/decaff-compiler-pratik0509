@@ -22,6 +22,7 @@
 #define CHAR_WIDTH  8
 #define BOOL_WIDTH  1
 #define SUCCESS     0
+#define STEP_DEFAULT 1
 
 extern llvm::LLVMContext the_context;
 extern llvm::IRBuilder<> builder;
