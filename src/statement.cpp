@@ -92,10 +92,14 @@ llvm::Value* statement::codegen() {
             val = itr->first.m_call->codegen();
             break;
             case statement_mode::ret:
-            val = itr->first.ret->codegen();
-            if(itr->first.ret->get_type() == type::loc)
-                val = builder->CreateLoad(val);
-            builder->CreateRet(val);
+            if(!(itr->first.ret)) {
+                builder->CreateRetVoid();
+            } else {
+                val = itr->first.ret->codegen();
+                if(itr->first.ret->get_type() == type::loc)
+                    val = builder->CreateLoad(val);
+                builder->CreateRet(val);
+            }
             break;
             case statement_mode::cond:
             val = itr->first.cond->codegen();

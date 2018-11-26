@@ -54,6 +54,7 @@ CALLOUT "callout"
 RETURN  "return"
 STR     "\""
 CHR     "'"
+VOID    "void"
 
 %%
 
@@ -67,6 +68,7 @@ CHR     "'"
 {RSB}                    { return RIGHT_SBRACE; }
 {COMMA}                  { return O_COMMA; }
 {INT}|{BOOL}             { yylval.str_value = strdup(yytext); return KEY_TYPE; }
+{VOID}                   { yylval.str_value = strdup(yytext); return KEY_VOID; }
 {CALLOUT}                { yylval.str_value = strdup(yytext); return KEY_CALLOUT; }
 {K_BREAK}                { return KEY_BREAK; }
 {K_CONT}                 { return KEY_CONTINUE; }

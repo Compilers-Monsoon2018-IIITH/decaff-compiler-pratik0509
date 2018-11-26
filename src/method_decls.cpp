@@ -11,6 +11,16 @@ method_decls::method_decls(std::string type, identifier* id, arg_list* arg, bloc
     m_blk = blk;
 }
 
+method_decls::method_decls(identifier* id, arg_list* arg, block* blk) {
+    #ifdef __TEST
+        std::cout << "Method Declarations created\n";
+    #endif
+    m_id = id;
+    r_type = "void";
+    args = arg;
+    m_blk = blk;
+}
+
 method_decls::~method_decls() {
     if (m_id != NULL)
         delete m_id;
@@ -27,6 +37,8 @@ llvm::Value* method_decls::codegen() {
             method_args.emplace_back(llvm::Type::getInt8Ty(the_context));
         else if(arg_typ == "bool")
             method_args.emplace_back(llvm::Type::getInt1Ty(the_context));
+        else if(arg_typ == "void")
+            method_args.emplace_back(llvm::Type::getVoidTy(the_context));
         else
             return log_error("Unknown type of argument!!");
     }
@@ -38,6 +50,8 @@ llvm::Value* method_decls::codegen() {
         ret_typ = llvm::Type::getInt8Ty(the_context);
     else if(r_type == "bool")
         ret_typ = llvm::Type::getInt1Ty(the_context);
+    else if(r_type == "void")
+        ret_typ = llvm::Type::getVoidTy(the_context);
     else
         return log_error("Unknown return type!!");
 
@@ -59,10 +73,13 @@ llvm::Value* method_decls::codegen() {
     }
 
     llvm::Value* ret_val = m_blk->codegen();
-    if(ret_val) {
-        builder->CreateRet(ret_val);
-        return ret_val;
+    if(!ret_val) {
+        func->eraseFromParent();
+        return log_error("Cannot create the function!!");
     }
-    func->eraseFromParent();
-    return log_error("Cannot create the function!!");
+    if(r_type == "void")
+        builder->CreateRetVoid();
+    else
+        builder->CreateRet(ret_val);
+    return ret_val;
 }

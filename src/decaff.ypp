@@ -27,6 +27,7 @@
 %token <str_value> UNARY_NOT
 %token KEY_RETURN
 %token KEY_BREAK KEY_CONTINUE
+%token KEY_VOID
 
 // Precedence
 
@@ -103,7 +104,8 @@ IDENTIFIER_LIST: IDENTIFIER
 
 METHOD_DECLS: KEY_TYPE IDENTIFIER O_LEF ARG_LIST O_RIT BLOCK
                         { $$ = new method_decls($1, new identifier($2), $4, $6); }
-            ;
+            | KEY_VOID IDENTIFIER O_LEF ARG_LIST O_RIT BLOCK
+                        { $$ = new method_decls(new identifier($2), $4, $6); }            ;
 
 BLOCK: LEFT_CBRACE EXECUTABLES RIGHT_CBRACE
                 { $$ = new block($2); }
@@ -209,6 +211,11 @@ STATEMENT: LOCATION ASSIGNMENT_OP EXPRESSION O_SEMICOLON
                 {
                         $$ = new statement();
                         $$->add_statement($2);
+                }
+        | KEY_RETURN O_SEMICOLON
+                {
+                        $$ = new statement();
+                        $$->add_statement((expression*)nullptr);
                 }
         | KEY_BREAK O_SEMICOLON
                 {

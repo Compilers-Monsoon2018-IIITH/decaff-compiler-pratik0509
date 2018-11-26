@@ -16,6 +16,7 @@ private:
 public:
     llvm::Value* codegen();
     method_decls(std::string, identifier*, arg_list*, block*);
+    method_decls(identifier*, arg_list*, block*);
     ~ method_decls();
 };
 
