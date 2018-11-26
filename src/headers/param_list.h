@@ -26,6 +26,8 @@ public:
     llvm::Value* codegen(int);
     unsigned int get_num_args();
     bool is_loc(int);
+    bool is_string(int);
+    std::string get_string_argument(int);
     void add_param(std::string);
     void add_param(expression*);
 };

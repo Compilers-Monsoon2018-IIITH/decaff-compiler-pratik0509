@@ -52,7 +52,7 @@ K_BREAK  "break"
 K_CONT  "continue"
 CALLOUT "callout"
 RETURN  "return"
-STR     "\""
+STR     (\\n|\\t|\\'|\\\\|\\\"|[^\\"'])
 CHR     "'"
 VOID    "void"
 
@@ -75,7 +75,6 @@ VOID    "void"
 {LEF}                    { return O_LEF; }
 {RIT}                    { return O_RIT; }
 {RETURN}                 { return KEY_RETURN;}
-{STR}.*{STR}             { return STRING; }
 {CHR}.{CHR}              { yylval.cval = yytext[1]; return CHAR_LITERAL; }
 {K_IF}                   { return KEY_IF; }
 {K_FOR}                  { return KEY_FOR; }
@@ -102,5 +101,6 @@ VOID    "void"
 {GRE}                    { yylval.str_value = strdup(yytext); return R_GREATER_THAN; }
 {NOT}                    { yylval.str_value = strdup(yytext); return UNARY_NOT; }
 {ALPHA}{ALNUM}*          { yylval.str_value = strdup(yytext); return IDENTIFIER; }
+\"{STR}*\"               { yylval.str_value = strdup(yytext); return STRING; }
 
 %%

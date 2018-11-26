@@ -22,6 +22,7 @@
 #define BOOL_WIDTH  1
 #define SUCCESS     0
 #define STEP_DEFAULT 1
+#define CALLOUT_STR "callout"
 
 extern llvm::LLVMContext the_context;
 extern llvm::IRBuilder<> *builder;

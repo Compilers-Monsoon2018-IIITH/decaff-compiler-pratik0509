@@ -7,12 +7,14 @@ param_list::param_list() {
 }
 
 void param_list::add_param(std::string v) {
+    log_error("===" + v);
     param_type p;
-    p.str = v.c_str();
+    p.str = v.substr(1, v.length() - 2);
     p_list.push_back({p, param_mode::str});
 }
 
 void param_list::add_param(expression* v) {
+    log_error("=== EXPR");
     param_type p;
     p.expr = v;
     p_list.push_back({p, param_mode::expr});
@@ -24,6 +26,17 @@ unsigned int param_list::get_num_args() {
 
 bool param_list::is_loc(int i) {
     return (p_list[i].second == param_mode::expr && p_list[i].first.expr->get_type() == type::loc);
+}
+
+bool param_list::is_string(int i) {
+    return (p_list[i].second == param_mode::str);
+}
+
+
+std::string param_list::get_string_argument(int i) {
+    if(p_list[i].second != param_mode::str)
+        return "";
+    return p_list[i].first.str;
 }
 
 llvm::Value* param_list::codegen(int i) {

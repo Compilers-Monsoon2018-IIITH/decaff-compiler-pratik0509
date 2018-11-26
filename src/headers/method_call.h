@@ -14,6 +14,7 @@ private:
     param_list *p_list;
 public:
     llvm::Value* codegen();
+    friend llvm::Value* callout_codegen(method_call*);
     method_call();
     void set_method_call(location*, param_list*);
 };

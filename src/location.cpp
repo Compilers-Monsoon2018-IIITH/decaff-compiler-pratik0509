@@ -29,7 +29,7 @@ llvm::Value* location::codegen() {
     if(!val)
         val = the_module->getNamedGlobal(name);
     if(!val)
-        return log_error("Location Not Declared!!");
+        return log_error("Location Not Declared!!" + name);
     std::vector<llvm::Value*> array_idx;
     llvm::Value* index;
     switch(loc_type) {

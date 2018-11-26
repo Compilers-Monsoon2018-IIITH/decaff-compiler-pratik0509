@@ -81,5 +81,6 @@ llvm::Value* method_decls::codegen() {
         builder->CreateRetVoid();
     else
         builder->CreateRet(ret_val);
+    verifyFunction(*func);
     return ret_val;
 }
