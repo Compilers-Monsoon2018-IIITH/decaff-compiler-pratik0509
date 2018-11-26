@@ -43,6 +43,10 @@ binary_op::binary_op(expression *e1, expression *e2, std::string b) {
 llvm::Value* binary_op::codegen() {
     llvm::Value* left_op = expr1->codegen();
     llvm::Value* right_op = expr2->codegen();
+    if(expr1->get_type() == type::loc)
+        left_op = builder->CreateLoad(left_op);
+    if(expr2->get_type() == type::loc)
+        right_op = builder->CreateLoad(left_op);
     if (!left_op || !right_op)
         return nullptr;
     switch(op) {

@@ -15,9 +15,10 @@ bool kfor::has_return() {
 }
 
 llvm::Value* kfor::codegen() {
+    log_error("For generating code!!");
     llvm::Value *init_state = start->codegen();
     if (!init_state)
-        return init_state;
+        return log_error("Could not parse start expression!!");
     
     if (start->get_type() == type::loc)
         init_state = builder->CreateLoad(init_state);
@@ -38,7 +39,7 @@ llvm::Value* kfor::codegen() {
     iter_var->addIncoming(init_state, prev_bb);
     llvm::Value *end_state = end->codegen();
     if (!end_state)
-        return end_state;
+        return log_error("Could not parse end state!!");
 
     if (end->get_type() == type::loc)
         end_state = builder->CreateLoad(end_state);
@@ -47,7 +48,7 @@ llvm::Value* kfor::codegen() {
     named_values[iter] = local_var;
     llvm::Value* block_val = blk->codegen();
     if (!block_val)
-        return block_val;
+        return log_error("Could not parse block codegen");
     loop_stack.push(new loop_metadata(end_state, iter, iter_var, afterloop_bb, loop_bb));
 
     llvm::Value *cur_iter_val = builder->CreateLoad(local_var, iter);

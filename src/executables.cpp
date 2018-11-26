@@ -30,7 +30,7 @@ llvm::Value* executables::codegen(std::map<std::string, llvm::AllocaInst*> &old_
             val = itr->first.v_dec->codegen(old_vals);
             break;
             case exec_modes::stmnt:
-            // val = itr->first.stmnt->codegen();
+            val = itr->first.stmnt->codegen();
             break;
         }
         if(!val)

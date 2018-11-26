@@ -2,7 +2,6 @@ class Program {
     int arr[50];
     int main() {
         int sum;
-        sum = 0;
         int i;
         for i = 0, 50 {
             arr[i] = (i * i + i + 23) % 17;

@@ -40,7 +40,7 @@ llvm::Value* field_decls::codegen() {
             llvm::GlobalVariable *gv = new llvm::GlobalVariable(*the_module, arr_type, false,
                                                     llvm::GlobalValue::ExternalLinkage, nullptr,
                                                     id_list->get_name(i));
-            gv->setInitializer(llvm::Constant::getNullValue(typ));
+            gv->setInitializer(llvm::Constant::getNullValue(arr_type));
         } else {
             llvm::GlobalVariable *gv = new llvm::GlobalVariable(*the_module, typ, false,
                                                     llvm::GlobalValue::ExternalLinkage, nullptr,

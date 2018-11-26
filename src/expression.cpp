@@ -59,9 +59,9 @@ llvm::Value* expression::codegen() {
     llvm::Value* ret_val;
     switch(e_type) {
         case type::loc:
-        return nullptr;
+        return val.loc->codegen();
         case type::mcall:
-        return nullptr;
+        return val.mcall->codegen();
         case type::lit:
         return val.lit->codegen();
         case type::b_op:
