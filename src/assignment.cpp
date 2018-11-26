@@ -25,6 +25,7 @@ llvm::Value* assignment::codegen() {
     
     llvm::Value* lloc = loc->codegen();
     lval = builder->CreateLoad(lloc);
+    // lval = builder->CreateLoad(lval);
 
     if (op == "+=")
         val = builder->CreateAdd(lval, val, "add_eql_tmp");
