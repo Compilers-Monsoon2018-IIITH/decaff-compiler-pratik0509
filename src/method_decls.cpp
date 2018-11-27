@@ -75,7 +75,7 @@ llvm::Value* method_decls::codegen() {
     llvm::Value* ret_val = m_blk->codegen();
     if(!ret_val) {
         func->eraseFromParent();
-        return log_error("Cannot create the function!!");
+        return log_error("Cannot create the function!! " + m_id->get_name());
     }
     if(r_type == "void")
         builder->CreateRetVoid();

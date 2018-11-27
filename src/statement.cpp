@@ -78,7 +78,6 @@ void statement::add_statement(kif *b) {
 }
 
 llvm::Value* statement::codegen() {
-    log_error("In statement loop!!");
     llvm::Value* val = llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, SUCCESS));
     for(auto itr = stmnts.begin(); itr != stmnts.end(); ++itr) {
         switch(itr->second) {

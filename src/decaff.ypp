@@ -236,7 +236,6 @@ METHOD_CALL: METHOD_NAME O_LEF PARAM_LIST O_RIT
                         }
             | KEY_CALLOUT O_LEF PARAM_LIST O_RIT
                         {
-                                printf("CALLOUT_KEY");
                                 $$ = new method_call();
                                 $$->set_method_call(new location($1), $3);
                         }            ;
@@ -250,14 +249,13 @@ PARAM_LIST: %empty
                 }
         | STRING
                 {
-                        printf("STRING_KEY");
                         $$ = new param_list();
                         $$->add_param($1);
                 }
         | PARAM_LIST O_COMMA EXPRESSION
                 { $$->add_param($3); }
         | PARAM_LIST O_COMMA STRING
-                { printf("STRING_KEY2");$$->add_param($3); }
+                { $$->add_param($3); }
         ;
 
 METHOD_NAME: IDENTIFIER         { $$ = new location($1); }

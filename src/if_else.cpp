@@ -28,9 +28,12 @@ kelse::kelse(kif *i, block *b) {
 
 llvm::Value* kif::codegen() {
     llvm::Value* condv = cond->codegen();
-    if (!condv)
+    if(cond->get_type() == type::loc)
+        condv = builder->CreateLoad(condv);
+    if (!condv) {
+        log_error("no condition provided!!");
         return nullptr;
-    
+    }
     // Not required now
     // condv = builder->CreateFCmpONE(condv, llvm::ConstantFP::get(the_context, llvm::APFloat(0.0)), "ifcond");
 
@@ -66,7 +69,7 @@ llvm::Value* kif::codegen() {
         els_val = els_blk->codegen();
         if(!els_val)
             return els_val;
-        if(els_ret)
+        if(!els_ret)
             builder->CreateBr(next_bb);
     }
 
@@ -77,10 +80,13 @@ llvm::Value* kif::codegen() {
     if(els_ret && if_ret) {
         llvm::Type* ret_type = builder->GetInsertBlock()->getParent()->getReturnType();
         // TODO: Add for Void
-        builder->CreateRet(llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, SUCCESS)));
+        if(ret_type != llvm::Type::getVoidTy(the_context))
+            builder->CreateRet(llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, SUCCESS)));
+        else
+            builder->CreateRetVoid();
     }
     llvm::Value* ret_val = llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, SUCCESS));
-    return nullptr;
+    return ret_val;
 }
 
 bool kif::has_return() {

@@ -7,7 +7,6 @@ param_list::param_list() {
 }
 
 void param_list::add_param(std::string v) {
-    log_error("===" + v);
     param_type p;
     p.str = v.substr(1, v.length() - 2);
     p_list.push_back({p, param_mode::str});

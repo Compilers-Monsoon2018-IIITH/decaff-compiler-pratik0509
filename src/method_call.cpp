@@ -14,16 +14,12 @@ void method_call::set_method_call(location *l, param_list *p) {
 
 llvm::Value* callout_codegen(method_call* mcall) {
     std::string c_func = mcall->p_list->get_string_argument(0);
-    std::cerr << mcall->loc->get_name() ;
-    log_error(c_func + "---");
     int idx = 0;
     llvm::Value* arg_val = nullptr;
     std::vector<llvm::Type*> arg_types;
     std::vector<llvm::Value*> arg_vals;
     for(idx = 1; idx < mcall->p_list->get_num_args(); ++idx) {
-        std::cerr << idx << std::endl;
         if(mcall->p_list->is_string(idx)){
-            log_error(mcall->p_list->get_string_argument(idx) + "--+--");
             arg_val = builder->CreateGlobalStringPtr(mcall->p_list->get_string_argument(idx));
         } else {
             arg_val = mcall->p_list->codegen(idx);
