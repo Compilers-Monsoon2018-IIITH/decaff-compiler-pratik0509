@@ -105,7 +105,6 @@ llvm::Value* statement::codegen() {
             val = itr->first.cond->codegen();
             break;
             case statement_mode::loop:
-            log_error("In for loop!!");
             val = itr->first.loop->codegen();
             break;
             case statement_mode::brek:

@@ -15,7 +15,6 @@ bool kfor::has_return() {
 }
 
 llvm::Value* kfor::codegen() {
-    log_error("For generating code!!");
     llvm::Value *init_state = start->codegen();
     if (!init_state)
         return log_error("Could not parse start expression!!");
