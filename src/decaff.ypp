@@ -284,24 +284,23 @@ ARG_LIST: %empty
 %%
 
 int main(int argc, char** argv) {
-	// Open a file handle to a particular file:
-	// FILE *myfile = fopen("test.decaff.file", "r");
-	// Make sure it is valid:
-	// if (!myfile) {
-	// 	printf("I can't open test.decaff.file!\n");
-	// 	return -1;
-	// }
-	// Set Flex to read from it instead of defaulting to STDIN:
-	// yyin = myfile;
-	
+        FILE *fin = NULL;
+        if(argc >= 2) {
+                fin = fopen(argv[1], "r");
+                yyin = fin;
+        }
+        yyparse();
 	// Parse through the input:
-	yyparse();
 
 	if(start) {
-                if(start->codegen())
-                        start->codeout();
-                else
+                if(start->codegen()) {
+                        if(argc >= 3)
+                                start->codeout(argv[2]);
+                        else
+                                start->codeout();
+                } else {
                         std::cerr << "Error generating code!!" << std::endl;
+                }
         }
         return 0;
 }

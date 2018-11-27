@@ -90,7 +90,15 @@ make
 
 ```
 # In build directory
+
+# Read from stdin and write to stdout
 ./bin/decaff
+
+# Read from a file and write to stdout
+./bin/decaff <file_in>
+
+# Read from a file and write to stdout
+./bin/decaff <file_in> <file_out>
 ```
 
 The program currently takes input from stdin and prints output codegen to stdout.

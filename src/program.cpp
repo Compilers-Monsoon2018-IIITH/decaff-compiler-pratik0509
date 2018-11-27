@@ -29,3 +29,11 @@ void program::codeout() {
     the_module->print(llvm::outs(), nullptr);
     return;
 }
+
+void program::codeout(std::string fname) {
+    std::cerr << "Generating Code to file " << fname << " : " << std::endl;
+    std::error_code EC;
+    llvm::raw_fd_ostream *out = new llvm::raw_fd_ostream(fname, EC);
+    the_module->print(*out, nullptr);
+    return;
+}

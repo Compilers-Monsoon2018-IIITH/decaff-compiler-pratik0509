@@ -13,7 +13,6 @@ void param_list::add_param(std::string v) {
 }
 
 void param_list::add_param(expression* v) {
-    log_error("=== EXPR");
     param_type p;
     p.expr = v;
     p_list.push_back({p, param_mode::expr});
