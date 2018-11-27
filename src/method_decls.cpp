@@ -77,10 +77,10 @@ llvm::Value* method_decls::codegen() {
         func->eraseFromParent();
         return log_error("Cannot create the function!! " + m_id->get_name());
     }
-    if(r_type == "void")
-        builder->CreateRetVoid();
-    else
-        builder->CreateRet(ret_val);
+    // if(r_type == "void")
+    //     builder->CreateRetVoid();
+    // else
+    //     builder->CreateRet(ret_val);
     verifyFunction(*func);
     return ret_val;
 }
