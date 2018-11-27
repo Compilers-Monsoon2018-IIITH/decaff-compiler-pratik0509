@@ -46,7 +46,7 @@ llvm::Value* binary_op::codegen() {
     if(expr1->get_type() == type::loc)
         left_op = builder->CreateLoad(left_op);
     if(expr2->get_type() == type::loc)
-        right_op = builder->CreateLoad(left_op);
+        right_op = builder->CreateLoad(right_op);
     if (!left_op || !right_op)
         return nullptr;
     switch(op) {

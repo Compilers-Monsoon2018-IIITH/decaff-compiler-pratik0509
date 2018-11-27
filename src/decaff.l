@@ -52,7 +52,7 @@ K_BREAK  "break"
 K_CONT  "continue"
 CALLOUT "callout"
 RETURN  "return"
-STR     (\\n|\\t|\\'|\\\\|\\\"|[^\\"'])
+STR     ([^\\"']|\\n|\\t|\\'|\\\\|\\\"|\\r|\\)
 CHR     "'"
 VOID    "void"
 
