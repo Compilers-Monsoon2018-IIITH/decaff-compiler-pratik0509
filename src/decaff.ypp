@@ -276,6 +276,8 @@ LOCATION: IDENTIFIER
 
 ARG_LIST: %empty
                 { $$ = new arg_list(); }
+        | KEY_TYPE IDENTIFIER
+                { $$ = new arg_list(); $$->add_identifier(std::string($1), new identifier($2)); }
         | ARG_LIST O_COMMA KEY_TYPE IDENTIFIER
                 { $$->add_identifier(std::string($3), new identifier($4)); }
         ;
