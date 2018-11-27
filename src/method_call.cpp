@@ -21,11 +21,15 @@ llvm::Value* callout_codegen(method_call* mcall) {
     std::vector<llvm::Type*> arg_types;
     std::vector<llvm::Value*> arg_vals;
     for(idx = 1; idx < mcall->p_list->get_num_args(); ++idx) {
+        std::cerr << idx << std::endl;
         if(mcall->p_list->is_string(idx)){
             log_error(mcall->p_list->get_string_argument(idx) + "--+--");
             arg_val = builder->CreateGlobalStringPtr(mcall->p_list->get_string_argument(idx));
         } else {
             arg_val = mcall->p_list->codegen(idx);
+            if(mcall->p_list->is_loc(idx))
+                arg_val = builder->CreateLoad(arg_val);
+
         }
         if(!arg_val)
             return log_error("Unknown Argument to callout!!");
@@ -36,7 +40,6 @@ llvm::Value* callout_codegen(method_call* mcall) {
     llvm::Constant* func = the_module->getOrInsertFunction(c_func, func_type);
     if(!func)
         return log_error("Unknown Function in callout");
-    // std::reverse(arg_vals.begin(), arg_vals.end());    
     llvm::Value* val = builder->CreateCall(func, arg_vals);
     return val;
 }
@@ -63,6 +66,5 @@ llvm::Value* method_call::codegen() {
             return nullptr;
         argsv.push_back(val);
     }
-    std::reverse(argsv.begin(), argsv.end());
     return builder->CreateCall(calleef, argsv, "cal_tmp");
 }

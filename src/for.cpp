@@ -26,6 +26,7 @@ llvm::Value* kfor::codegen() {
 
     llvm::Function *the_func = builder->GetInsertBlock()->getParent();
 
+    // 1
     llvm::AllocaInst *local_var = create_entry_alloc(the_func, iter, "int");
     builder->CreateStore(init_state, local_var);
 
@@ -44,6 +45,7 @@ llvm::Value* kfor::codegen() {
     if (end->get_type() == type::loc)
         end_state = builder->CreateLoad(end_state);
 
+    // 2
     llvm::AllocaInst *old_iter_val = named_values[iter];
     named_values[iter] = local_var;
     llvm::Value* block_val = blk->codegen();
@@ -51,6 +53,7 @@ llvm::Value* kfor::codegen() {
         return log_error("Could not parse block codegen");
     loop_stack.push(new loop_metadata(end_state, iter, iter_var, afterloop_bb, loop_bb));
 
+    // 3
     llvm::Value *cur_iter_val = builder->CreateLoad(local_var, iter);
     llvm::Value *iter_step = llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, STEP_DEFAULT));
     llvm::Value *next_iter_val = builder->CreateAdd(cur_iter_val, iter_step, "nxt_val");

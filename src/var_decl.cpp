@@ -38,8 +38,8 @@ llvm::Value* var_decl::codegen(std::map<std::string, llvm::AllocaInst*> &old_val
             alloc = create_entry_alloc(the_func, id_list->get_name(i), v_type);
         }
         builder->CreateStore(init, alloc);
-        if(named_values.find(id_list->get_name(i)) != named_values.end())
-            old_vals[id_list->get_name(i)] = named_values[id_list->get_name(i)];
+        // if(named_values.find(id_list->get_name(i)) != named_values.end())
+        old_vals[id_list->get_name(i)] = named_values[id_list->get_name(i)];
         named_values[id_list->get_name(i)] = alloc;
     }
     llvm::Value* val = llvm::ConstantInt::get(the_context, llvm::APInt(INT_WIDTH, SUCCESS));

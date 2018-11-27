@@ -45,7 +45,7 @@ llvm::Value* location::codegen() {
         if(!index)
             return log_error("Invalid Index Access!!");
         array_idx.emplace_back(builder->getInt32(0));
-        array_idx.push_back(index);
+        array_idx.emplace_back(index);
         return builder->CreateGEP(val, array_idx, name + "_idx");
         break;
         default:
